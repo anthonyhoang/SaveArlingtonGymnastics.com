@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IG Reel — One Weekend for Arlington | Save Arlington Gymnastics</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; background: #222;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  .frame {
+    width: 1080px; height: 1920px;
+    background: #0F1B33;
+    position: relative; overflow: hidden;
+    transform: scale(0.45);
+    transform-origin: center center;
+  }
+
+  /* === SLIDES === */
+  .slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; z-index: 1;
+  }
+  .slide.active { opacity: 1; z-index: 10; }
+
+  /* === ANIMATIONS === */
+  @keyframes slamIn {
+    0% { transform: scale(1.8); opacity: 0; }
+    60% { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeDown {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes slideInLeft {
+    0% { transform: translateX(-60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideInRight {
+    0% { transform: translateX(60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  @keyframes growWidth {
+    0% { width: 0; }
+    100% { width: 240px; }
+  }
+
+  /* === SLIDE 0: TITLE === */
+  #slide0 { background: #000; }
+  #slide0 > img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0.35; }
+  #slide0 .title-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; padding: 0 60px;
+  }
+  #slide0 .sg-label { font-size: 28px; font-weight: 900; color: #F9A825; letter-spacing: 4px; text-transform: uppercase; }
+  #slide0 .program-badge {
+    display: inline-flex; align-items: center; gap: 20px;
+    border: 3px solid #F9A825; border-radius: 16px;
+    padding: 18px 50px; margin-top: 40px;
+  }
+  #slide0 .program-badge img { height: 60px; width: auto; filter: brightness(1.1); }
+  #slide0 .program-badge span { font-size: 42px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 3px; }
+  #slide0 .logo-row {
+    display: flex; gap: 24px; align-items: center; margin-top: 30px;
+  }
+  #slide0 .logo-row img {
+    height: 68px; width: 68px; object-fit: contain;
+    background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 50%; padding: 7px;
+  }
+  #slide0 .title-line { width: 0; height: 6px; background: #F9A825; margin: 45px auto; }
+  #slide0 .title-main { font-size: 100px; font-weight: 900; color: #fff; text-transform: uppercase; line-height: 1.05; text-align: center; }
+  #slide0 .title-main span { color: #F9A825; }
+  #slide0 .title-line2 { width: 0; height: 6px; background: #F9A825; margin: 45px auto; }
+  #slide0 .title-context {
+    margin-top: 10px; text-align: center;
+  }
+  #slide0 .title-context-lead { font-size: 38px; font-weight: 900; color: #F9A825; letter-spacing: 2px; }
+  #slide0 .title-context-rest { font-size: 30px; font-weight: 700; color: #a0a8ba; line-height: 1.5; margin-top: 8px; }
+  #slide0 .title-hook {
+    font-size: 72px; font-weight: 900; color: #fff; text-align: center;
+    margin-top: 30px; line-height: 1.05; letter-spacing: 2px; text-transform: uppercase;
+    text-shadow: 0 0 40px rgba(249,168,37,0.3), 0 0 80px rgba(249,168,37,0.15);
+  }
+  #slide0 .title-hook span { color: #F9A825; }
+
+  #slide0.active .sg-label { animation: fadeIn 0.5s ease-out both; }
+  #slide0.active .program-badge { animation: fadeUp 0.6s 0.3s ease-out both; }
+  #slide0.active .logo-row { animation: fadeIn 0.5s 0.5s ease-out both; }
+  #slide0.active .title-line { animation: growWidth 0.5s 0.7s ease-out both; }
+  #slide0.active .title-main { animation: fadeUp 0.6s 0.9s ease-out both; }
+  #slide0.active .title-line2 { animation: growWidth 0.5s 1.3s ease-out both; }
+  #slide0.active .title-context-lead { animation: slamIn 0.6s 1.5s ease-out both; }
+  #slide0.active .title-context-rest { animation: fadeIn 0.8s 2.0s ease-out both; }
+  #slide0.active .title-hook { animation: fadeIn 1.5s 2.8s ease-out both; }
+
+  /* === FOUR DAYS AGO === */
+  #slide-fourdays { background: #0a0a0a; }
+  #slide-fourdays .fourdays-text {
+    font-size: 96px; font-weight: 900; color: #fff; text-align: center; letter-spacing: 2px;
+  }
+  #slide-fourdays .fourdays-text span { color: #F9A825; }
+  #slide-fourdays.active .fourdays-text { animation: fadeIn 1.2s ease-out both; }
+
+  /* === SEASON SLIDE === */
+  .slide-season { background: #000; }
+  .slide-season > img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0.3; }
+  .slide-season .season-content {
+    position: relative; z-index: 2; padding: 0 70px; text-align: center;
+  }
+  .slide-season .season-text { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.3; }
+  .slide-season .season-text em { color: #F9A825; font-style: normal; }
+  .slide-season.active .season-text { animation: fadeUp 0.7s 0.2s ease-out both; }
+
+  /* === SCHOOLS SLIDE — REAL LOGOS === */
+  #slide-schools {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 50px;
+  }
+  #slide-schools .schools-label { font-size: 36px; font-weight: 900; color: #F9A825; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px; }
+  .logo-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%;
+  }
+  .logo-grid .logo-card:nth-child(5) {
+    grid-column: 1 / -1; justify-self: center; width: 48%;
+  }
+  .logo-card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 26px 20px 20px;
+  }
+  .logo-card img {
+    height: 110px; width: auto; max-width: 180px; object-fit: contain;
+  }
+  .logo-card .logo-name { font-size: 28px; font-weight: 900; color: #fff; margin-top: 14px; text-align: center; }
+  .logo-card .logo-mascot { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 2px; }
+  #slide-schools .schools-sub { font-size: 40px; font-weight: 800; color: #fff; text-align: center; margin-top: 30px; line-height: 1.3; }
+  #slide-schools .schools-sub span { color: #F9A825; }
+
+  #slide-schools.active .schools-label { animation: fadeIn 0.5s ease-out both; }
+  #slide-schools.active .logo-card:nth-child(1) { animation: fadeUp 0.5s 0.3s ease-out both; }
+  #slide-schools.active .logo-card:nth-child(2) { animation: fadeUp 0.5s 0.5s ease-out both; }
+  #slide-schools.active .logo-card:nth-child(3) { animation: fadeUp 0.5s 0.7s ease-out both; }
+  #slide-schools.active .logo-card:nth-child(4) { animation: fadeUp 0.5s 0.9s ease-out both; }
+  #slide-schools.active .logo-card:nth-child(5) { animation: fadeUp 0.5s 1.1s ease-out both; }
+  #slide-schools.active .schools-sub { animation: fadeUp 0.6s 1.5s ease-out both; }
+
+  /* === PHOTO OVERLAY SLIDES === */
+  .slide-photo-overlay { background: #000; }
+  .slide-photo-overlay > img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+  .slide-photo-overlay .po-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 200px 60px 180px;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.95) 100%);
+    z-index: 2;
+  }
+  .slide-photo-overlay .po-text { font-size: 46px; font-weight: 700; color: #fff; line-height: 1.35; }
+  .slide-photo-overlay .po-text em { color: #F9A825; font-style: normal; }
+  .slide-photo-overlay .po-source {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 20px; font-size: 22px; font-weight: 700; color: rgba(255,255,255,0.5);
+  }
+  .slide-photo-overlay.active .po-text { animation: fadeUp 0.6s 0.3s ease-out both; }
+
+  /* Unity slide — show full width of photo */
+  .slide-unity > img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    position: absolute;
+    top: 280px;
+    left: 0;
+  }
+
+  /* Maddie callout caption box */
+  @keyframes popBounce {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+    60% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+    80% { transform: scale(0.97) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes floatGentle {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-6px) rotate(-2deg); }
+  }
+  .maddie-callout {
+    position: absolute;
+    z-index: 4;
+    top: 680px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+  }
+  .slide-unity.active .maddie-callout {
+    animation: popBounce 0.5s 1.8s ease-out both, floatGentle 3s 2.3s ease-in-out infinite;
+  }
+  .maddie-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    transform: rotate(-2deg);
+  }
+  .maddie-box .maddie-emoji {
+    font-size: 32px;
+  }
+  .maddie-box .maddie-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+  .maddie-box .maddie-text .maddie-name {
+    color: #C62828;
+  }
+  .maddie-box .maddie-hashtag {
+    font-size: 18px;
+    font-weight: 800;
+    color: #C62828;
+    margin-top: 2px;
+  }
+
+  /* Unity slide top bar */
+  .unity-top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: 40px 50px 30px;
+    background: linear-gradient(rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .unity-top-bar .aerials-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .unity-top-bar .aerials-badge img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+  .unity-top-bar .aerials-badge span {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .unity-top-bar .school-logos {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .unity-top-bar .school-logos img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.1);
+  }
+  .slide-photo-overlay.active .unity-top-bar .aerials-badge { animation: fadeDown 0.5s 0.2s ease-out both; }
+  .slide-photo-overlay.active .unity-top-bar .school-logos { animation: fadeDown 0.5s 0.5s ease-out both; }
+  .slide-photo-overlay.active .po-source { animation: fadeIn 0.4s 0.8s ease-out both; }
+
+  /* === RED SLAM === */
+  .slide-slam { background: #C62828; }
+  .slide-slam .slam-text { font-size: 90px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; line-height: 1.1; padding: 0 60px; }
+  .slide-slam.active .slam-text { animation: slamIn 0.6s ease-out both; }
+
+  /* === GUT PUNCH === */
+  .slide-punch { background: #0a0a0a; padding: 0 70px; }
+  .slide-punch .punch-text { font-size: 72px; font-weight: 900; color: #fff; text-align: center; line-height: 1.2; }
+  .slide-punch .punch-text span { color: #C62828; }
+  .slide-punch.active .punch-text { animation: fadeIn 1s ease-out both; }
+
+  /* === MENTAL GAME SLIDE === */
+  .slide-mental { background: #0a0a0a; padding: 0 60px; }
+  .slide-mental .mental-text { font-size: 50px; font-weight: 800; color: #fff; text-align: center; line-height: 1.35; }
+  .slide-mental .mental-text em { color: #F9A825; font-style: normal; }
+  .slide-mental .mental-text strong { color: #C62828; font-weight: 900; }
+  .slide-mental.active .mental-text { animation: fadeUp 0.8s 0.2s ease-out both; }
+
+  /* === TEAGAN QUOTE SLIDE === */
+  .slide-teagan-quote {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 60px;
+  }
+  .slide-teagan-quote .tq-mark {
+    font-size: 160px; font-weight: 900; color: #F9A825; line-height: 0.6; margin-bottom: 20px; opacity: 0.35;
+  }
+  .slide-teagan-quote .tq-text {
+    font-size: 42px; font-weight: 700; color: #fff; line-height: 1.45; text-align: center;
+    font-style: italic;
+  }
+  .slide-teagan-quote .tq-text strong { color: #F9A825; font-style: normal; font-weight: 900; }
+  .slide-teagan-quote .tq-avatar {
+    display: flex; align-items: center; gap: 18px; margin-top: 40px;
+  }
+  .slide-teagan-quote .tq-avatar img {
+    width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+    border: 3px solid #F9A825;
+  }
+  .slide-teagan-quote .tq-attr {
+    font-size: 28px; font-weight: 900; color: #F9A825;
+    text-transform: uppercase; letter-spacing: 3px;
+  }
+  .slide-teagan-quote.active .tq-mark { animation: fadeIn 0.4s ease-out both; }
+  .slide-teagan-quote.active .tq-text { animation: fadeUp 0.7s 0.3s ease-out both; }
+  .slide-teagan-quote.active .tq-avatar { animation: fadeUp 0.5s 0.8s ease-out both; }
+
+  /* === WAKEFIELD SLIDE === */
+  .slide-wakefield {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 50px;
+  }
+  .slide-wakefield .wake-badge {
+    display: inline-flex; align-items: center; gap: 20px;
+    background: rgba(34,139,34,0.12); border: 2px solid rgba(34,139,34,0.35);
+    border-radius: 20px; padding: 18px 36px; margin-bottom: 40px;
+  }
+  .slide-wakefield .wake-badge img { height: 70px; width: auto; object-fit: contain; }
+  .slide-wakefield .wake-text { font-size: 52px; font-weight: 800; color: #fff; text-align: center; line-height: 1.35; }
+  .slide-wakefield .wake-text em { color: #F9A825; font-style: normal; }
+  .slide-wakefield.active .wake-badge { animation: fadeIn 0.5s ease-out both; }
+  .slide-wakefield.active .wake-text { animation: fadeUp 0.7s 0.4s ease-out both; }
+
+  /* === CTA === */
+  .slide-cta {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+  }
+  .slide-cta .cta-main { font-size: 72px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; line-height: 1.1; padding: 0 60px; }
+  .slide-cta .cta-main span { color: #F9A825; }
+  .slide-cta .cta-odm {
+    margin-top: 50px; padding: 30px 50px; background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.12); border-radius: 20px; text-align: center;
+  }
+  .slide-cta .cta-odm-label { font-size: 22px; font-weight: 900; color: #F9A825; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
+  .slide-cta .cta-odm-date { font-size: 30px; font-weight: 700; color: #fff; line-height: 1.8; }
+  .slide-cta .cta-odm-date strong { color: #F9A825; }
+  .slide-cta .cta-btn {
+    display: inline-block; background: #F9A825; color: #0F1B33;
+    font-size: 44px; font-weight: 900; padding: 26px 70px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 2px; margin-top: 40px;
+  }
+  .slide-cta .cta-site { font-size: 32px; font-weight: 900; color: #F9A825; margin-top: 30px; }
+  .slide-cta.active .cta-main { animation: slamIn 0.6s ease-out both; }
+  .slide-cta.active .cta-odm { animation: fadeUp 0.5s 0.5s ease-out both; }
+  .slide-cta.active .cta-btn { animation: fadeUp 0.5s 0.9s ease-out both, pulse 1.5s 1.6s ease-in-out infinite; }
+  .slide-cta.active .cta-site { animation: fadeIn 0.4s 1.2s ease-out both; }
+
+  /* === CONTROLS === */
+  .controls {
+    position: fixed; top: 20px; right: 20px;
+    display: flex; gap: 10px; z-index: 999;
+  }
+  .ctrl-btn {
+    background: #444; color: #fff; border: none; padding: 10px 24px; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { background: #666; }
+  .ctrl-btn.play { background: #F9A825; color: #0F1B33; }
+  .ctrl-btn.play:hover { background: #e09800; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn play" onclick="startSequence()">&#9654; Play</button>
+  <button class="ctrl-btn" onclick="replaySequence()">&#8634; Replay</button>
+</div>
+
+<div class="frame">
+
+  <!-- SLIDE: Title — One Weekend for Arlington -->
+  <div class="slide active" id="slide0" data-duration="6000">
+    <img src="hs-unified-aerials-team-photo-across-high-schools.jpeg" alt="Aerials athletes from all schools">
+    <div class="title-content">
+      <div class="sg-label">Save Arlington Gymnastics</div>
+      <div class="program-badge">
+        <img src="arlington-aerials-white-transparent.png" alt="Arlington Aerials">
+        <span>Arlington Aerials</span>
+      </div>
+      <div class="logo-row">
+        <img src="hs-logo-yorktown.png" alt="Yorktown">
+        <img src="hs-logo-thomas-jefferson-tj.png" alt="Thomas Jefferson">
+        <img src="hs-logo-wakefield.webp" alt="Wakefield">
+        <img src="hs-logo-washington-liberty.jpg" alt="Washington-Liberty">
+        <img src="hs-logo-meridien.png" alt="Meridian">
+      </div>
+      <div class="title-line"></div>
+      <div class="title-main">They Showed Up<br>for <span>Arlington</span></div>
+      <div class="title-line2"></div>
+      <div class="title-context">
+        <div class="title-context-lead">Four days ago</div>
+        <div class="title-context-rest">they represented Arlington County<br>at the VHSL State Championship</div>
+      </div>
+      <div class="title-hook">Will Arlington<br>show up <span>for them?</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE: The Season -->
+  <div class="slide slide-season" data-duration="4500">
+    <img src="hs-yorktown-team-huddle-at-state-meet.png" alt="Team huddle">
+    <div class="season-content">
+      <div class="season-text">All season long, these athletes honed new skills and perfected routines &mdash; <em>building toward one moment</em></div>
+    </div>
+  </div>
+
+  <!-- SLIDE: The Schools — Real Logos -->
+  <div class="slide" id="slide-schools" data-duration="6000">
+    <div class="schools-label">Representing</div>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <img src="hs-logo-yorktown.png" alt="Yorktown">
+        <div class="logo-name">Yorktown</div>
+        <div class="logo-mascot">Patriots</div>
+      </div>
+      <div class="logo-card">
+        <img src="hs-logo-wakefield.webp" alt="Wakefield">
+        <div class="logo-name">Wakefield</div>
+        <div class="logo-mascot">Warriors</div>
+      </div>
+      <div class="logo-card">
+        <img src="hs-logo-washington-liberty.jpg" alt="Washington-Liberty">
+        <div class="logo-name">Washington-Liberty</div>
+        <div class="logo-mascot">Generals</div>
+      </div>
+      <div class="logo-card">
+        <img src="hs-logo-thomas-jefferson-tj.png" alt="Thomas Jefferson">
+        <div class="logo-name">Thomas Jefferson</div>
+        <div class="logo-mascot">Colonials</div>
+      </div>
+      <div class="logo-card">
+        <img src="hs-logo-meridien.png" alt="Meridian">
+        <div class="logo-name">Meridian</div>
+        <div class="logo-mascot">Mustangs</div>
+      </div>
+    </div>
+    <div class="schools-sub">Five high schools.<br><span>One program that built them all.</span></div>
+  </div>
+
+  <!-- SLIDE: Regionals — Yorktown banner -->
+  <div class="slide slide-photo-overlay" data-duration="5000">
+    <img src="hs-yorktown-cheering-with-banner-at-wl-meet.png" alt="Yorktown celebrating Northern Region Championship">
+    <div class="po-overlay">
+      <div class="po-text">Yorktown won the <em>Northern Region Championship</em> &mdash; their first since 2016</div>
+      <div class="po-source">As reported by ARLnow &middot; Feb 18, 2026</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: Teagan & Tatum — podium -->
+  <div class="slide slide-photo-overlay" data-duration="6000">
+    <img src="hs-teagan-tatum-on-podium-at-state-meet.jpeg" alt="Teagan and Tatum Wielechowski on podium">
+    <div class="po-overlay">
+      <div class="po-text"><em>Teagan Wielechowski</em> won the all-around at districts and regionals &mdash; bars, floor, and vault. Her sister <em>Tatum</em> was right beside her. Both are Arlington Aerials.</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: Anya — competed through injury -->
+  <div class="slide slide-photo-overlay" data-duration="5500">
+    <img src="hs-anya-with-coaches-and-trophy-wearing-boot.png" alt="Anya Clemmer with coaches, wearing a boot">
+    <div class="po-overlay">
+      <div class="po-text">Yorktown senior <em>Anya Clemmer</em> competed through an injury to help lead her team to states. That&rsquo;s what Aerials are made of.</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: States — team posed -->
+  <div class="slide slide-photo-overlay" data-duration="4000">
+    <img src="hs-yorktown-team-posed-at-state-meet.jpeg" alt="Yorktown team at VHSL State Championship">
+    <div class="po-overlay">
+      <div class="po-text">This past Friday, they represented the <em>best of Arlington County</em> at the VHSL State Championship in Virginia Beach</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: CONTRAST SLAM — red -->
+  <div class="slide slide-slam" data-duration="2500">
+    <div class="slam-text">While they competed for Arlington&hellip;</div>
+  </div>
+
+  <!-- SLIDE: GUT PUNCH -->
+  <div class="slide slide-punch" data-duration="4500">
+    <div class="punch-text">&hellip;their Barcroft Arlington Aerials coaches were receiving <span>severance letters.</span></div>
+  </div>
+
+  <!-- SLIDE: Mental Game -->
+  <div class="slide slide-mental" data-duration="6000">
+    <div class="mental-text">These athletes received the news <strong>while competing.</strong><br><br>At the <em>biggest moment of their season,</em> they carried the weight of devastating news onto the competition floor.</div>
+  </div>
+
+  <!-- SLIDE: Teagan Quote -->
+  <div class="slide slide-teagan-quote" data-duration="8000">
+    <div class="tq-mark">&ldquo;</div>
+    <div class="tq-text">Right after I discovered Aerials was trying to be shut down during the state competition, I immediately thought, <strong>&ldquo;this can&rsquo;t be real.&rdquo;</strong><br><br>Aerials is so much more than a gym &mdash; it&rsquo;s a place to build a community and practice a sport you have devoted thousands of hours to over the years.</div>
+    <div class="tq-avatar">
+      <img src="teagan-headshot.png" alt="Teagan Wielechowski">
+      <div class="tq-attr">Teagan Wielechowski</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: Wakefield Red Slam -->
+  <div class="slide slide-slam" data-duration="3500">
+    <div class="slam-text">Wakefield&rsquo;s team has no equipment at their school. Barcroft is all they have.</div>
+  </div>
+
+  <!-- SLIDE: Pipeline — trophy jump -->
+  <div class="slide slide-photo-overlay" data-duration="5500">
+    <img src="hs-elizabeth-chang-group-with-wl-trophy.jpeg" alt="Athletes celebrating with trophy">
+    <div class="po-overlay">
+      <div class="po-text">High school gymnastics doesn&rsquo;t start in high school. <em>It starts at Barcroft.</em> Cut the program, and the next generation has nowhere to begin.</div>
+    </div>
+  </div>
+
+  <!-- SLIDE: Unity — all schools together -->
+  <div class="slide slide-photo-overlay slide-unity" data-duration="6000">
+    <img src="hs-new-all-high-schools-pic-from-wakefield-mom.jpeg" alt="Gymnasts from all Arlington high schools together">
+    <div class="unity-top-bar">
+      <div class="aerials-badge">
+        <img src="arlington-aerials-white-transparent.png" alt="Arlington Aerials">
+        <span>Arlington Aerials</span>
+      </div>
+      <div class="school-logos">
+        <img src="hs-logo-yorktown.png" alt="Yorktown">
+        <img src="hs-logo-wakefield.webp" alt="Wakefield">
+        <img src="hs-logo-washington-liberty.jpg" alt="Washington-Liberty">
+        <img src="hs-logo-thomas-jefferson-tj.png" alt="Thomas Jefferson">
+        <img src="hs-logo-meridien.png" alt="Meridian">
+      </div>
+    </div>
+    <!-- Maddie callout -->
+    <div class="maddie-callout">
+      <div class="maddie-box">
+        <div class="maddie-emoji">💪❤️</div>
+        <div class="maddie-text">
+          <span class="maddie-name">Maddie</span> competed on a<br>sprained ankle 🤯
+          <div class="maddie-hashtag">#AerialTough</div>
+        </div>
+      </div>
+    </div>
+    <div class="po-overlay">
+      <div class="po-text">Different schools. Different leotards. <em>One program that built them all.</em></div>
+    </div>
+  </div>
+
+  <!-- SLIDE: CTA -->
+  <div class="slide slide-cta" data-duration="99999">
+    <div class="cta-main">They showed up<br>for Arlington.<br><span>Now show up<br>for them.</span></div>
+    <div class="cta-odm">
+      <div class="cta-odm-label">Open Door Mondays</div>
+      <div class="cta-odm-date"><strong>March 9</strong> &mdash; Lubber Run Community Center<br><strong>March 23</strong> &mdash; Walter Reed Community Center</div>
+    </div>
+    <div class="cta-btn">Show Up</div>
+    <div class="cta-site">savearlingtongymnastics.com</div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+  let timer = null;
+  let isPlaying = false;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function advanceSlide() {
+    if (currentSlide >= slides.length - 1) {
+      clearTimeout(timer);
+      isPlaying = false;
+      return;
+    }
+    const nextIndex = currentSlide + 1;
+    showSlide(nextIndex);
+    const duration = parseInt(slides[nextIndex].getAttribute('data-duration')) || 3000;
+    timer = setTimeout(advanceSlide, duration);
+  }
+
+  function startSequence() {
+    if (isPlaying) return;
+    isPlaying = true;
+    if (currentSlide === 0) {
+      const duration = parseInt(slides[0].getAttribute('data-duration')) || 3000;
+      timer = setTimeout(advanceSlide, duration);
+    } else {
+      advanceSlide();
+    }
+  }
+
+  function replaySequence() {
+    clearTimeout(timer);
+    isPlaying = false;
+    showSlide(0);
+    setTimeout(() => startSequence(), 100);
+  }
+</script>
+</body>
+</html>

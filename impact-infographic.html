@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closing Barcroft: A Cascade of Consequences</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --red: #C62828; --red-light: #EF5350; --red-glow: rgba(198,40,40,0.4);
+    --orange: #E65100; --orange-light: #FF8A65; --orange-glow: rgba(230,81,0,0.35);
+    --purple: #4A148C; --purple-light: #B388FF; --purple-glow: rgba(74,20,140,0.35);
+    --navy: #0B1120; --card-bg: #141C2E; --border: #1E293B;
+    --t-access: #3B82F6; --t-disability: #22C55E; --t-pipeline: #F59E0B;
+    --t-fiscal: #94A3B8; --t-democracy: #E2E8F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: #E8EBF0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Particle canvas ── */
+  #particles {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Global scroll reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Header ── */
+  .header {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 80px 24px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header .tag {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px;
+    margin-bottom: 20px;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px var(--red-glow); }
+    50% { box-shadow: 0 0 30px var(--red-glow), 0 0 60px rgba(198,40,40,0.15); }
+  }
+  .header h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: title-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes title-in {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(8px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+  }
+  .header p {
+    font-size: 16px; color: #8A94A6;
+    max-width: 700px; margin: 0 auto;
+    line-height: 1.65;
+    animation: fade-up 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+  .header .source-note {
+    font-size: 12px; color: #5A6478; margin-top: 12px;
+    animation: fade-up 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ── Theme legend ── */
+  .legend {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 10px 20px;
+    max-width: 800px; margin: 30px auto 50px;
+    padding: 0 24px;
+    animation: fade-up 1s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    animation: dot-pulse 3s ease-in-out infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+  .legend-dot.ld-access { background: var(--t-access); animation-delay: 0s; }
+  .legend-dot.ld-disability { background: var(--t-disability); animation-delay: 0.3s; }
+  .legend-dot.ld-pipeline { background: var(--t-pipeline); animation-delay: 0.6s; }
+  .legend-dot.ld-fiscal { background: var(--t-fiscal); animation-delay: 0.9s; }
+  .legend-dot.ld-democracy { background: var(--t-democracy); animation-delay: 1.2s; }
+  .lt-access { color: #60A5FA; }
+  .lt-disability { color: #4ADE80; }
+  .lt-pipeline { color: #FBBF24; }
+  .lt-fiscal { color: #94A3B8; }
+  .lt-democracy { color: #E2E8F0; }
+
+  /* ── Trigger ── */
+  .trigger {
+    position: relative; z-index: 1;
+    max-width: 860px; margin: 0 auto 20px; padding: 0 24px;
+  }
+  .trigger-card {
+    background: linear-gradient(135deg, #1E0A0A 0%, #2A0F0F 100%);
+    border: 2px solid var(--red);
+    border-radius: 16px; padding: 36px;
+    text-align: center; position: relative; overflow: hidden;
+    animation: trigger-in 1s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes trigger-in {
+    from { opacity: 0; transform: scale(0.9); border-color: transparent; }
+    to { opacity: 1; transform: none; border-color: var(--red); }
+  }
+  .trigger-card::before {
+    content: ''; position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(198,40,40,0.1) 0%, transparent 60%);
+    animation: trigger-pulse 4s ease-in-out infinite;
+  }
+  @keyframes trigger-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  .trigger-card h2 {
+    font-size: 22px; font-weight: 800;
+    color: var(--red-light); margin-bottom: 10px;
+    position: relative;
+  }
+  .trigger-card .detail {
+    font-size: 14px; color: #E57373;
+    line-height: 1.55; position: relative;
+  }
+
+  /* ── Flow connector between tiers ── */
+  .flow-connector {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center;
+    padding: 16px 0;
+  }
+  .flow-line {
+    width: 3px; height: 50px;
+    border-radius: 2px;
+    position: relative; overflow: hidden;
+  }
+  .flow-line::after {
+    content: ''; position: absolute;
+    top: -100%; left: 0; width: 100%; height: 100%;
+    border-radius: 2px;
+    animation: flow-drop 2s ease-in-out infinite;
+  }
+  @keyframes flow-drop {
+    0% { top: -100%; opacity: 0; }
+    30% { opacity: 1; }
+    100% { top: 200%; opacity: 0; }
+  }
+  .flow-line.fl-red { background: rgba(198,40,40,0.2); }
+  .flow-line.fl-red::after { background: var(--red-light); }
+  .flow-line.fl-orange { background: rgba(230,81,0,0.2); }
+  .flow-line.fl-orange::after { background: var(--orange-light); }
+  .flow-line.fl-purple { background: rgba(74,20,140,0.2); }
+  .flow-line.fl-purple::after { background: var(--purple-light); }
+
+  /* ── Cascade ── */
+  .cascade {
+    position: relative; z-index: 1;
+    max-width: 1080px; margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── Order section ── */
+  .order { margin-bottom: 16px; }
+  .order-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .order-badge {
+    flex-shrink: 0; width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px; color: #fff;
+    position: relative;
+  }
+  .order-badge::after {
+    content: ''; position: absolute;
+    inset: -4px; border-radius: 18px;
+    opacity: 0.3; z-index: -1;
+  }
+  .order-1 .order-badge { background: var(--red); }
+  .order-1 .order-badge::after { background: var(--red); filter: blur(12px); }
+  .order-2 .order-badge { background: var(--orange); }
+  .order-2 .order-badge::after { background: var(--orange); filter: blur(12px); }
+  .order-3 .order-badge { background: var(--purple); }
+  .order-3 .order-badge::after { background: var(--purple); filter: blur(12px); }
+
+  .order-label {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .order-1 .order-label { color: var(--red-light); }
+  .order-2 .order-label { color: var(--orange-light); }
+  .order-3 .order-label { color: var(--purple-light); }
+  .order-title {
+    font-size: 20px; font-weight: 700; color: #fff;
+    margin-top: 2px;
+  }
+
+  /* ── Impact cards grid ── */
+  .impacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 14px;
+  }
+
+  .impact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .impact-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    transition: height 0.3s, opacity 0.3s;
+  }
+  .order-1 .impact-card::before { background: linear-gradient(90deg, var(--red), var(--red-light)); }
+  .order-2 .impact-card::before { background: linear-gradient(90deg, var(--orange), var(--orange-light)); }
+  .order-3 .impact-card::before { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+
+  .impact-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: #334155;
+  }
+  .order-1 .impact-card:hover { box-shadow: 0 8px 40px var(--red-glow); }
+  .order-2 .impact-card:hover { box-shadow: 0 8px 40px var(--orange-glow); }
+  .order-3 .impact-card:hover { box-shadow: 0 8px 40px var(--purple-glow); }
+  .impact-card:hover::before { height: 4px; }
+
+  .impact-card .icon { font-size: 30px; margin-bottom: 10px; display: block; }
+  .impact-card h3 {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 7px; line-height: 1.3;
+  }
+  .impact-card p {
+    font-size: 13px; color: #8A94A6; line-height: 1.6;
+  }
+  .impact-card .stat {
+    display: inline-block; margin-top: 10px;
+    font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .order-1 .impact-card .stat { color: var(--red-light); }
+  .order-2 .impact-card .stat { color: var(--orange-light); }
+  .order-3 .impact-card .stat { color: var(--purple-light); }
+
+  /* Theme tags */
+  .themes { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .theme-tag {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+  }
+  .impact-card:hover .theme-tag { background: rgba(255,255,255,0.07); }
+  .tt-access { color: var(--t-access); border-color: rgba(59,130,246,0.2); }
+  .tt-disability { color: var(--t-disability); border-color: rgba(34,197,94,0.2); }
+  .tt-pipeline { color: var(--t-pipeline); border-color: rgba(245,158,11,0.2); }
+  .tt-fiscal { color: var(--t-fiscal); border-color: rgba(148,163,184,0.2); }
+  .tt-democracy { color: var(--t-democracy); border-color: rgba(226,232,240,0.2); }
+
+  /* ── Staggered card entrance ── */
+  .impact-card.reveal {
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Counter animation ── */
+  .counter-row {
+    position: relative; z-index: 1;
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 24px 48px;
+    max-width: 900px; margin: 0 auto 56px;
+    padding: 0 24px;
+  }
+  .counter-item { text-align: center; }
+  .counter-num {
+    font-size: 48px; font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--red-light), var(--orange-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .counter-label {
+    font-size: 12px; font-weight: 600;
+    color: #5A6478; text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 6px;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    position: relative; z-index: 1;
+    max-width: 860px; margin: 0 auto;
+    padding: 0 24px 80px; text-align: center;
+  }
+  .cta-box {
+    background: linear-gradient(135deg, #1B2A4A 0%, #0F1B33 100%);
+    border: 1px solid #2D3E5E;
+    border-radius: 16px; padding: 48px 32px;
+    position: relative; overflow: hidden;
+  }
+  .cta-box::before {
+    content: ''; position: absolute;
+    top: -100px; left: 50%; width: 400px; height: 400px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(198,40,40,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-box h2 {
+    font-size: 28px; font-weight: 800;
+    margin-bottom: 12px; color: #fff; position: relative;
+  }
+  .cta-box p {
+    font-size: 14px; color: #8A94A6;
+    margin-bottom: 28px; line-height: 1.65;
+    max-width: 600px; margin-left: auto; margin-right: auto;
+    position: relative;
+  }
+  .cta-buttons {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center; position: relative;
+  }
+  .cta-buttons a {
+    display: inline-block; padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-buttons a:hover { transform: translateY(-2px); }
+  .btn-red {
+    background: var(--red); color: #fff;
+    box-shadow: 0 4px 20px var(--red-glow);
+  }
+  .btn-red:hover { box-shadow: 0 8px 30px var(--red-glow); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #2D3E5E; color: #94A3B8;
+  }
+  .btn-outline:hover { border-color: #475569; color: #fff; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .impacts { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .header { padding: 50px 20px 30px; }
+    .counter-num { font-size: 36px; }
+  }
+  @media (max-width: 480px) {
+    .impacts { grid-template-columns: 1fr; }
+    .counter-row { gap: 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- Header -->
+<div class="header">
+  <div class="tag">Impact Analysis</div>
+  <h1>The Cascade of Closing Barcroft &amp; Cutting All Gymnastics</h1>
+  <p>One budget line doesn't eliminate one program — it triggers a chain reaction that grows wider at every level, hitting access, disability inclusion, competitive athletics, taxpayer investments, and democratic trust.</p>
+  <div class="source-note">Data: Arlington County FY2027 budget proposal, budget engagement survey, community testimonials, Change.org petition (2,700+ signatures)</div>
+</div>
+
+<!-- Theme Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot ld-access"></div><span class="lt-access">Access &amp; Equity</span></div>
+  <div class="legend-item"><div class="legend-dot ld-disability"></div><span class="lt-disability">Disability &amp; Inclusion</span></div>
+  <div class="legend-item"><div class="legend-dot ld-pipeline"></div><span class="lt-pipeline">Athletic Pipeline</span></div>
+  <div class="legend-item"><div class="legend-dot ld-fiscal"></div><span class="lt-fiscal">Taxpayer &amp; Fiscal</span></div>
+  <div class="legend-item"><div class="legend-dot ld-democracy"></div><span class="lt-democracy">Democratic Process</span></div>
+</div>
+
+<!-- Counters -->
+<div class="counter-row reveal">
+  <div class="counter-item">
+    <div class="counter-num" data-target="26">0</div>
+    <div class="counter-label">Cascading Impacts</div>
+  </div>
+  <div class="counter-item">
+    <div class="counter-num" data-target="5">0</div>
+    <div class="counter-label">Thematic Threads</div>
+  </div>
+  <div class="counter-item">
+    <div class="counter-num" data-target="47">0</div>
+    <div class="counter-label">Years of History</div>
+  </div>
+  <div class="counter-item">
+    <div class="counter-num" data-target="0">0</div>
+    <div class="counter-label">Community Input</div>
+  </div>
+</div>
+
+<!-- Trigger -->
+<div class="trigger reveal">
+  <div class="trigger-card">
+    <h2>THE TRIGGER: FY2027 Budget Proposal</h2>
+    <div class="detail">Eliminate ALL competitive &amp; recreational gymnastics programs. Close Barcroft Sports &amp; Fitness Center (28,000 sq. ft.). Effective May 16, 2026. No community input. County's own budget survey never asked about it.</div>
+  </div>
+</div>
+
+<!-- Flow 1 -->
+<div class="flow-connector"><div class="flow-line fl-red"></div></div>
+
+<!-- Cascade -->
+<div class="cascade">
+
+  <!-- ═══ FIRST ORDER ═══ -->
+  <div class="order order-1">
+    <div class="order-header reveal">
+      <div class="order-badge">1</div>
+      <div>
+        <div class="order-label">First-Order Impacts</div>
+        <div class="order-title">What Disappears the Day the Budget Passes</div>
+      </div>
+    </div>
+    <div class="impacts">
+      <div class="impact-card reveal">
+        <span class="icon">🏋️</span>
+        <h3>Barcroft Sports &amp; Fitness Center Closes</h3>
+        <p>28,000 sq. ft. purpose-built gymnastics facility goes dark. Years of taxpayer investment wasted. No cost-benefit analysis released.</p>
+        <span class="stat">$0 cost-benefit analysis released</span>
+        <div class="themes"><span class="theme-tag tt-fiscal">Fiscal</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🤸‍♀️</span>
+        <h3>Arlington Aerials Eliminated</h3>
+        <p>47-year girls' JO program. State champions, D1 athletes. Coach Mengering inducted into Arlington Sports Hall of Fame 2012. The Board formally commended his life's work.</p>
+        <span class="stat">Est. 1979 — 47 years erased</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🤸‍♂️</span>
+        <h3>Arlington Tigers Eliminated</h3>
+        <p>NPR-profiled national model for public boys gymnastics. 1st place Eastern National Championships. One of the few public boys programs left in the country.</p>
+        <span class="stat">Only 15 NCAA men's programs remain</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">♿</span>
+        <h3>Adaptive &amp; Therapeutic Programs Destroyed</h3>
+        <p>Sunday adaptive classes and Therapeutic Rec Family Nights — among the only athletic programs for kids with disabilities in the entire county. Zero private alternatives.</p>
+        <span class="stat">Zero alternatives — anywhere</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">👶</span>
+        <h3>All Recreational Classes Eliminated</h3>
+        <p>Toddler, preschool, beginner, boys, adult beginner, family gymnastics, summer camps — all gone. Classes with 100+ person waitlists. High demand, zero supply.</p>
+        <span class="stat">100+ waitlist for adult beginner alone</span>
+        <div class="themes"><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">👨‍🏫</span>
+        <h3>Coaching Staff &amp; Institutional Knowledge Lost</h3>
+        <p>Coaches, Therapeutic Rec specialists, coordinators displaced. Decades of athlete relationships and adaptive expertise severed overnight.</p>
+        <span class="stat">Irreplaceable expertise</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span><span class="theme-tag tt-disability">Inclusion</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🔇</span>
+        <h3>Community Blindsided — No Input Sought</h3>
+        <p>Budget survey never asked about cutting gymnastics or closing Barcroft. 70% of respondents said they'd pay more. Decision made behind closed doors.</p>
+        <span class="stat">70% willing to pay more — never asked</span>
+        <div class="themes"><span class="theme-tag tt-democracy">Democracy</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow 2 -->
+  <div class="flow-connector"><div class="flow-line fl-orange"></div></div>
+
+  <!-- ═══ SECOND ORDER ═══ -->
+  <div class="order order-2">
+    <div class="order-header reveal">
+      <div class="order-badge">2</div>
+      <div>
+        <div class="order-label">Second-Order Impacts</div>
+        <div class="order-title">What Unravels in the Weeks &amp; Months After</div>
+      </div>
+    </div>
+    <div class="impacts">
+      <div class="impact-card reveal">
+        <span class="icon">🏫</span>
+        <h3>Five HS Teams Lose Their Feeder Pipeline</h3>
+        <p>Yorktown, W-L, Wakefield, TJ, Meridian all depend on Barcroft. Wakefield has no other gym. Yorktown just won the 2026 6D North Region Championship.</p>
+        <span class="stat">5 high school programs undermined</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🏆</span>
+        <h3>Competitive Athletes Stranded Mid-Season</h3>
+        <p>JO gymnasts disrupted mid-season. Years of development halted. Quit, commute far out of county, or pay 3-5x more at private clubs — if spots exist.</p>
+        <span class="stat">Mid-season disruption</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">💸</span>
+        <h3>Affordability Wall Goes Up</h3>
+        <p>Private = $200–$500/month. County programs served all income levels. 49% of parents can't absorb tax increases. Low-income families priced out entirely.</p>
+        <span class="stat">$200–$500/mo private vs. county rates</span>
+        <div class="themes"><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🧠</span>
+        <h3>Children with Disabilities Lose Their Only Option</h3>
+        <p>Kids like Gabriel Remus lose the only athletic program with trained support. His mom: "the only athletic-focused camp that he is able to participate in." No Plan B.</p>
+        <span class="stat">No replacement — period</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">👨‍👩‍👦‍👦</span>
+        <h3>Families Affected by Disability Lose Community</h3>
+        <p>Therapeutic Rec Family Nights gave families a rare evening where every child was supported. Volunteers knew kids by name. That community network dissolves.</p>
+        <span class="stat">Irreplaceable family support</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">☀️</span>
+        <h3>Summer Camp Gap for Kids with Disabilities</h3>
+        <p>Barcroft's gymnastics camp was one of the only athletic summer camps with appropriate accommodations. No comparable option remains — not in Arlington, not regionally.</p>
+        <span class="stat">No summer alternative</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🏚️</span>
+        <h3>28,000 Sq. Ft. Facility Sits at Risk</h3>
+        <p>Purpose-built facility — specialized equipment, pit areas — extremely hard to repurpose. Risk of vacancy, deterioration, or expensive conversion. No plan announced.</p>
+        <span class="stat">No repurposing plan announced</span>
+        <div class="themes"><span class="theme-tag tt-fiscal">Fiscal</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">📉</span>
+        <h3>Public Engagement Credibility Damaged</h3>
+        <p>70% said they'll pay more and the county eliminates instead of asking. Every future budget survey and engagement process loses credibility. Participating stops mattering.</p>
+        <span class="stat">Survey rendered meaningless</span>
+        <div class="themes"><span class="theme-tag tt-democracy">Democracy</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🎤</span>
+        <h3>Board Members' Own Promises Contradicted</h3>
+        <p>De Ferranti: "investments in our children." Cunningham: "people first." Karantonis: "creative rethinking — not elimination." This contradicts all three, on the record.</p>
+        <span class="stat">Their words, their votes</span>
+        <div class="themes"><span class="theme-tag tt-democracy">Democracy</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow 3 -->
+  <div class="flow-connector"><div class="flow-line fl-purple"></div></div>
+
+  <!-- ═══ THIRD ORDER ═══ -->
+  <div class="order order-3">
+    <div class="order-header reveal">
+      <div class="order-badge">3</div>
+      <div>
+        <div class="order-label">Third-Order Impacts</div>
+        <div class="order-title">The Permanent Damage That Doesn't Reverse</div>
+      </div>
+    </div>
+    <div class="impacts">
+      <div class="impact-card reveal">
+        <span class="icon">📉</span>
+        <h3>Boys Gymnastics Weakened Nationally</h3>
+        <p>Only 15 NCAA men's programs remain. Losing the NPR-profiled Tigers signals public investment in boys gymnastics isn't worth it — accelerating national decline.</p>
+        <span class="stat">National signal sent</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🏫</span>
+        <h3>High School Programs Collapse Without Feeder</h3>
+        <p>Can't field competitive HS gymnastics without trained athletes. Within 2-3 years, five teams face roster shortages and potential dissolution. Decades of competitive history at risk.</p>
+        <span class="stat">2-3 year collapse window</span>
+        <div class="themes"><span class="theme-tag tt-pipeline">Pipeline</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🧒</span>
+        <h3>A Generation of Kids Never Gets Access</h3>
+        <p>Once closed, these programs rarely return. Tens of thousands of kids over the coming decade will never know affordable public gymnastics in Arlington.</p>
+        <span class="stat">47-year legacy ends</span>
+        <div class="themes"><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🔒</span>
+        <h3>Gymnastics Becomes Wealthy-Only in Arlington</h3>
+        <p>No public option means private clubs at $200–$500/mo are the only path in. A sport accessible to every family becomes gated by income. An entire discipline de-democratized.</p>
+        <span class="stat">Income-gated sport</span>
+        <div class="themes"><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🌐</span>
+        <h3>Disability Inclusion Regresses County-Wide</h3>
+        <p>A model adaptive program lost. Kids with Down syndrome, autism, physical disabilities trained alongside peers, supported by team volunteers. The message: inclusion is optional.</p>
+        <span class="stat">Inclusion is not optional</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">⚖️</span>
+        <h3>Vulnerable Communities Absorb Disproportionate Harm</h3>
+        <p>Emily Remus: "Our most vulnerable communities shouldn't be the ones who lose the most." Low-income families, kids with disabilities — hit hardest, fewest alternatives.</p>
+        <span class="stat">Most vulnerable pay most</span>
+        <div class="themes"><span class="theme-tag tt-disability">Inclusion</span><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🚪</span>
+        <h3>Precedent: High-Demand Programs Cut Without Input</h3>
+        <p>If 100+ waitlists get eliminated without consultation, every youth program is vulnerable — swim, tennis, theater, after-school. Montgomery County, MD already following suit.</p>
+        <span class="stat">Every program now at risk</span>
+        <div class="themes"><span class="theme-tag tt-democracy">Democracy</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">📜</span>
+        <h3>County's Equity Framework Undermined</h3>
+        <p>2019 Equity Resolution, Youth Strategic Plan, Board commitments — all contradicted. If equity doesn't hold when budgets tighten, it was never a commitment. It was a slogan.</p>
+        <span class="stat">Commitments vs. slogans</span>
+        <div class="themes"><span class="theme-tag tt-democracy">Democracy</span><span class="theme-tag tt-access">Equity</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">💰</span>
+        <h3>Taxpayer Investment Stranded</h3>
+        <p>Public dollars for a 28,000 sq. ft. purpose-built facility yield zero return if closed. No cost-benefit analysis. The county hasn't shown closing saves more than it destroys.</p>
+        <span class="stat">Zero ROI on public investment</span>
+        <div class="themes"><span class="theme-tag tt-fiscal">Fiscal</span></div>
+      </div>
+      <div class="impact-card reveal">
+        <span class="icon">🏠</span>
+        <h3>Barcroft Neighborhood Loses Community Anchor</h3>
+        <p>Vacant or repurposed building changes neighborhood character. Families chose to live near Barcroft for its programs. Property values, foot traffic, identity — the loss radiates outward.</p>
+        <span class="stat">Neighborhood identity affected</span>
+        <div class="themes"><span class="theme-tag tt-fiscal">Fiscal</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta reveal">
+  <div class="cta-box">
+    <h2>This Is Preventable.</h2>
+    <p>The community has offered alternatives: fee increases (70% willing), public-private partnerships, fundraising, shared-use models. The county chose elimination without asking. The March 24 Public Budget Hearing is the last chance to be heard.</p>
+    <div class="cta-buttons">
+      <a href="https://savearlingtongymnastics.com" class="btn-red">#SaveArlingtonGymnastics</a>
+      <a href="mailto:countyboard@arlingtonva.us" class="btn-outline">Email the Board</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Particle background ──
+(function() {
+  var canvas = document.getElementById('particles');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var particleCount = 60;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (var i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+      a: Math.random() * 0.15 + 0.03
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(148,163,184,' + p.a + ')';
+      ctx.fill();
+    }
+    // Faint connections
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(148,163,184,' + (0.04 * (1 - dist / 120)) + ')';
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── Scroll reveal with stagger ──
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Stagger cards within a grid
+        var parent = entry.target.closest('.impacts');
+        if (parent) {
+          var cards = Array.from(parent.querySelectorAll('.impact-card.reveal'));
+          var idx = cards.indexOf(entry.target);
+          setTimeout(function() {
+            entry.target.classList.add('visible');
+          }, idx * 80);
+        } else {
+          entry.target.classList.add('visible');
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+// ── Counter animation ──
+(function() {
+  var counted = false;
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.counter-num').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-target'));
+        var duration = 2000;
+        var start = performance.now();
+        function step(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+  }, { threshold: 0.5 });
+  var row = document.querySelector('.counter-row');
+  if (row) observer.observe(row);
+})();
+</script>
+
+</body>
+</html>

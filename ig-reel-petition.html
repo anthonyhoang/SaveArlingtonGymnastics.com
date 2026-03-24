@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IG Reel — Save Arlington Gymnastics</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; background: #222;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  .phone-frame {
+    width: 1080px; height: 1920px;
+    background: #0F1B33;
+    position: relative; overflow: hidden;
+    transform: scale(0.45);
+    transform-origin: center center;
+  }
+
+  /* === SLIDES === */
+  .slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0;
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    z-index: 1;
+  }
+  .slide.active { opacity: 1; z-index: 10; }
+
+  /* === GLOBAL TEXT === */
+  .big-text { font-weight: 900; text-transform: uppercase; text-align: center; line-height: 1.05; padding: 0 40px; }
+  .gold { color: #F9A825; }
+  .white { color: #fff; }
+  .red { color: #C62828; }
+  .gray { color: #a0a8ba; }
+  .light { font-weight: 400; }
+
+  /* === TOP BAR === */
+  .top-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 2px;
+    z-index: 20;
+  }
+  .top-bar.red-bg { background: #C62828; }
+  .top-bar.gold-line { height: 8px; background: #F9A825; }
+
+  /* === BOTTOM BAR === */
+  .bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 8px;
+    z-index: 20;
+  }
+  .bottom-bar.red { background: #C62828; }
+  .bottom-bar.gold { background: #F9A825; }
+
+  /* === SLIDE 1: HOOK === */
+  #slide1 .hook-breaking { font-size: 34px; letter-spacing: 3px; }
+  #slide1 .hook-main { font-size: 92px; margin-top: 20px; }
+  #slide1 .hook-wants { font-size: 68px; margin-top: 15px; color: #a0a8ba; }
+  #slide1 .hook-elim { font-size: 92px; margin-top: 15px; }
+  #slide1 .hook-line { width: 240px; height: 6px; background: #F9A825; margin: 40px auto; }
+  #slide1 .hook-programs { font-size: 42px; font-weight: 700; color: #a0a8ba; margin-top: 10px; letter-spacing: 1px; }
+  #slide1 .hook-barcroft { font-size: 44px; font-weight: 800; color: #C62828; margin-top: 15px; }
+
+  /* Animation: text slam in */
+  @keyframes slamIn {
+    0% { transform: scale(1.8); opacity: 0; }
+    60% { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  @keyframes countUp {
+    0% { content: "0"; }
+    100% { content: "1,869"; }
+  }
+  @keyframes slideInLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideInRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  #slide1.active .hook-main { animation: slamIn 0.4s ease-out both; }
+  #slide1.active .hook-wants { animation: fadeIn 0.3s 0.3s ease-out both; }
+  #slide1.active .hook-elim { animation: slamIn 0.4s 0.5s ease-out both; }
+  #slide1.active .hook-line { animation: fadeIn 0.3s 0.8s ease-out both; opacity: 0; }
+  #slide1.active .hook-programs { animation: fadeUp 0.3s 0.9s ease-out both; }
+  #slide1.active .hook-barcroft { animation: fadeUp 0.3s 1.0s ease-out both; }
+
+  /* === SLIDE 2: FIGHTING BACK === */
+  #slide2 .fight-top { font-size: 80px; }
+  #slide2 .fight-bottom { font-size: 84px; margin-top: 20px; }
+  #slide2 .fight-line { width: 200px; height: 6px; background: #C62828; margin: 50px auto; }
+
+  #slide2.active .fight-top { animation: slideInLeft 0.4s ease-out both; }
+  #slide2.active .fight-bottom { animation: slideInRight 0.4s 0.25s ease-out both; }
+  #slide2.active .fight-line { animation: fadeIn 0.3s 0.5s ease-out both; opacity: 0; }
+
+  /* === SLIDE 3: COUNTER === */
+  .counter-logo { width: 280px; margin-bottom: 50px; }
+  .counter-number {
+    font-size: 170px; font-weight: 900; color: #F9A825;
+    line-height: 1; letter-spacing: -4px;
+  }
+  .counter-label { font-size: 52px; font-weight: 900; color: #fff; margin-top: 10px; letter-spacing: 3px; }
+  .counter-sub { font-size: 38px; font-weight: 400; color: #a0a8ba; margin-top: 15px; }
+  .progress-bar {
+    width: 700px; height: 24px; background: rgba(255,255,255,0.1);
+    border-radius: 12px; margin-top: 50px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: #C62828; border-radius: 12px;
+    width: 0%; transition: width 1s ease-out;
+  }
+  .progress-goal { font-size: 28px; color: #a0a8ba; margin-top: 15px; }
+
+  #slide3.active .counter-number { animation: slamIn 0.5s ease-out both; }
+  #slide3.active .counter-label { animation: fadeUp 0.3s 0.3s ease-out both; }
+  #slide3.active .counter-sub { animation: fadeUp 0.3s 0.5s ease-out both; }
+
+  /* === TESTIMONIAL SLIDES === */
+  .testimonial-slide { padding: 0 60px; }
+  .test-header {
+    position: absolute; top: 100; left: 0; right: 0;
+    text-align: center; font-size: 32px; font-weight: 900;
+    color: #F9A825; letter-spacing: 2px; text-transform: uppercase;
+    padding-top: 120px;
+  }
+  .test-card {
+    background: rgba(20, 32, 60, 0.95);
+    border-radius: 24px; padding: 60px 50px;
+    border-left: 8px solid #F9A825;
+    max-width: 960px; margin-top: 60px;
+    position: relative;
+  }
+  .test-quote-mark {
+    font-size: 180px; font-weight: 900; color: rgba(249, 168, 37, 0.15);
+    position: absolute; top: -30px; left: 30px; line-height: 1;
+  }
+  .test-text {
+    font-size: 48px; font-weight: 700; color: #fff;
+    line-height: 1.3; position: relative; z-index: 2;
+  }
+  .test-name {
+    font-size: 44px; font-weight: 900; color: #F9A825;
+    margin-top: 40px;
+  }
+  .test-count {
+    position: absolute; bottom: 160px; left: 0; right: 0;
+    text-align: center; font-size: 34px; font-weight: 700; color: #a0a8ba;
+  }
+
+  .slide.active .test-card { animation: fadeUp 0.35s ease-out both; }
+  .slide.active .test-header { animation: fadeIn 0.3s ease-out both; }
+
+  /* === SLIDE: 60+ === */
+  .sixty-number { font-size: 200px; font-weight: 900; color: #F9A825; line-height: 1; }
+  .sixty-label { font-size: 76px; font-weight: 900; color: #fff; margin-top: 10px; letter-spacing: 2px; }
+  .sixty-sub { font-size: 48px; font-weight: 700; color: #a0a8ba; margin-top: 10px; }
+  .sixty-line { width: 200px; height: 6px; background: #C62828; margin: 40px auto; }
+
+  /* === CTA SLIDE === */
+  .cta-slide { text-align: center; }
+  .cta-avatar { width: 140px; height: 140px; border-radius: 20px; margin-bottom: 40px; }
+  .cta-add { font-size: 92px; font-weight: 900; color: #fff; letter-spacing: 2px; }
+  .cta-button {
+    display: inline-block; background: #C62828; color: #fff;
+    font-size: 56px; font-weight: 900; padding: 30px 80px;
+    border-radius: 20px; margin-top: 40px; letter-spacing: 1px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .cta-count { font-size: 42px; font-weight: 800; color: #F9A825; margin-top: 40px; }
+  .cta-link { font-size: 36px; font-weight: 700; color: #a0a8ba; margin-top: 30px; }
+  .cta-site { font-size: 34px; font-weight: 700; color: #F9A825; position: absolute; bottom: 140px; left: 0; right: 0; text-align: center; }
+
+  .slide.active .cta-add { animation: slamIn 0.4s ease-out both; }
+  .slide.active .cta-button { animation: fadeUp 0.4s 0.3s ease-out both, pulse 1.5s 0.7s ease-in-out infinite; }
+
+  /* === SLIDE 0: TITLE CARD === */
+  #slide0 {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    cursor: pointer;
+  }
+  .title-sg {
+    width: 160px; height: 160px; border: 4px solid #F9A825; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 72px; font-weight: 900; color: #F9A825; margin-bottom: 50px;
+  }
+  .title-main { font-size: 88px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; line-height: 1.05; padding: 0 40px; }
+  .title-gym { font-size: 88px; font-weight: 900; color: #F9A825; text-transform: uppercase; text-align: center; line-height: 1.05; margin-top: 5px; }
+  .title-line { width: 240px; height: 5px; background: #C62828; margin: 40px auto; }
+  .title-sub { font-size: 38px; font-weight: 700; color: #a0a8ba; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
+  .title-tap { font-size: 30px; font-weight: 400; color: rgba(255,255,255,0.4); margin-top: 80px; letter-spacing: 1px; }
+  .title-programs {
+    display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; justify-content: center; padding: 0 40px;
+  }
+  .title-pill {
+    border: 2px solid rgba(255,255,255,0.25); border-radius: 40px;
+    padding: 10px 28px; font-size: 28px; font-weight: 700; color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+  }
+
+  @keyframes titleFadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes titlePulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+  }
+  #slide0.active .title-sg { animation: titleFadeIn 0.5s ease-out both; }
+  #slide0.active .title-main { animation: titleFadeIn 0.4s 0.15s ease-out both; }
+  #slide0.active .title-gym { animation: titleFadeIn 0.4s 0.25s ease-out both; }
+  #slide0.active .title-line { animation: fadeIn 0.3s 0.4s ease-out both; opacity: 0; }
+  #slide0.active .title-sub { animation: fadeUp 0.3s 0.5s ease-out both; }
+  #slide0.active .title-programs { animation: fadeUp 0.3s 0.6s ease-out both; }
+  /* === CONTROLS (outside phone frame) === */
+  .controls {
+    position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 16px; z-index: 200;
+  }
+  .ctrl-btn {
+    width: 64px; height: 64px; border-radius: 50%; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: #fff; transition: transform 0.15s, background 0.15s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .ctrl-btn:hover { transform: scale(1.1); }
+  .ctrl-play { background: #C62828; }
+  .ctrl-play:hover { background: #B71C1C; }
+  .ctrl-replay { background: #1B2A4A; }
+  .ctrl-replay:hover { background: #0F1B33; }
+  .ctrl-label { font-size: 11px; font-weight: 700; color: #aaa; text-align: center; margin-top: -8px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+
+<div class="phone-frame" id="reel">
+
+  <!-- SLIDE 0: TITLE CARD -->
+  <div class="slide" id="slide0">
+    <div class="title-sg">SG</div>
+    <div class="title-main">SAVE ARLINGTON</div>
+    <div class="title-gym">GYMNASTICS</div>
+    <div class="title-line"></div>
+    <div class="title-sub">Stop the elimination of all county programs</div>
+    <div class="title-programs">
+      <span class="title-pill">AERIALS</span>
+      <span class="title-pill">TIGERS</span>
+      <span class="title-pill">REC</span>
+      <span class="title-pill">ADAPTIVE</span>
+    </div>
+    <div class="bottom-bar gold"></div>
+  </div>
+
+  <!-- SLIDE 1: HOOK -->
+  <div class="slide" id="slide1">
+    <div class="top-bar red-bg hook-breaking">BREAKING</div>
+    <div class="big-text hook-main white">ARLINGTON COUNTY</div>
+    <div class="big-text hook-wants gray">WANTS TO</div>
+    <div class="big-text hook-elim gold">ELIMINATE ALL GYMNASTICS</div>
+    <div class="hook-line"></div>
+    <div class="hook-programs">Aerials &bull; Tigers &bull; Rec &bull; Adaptive</div>
+    <div class="hook-barcroft">& Close Barcroft</div>
+    <div class="bottom-bar red"></div>
+  </div>
+
+  <!-- SLIDE 2: FIGHTING BACK -->
+  <div class="slide" id="slide2">
+    <div class="top-bar gold-line"></div>
+    <div class="big-text fight-top white">BUT THE COMMUNITY</div>
+    <div class="big-text fight-bottom gold">IS FIGHTING BACK</div>
+    <div class="fight-line"></div>
+    <div class="bottom-bar gold"></div>
+  </div>
+
+  <!-- SLIDE 3: COUNTER -->
+  <div class="slide" id="slide3">
+    <img src="change-org-long-logo.png" class="counter-logo" alt="Change.org">
+    <div class="counter-number" id="counterNum">0</div>
+    <div class="counter-label">SIGNATURES</div>
+    <div class="counter-sub">in less than 48 hours</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-goal">Goal: 2,500</div>
+    <div class="bottom-bar red"></div>
+  </div>
+
+  <!-- TESTIMONIALS (generated by JS) -->
+
+  <!-- SLIDE: 60+ -->
+  <div class="slide" id="slide60">
+    <div class="sixty-number">60+</div>
+    <div class="sixty-label">TESTIMONIALS</div>
+    <div class="sixty-sub">AND COUNTING</div>
+    <div class="sixty-line"></div>
+    <div class="bottom-bar red"></div>
+  </div>
+
+  <!-- SLIDE: CTA -->
+  <div class="slide" id="slideCTA">
+    <div class="top-bar red-bg" style="font-size:32px; letter-spacing:1px;">PUBLIC HEARING: MARCH 24</div>
+    <img src="change-org-avatar-logo.png" class="cta-avatar" alt="Change.org">
+    <div class="cta-add">ADD YOUR<br>NAME</div>
+    <div class="cta-button">SIGN THE PETITION</div>
+    <div class="cta-count">1,869 have signed</div>
+    <div class="cta-link">Link in bio + comments</div>
+    <div class="cta-site">savearlingtongymnastics.com</div>
+    <div class="bottom-bar gold"></div>
+  </div>
+
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <button class="ctrl-btn ctrl-play" id="btnPlay" onclick="startReel()" title="Play">&#9654;</button>
+  <div class="ctrl-label">PLAY</div>
+  <button class="ctrl-btn ctrl-replay" id="btnReplay" onclick="replayReel()" title="Replay">&#8635;</button>
+  <div class="ctrl-label">REPLAY</div>
+</div>
+
+<script>
+const testimonials = [
+  { name: "Storm", quote: "I used to do gymnastics at Barcroft, it was a very fun and important educational experience!" },
+  { name: "Mia", quote: "Arlington Aerials and Barcroft are a fundamental part of my upbringing. My teammates are still some of my best friends." },
+  { name: "Rebecca", quote: "I used to work for the adaptive gymnastics program! This program opens doors for children who may not have been able to enter the gymnastics space otherwise." },
+  { name: "Katie", quote: "As a breast cancer survivor, gymnastics helped me regain strength, flexibility, and confidence after chemo, radiation, and surgeries." },
+  { name: "Sara", quote: "This program supports the entire Arlington community, from toddlers to those who want to compete. They serve everyone no matter ability or income." },
+  { name: "Ryan", quote: "Both my boys were Tigers \u2014 the discipline, teamwork, and life skills they learned are unmatched. Premier program in the state." },
+  { name: "Rebecca", quote: "This program opens doors for children who may not have been able to enter the gymnastics space otherwise." },
+  { name: "Jordan", quote: "I was an Arlington Aerial since age 9. My time on the team is the foundation of the adult I am today." },
+  { name: "Kara", quote: "My toddler learned bravery, confidence, and social skills through Barcroft. I\u2019d happily chip in more to see these programs continue." },
+  { name: "Olga", quote: "My son is a 3-time Virginia State Champion. Please help keep the Arlington program alive." },
+  { name: "Leah", quote: "I\u2019ve been doing gymnastics at Barcroft for 13+ years. I don\u2019t remember life without it." },
+  { name: "Gillian", quote: "There are no gymnasts in my family, but these programs are in such high demand the website crashes at registration." },
+  { name: "Anna", quote: "This is where I grew up, learned discipline, and built confidence. It feels like a second home filled with friends who are like family." },
+  { name: "Ava", quote: "I\u2019m really sad our gym might close. Arlington Aerials has been like a second home to me." },
+  { name: "Scott", quote: "I have no doubt the Board views economic development as far more important than the development of young women, young men, and children with life challenges." },
+];
+
+// Generate testimonial slide elements
+const reel = document.getElementById('reel');
+const slide60 = document.getElementById('slide60');
+
+testimonials.forEach((t, i) => {
+  const div = document.createElement('div');
+  div.className = 'slide testimonial-slide';
+  div.id = `slideT${i}`;
+  div.innerHTML = `
+    <div class="test-header">REAL VOICES FROM THE PETITION</div>
+    <div class="test-card">
+      <div class="test-quote-mark">\u201C</div>
+      <div class="test-text">${t.quote}</div>
+      <div class="test-name">\u2014 ${t.name}</div>
+    </div>
+    <div class="test-count">Testimony ${i + 1} of 60+</div>
+    <div class="bottom-bar red"></div>
+  `;
+  reel.insertBefore(div, slide60);
+});
+
+// Build slide order
+const slideOrder = ['slide0', 'slide1', 'slide2', 'slide3'];
+testimonials.forEach((_, i) => slideOrder.push(`slideT${i}`));
+slideOrder.push('slide60', 'slideCTA');
+
+// Timing per slide (ms)
+function getSlideDuration(id) {
+  if (id === 'slide0') return 99999999; // waits for tap
+  if (id === 'slide1') return 2200;
+  if (id === 'slide2') return 1500;
+  if (id === 'slide3') return 2200;
+  if (id === 'slide60') return 1500;
+  if (id === 'slideCTA') return 3500;
+  // testimonials: shorter quotes = faster
+  const el = document.getElementById(id);
+  const text = el.querySelector('.test-text')?.textContent || '';
+  if (text.length < 80) return 1400;
+  if (text.length < 130) return 1800;
+  return 2200;
+}
+
+let currentSlide = -1;
+let running = false;
+
+function showSlide(idx) {
+  // Remove active from all
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  const id = slideOrder[idx];
+  const el = document.getElementById(id);
+  el.classList.add('active');
+
+  // Special: counter animation
+  if (id === 'slide3') {
+    animateCounter();
+  }
+}
+
+// Show title card immediately on load
+document.addEventListener('DOMContentLoaded', () => {
+  currentSlide = 0;
+  showSlide(0);
+});
+
+function animateCounter() {
+  const numEl = document.getElementById('counterNum');
+  const fillEl = document.getElementById('progressFill');
+  const target = 1869;
+  const duration = 1200;
+  const start = performance.now();
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const current = Math.round(target * eased);
+    numEl.textContent = current.toLocaleString();
+    fillEl.style.width = (74.76 * eased) + '%'; // 1869/2500 = 74.76%
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function nextSlide() {
+  currentSlide++;
+  if (currentSlide >= slideOrder.length) {
+    // Stop at end (CTA stays on screen)
+    running = false;
+    return;
+  }
+  showSlide(currentSlide);
+  const dur = getSlideDuration(slideOrder[currentSlide]);
+  if (running) setTimeout(nextSlide, dur);
+}
+
+function startReel() {
+  if (running) return;
+  running = true;
+  currentSlide = 0;
+  nextSlide();
+}
+
+function replayReel() {
+  running = false;
+  currentSlide = -1;
+  // Reset to title card briefly, then auto-play
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  currentSlide = 0;
+  showSlide(0);
+  // Auto-start after showing title for 1.5s
+  setTimeout(() => {
+    running = true;
+    nextSlide();
+  }, 1500);
+}
+</script>
+</body>
+</html>

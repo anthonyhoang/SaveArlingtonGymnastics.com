@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closing Barcroft: Cascade of Consequences</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Inter',sans-serif;
+  background:#060B16;
+  color:#E8EBF0;
+  width:1920px;height:1080px;
+  overflow:hidden;position:relative;
+}
+canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+svg#lines{position:absolute;top:0;left:0;width:1920px;height:1080px;z-index:1;pointer-events:none;}
+svg#lines path{fill:none;stroke-width:1.5;stroke-linecap:round;}
+
+/* Nodes */
+.node{
+  position:absolute;z-index:2;
+  border-radius:8px;
+  padding:10px 14px;
+  opacity:0;transform:scale(0.85);
+  transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s;
+  cursor:default;
+  max-width:210px;
+}
+.node.on{opacity:1;transform:scale(1);}
+.node h3{font-size:12px;font-weight:800;line-height:1.25;margin-bottom:3px;color:#fff;}
+.node p{font-size:10px;color:#7A8599;line-height:1.35;}
+.node .stat{
+  display:inline-block;margin-top:5px;
+  font-size:9px;font-weight:700;
+  padding:2px 7px;border-radius:4px;
+  background:rgba(255,255,255,0.05);
+}
+.node .dots{display:flex;gap:3px;margin-top:5px;}
+.node .dot{width:6px;height:6px;border-radius:50%;}
+.d-access{background:#3B82F6;} .d-disability{background:#22C55E;}
+.d-pipeline{background:#F59E0B;} .d-fiscal{background:#94A3B8;}
+.d-democracy{background:#E2E8F0;}
+
+/* Tier colors */
+.n-trigger{background:rgba(198,40,40,0.25);border:2px solid #C62828;max-width:520px;}
+.n-trigger h3{font-size:16px;color:#EF5350;}
+.n-trigger p{font-size:13px;color:#E57373;}
+.n-1{background:rgba(198,40,40,0.1);border:1px solid rgba(198,40,40,0.4);}
+.n-1 h3{color:#EF5350;} .n-1 .stat{color:#EF5350;}
+.n-2{background:rgba(230,81,0,0.1);border:1px solid rgba(230,81,0,0.35);}
+.n-2 h3{color:#FF8A65;} .n-2 .stat{color:#FF8A65;}
+.n-3{background:rgba(74,20,140,0.1);border:1px solid rgba(74,20,140,0.4);}
+.n-3 h3{color:#B388FF;} .n-3 .stat{color:#B388FF;}
+
+/* Tier labels */
+.tier-label{
+  position:absolute;z-index:3;
+  font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  opacity:0;transition:opacity 0.6s;
+}
+.tier-label.on{opacity:1;}
+.tl-1{color:#EF5350;} .tl-2{color:#FF8A65;} .tl-3{color:#B388FF;}
+
+/* Title overlay */
+#title-overlay{
+  position:absolute;inset:0;z-index:10;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:#060B16;
+  transition:opacity 1s cubic-bezier(0.16,1,0.3,1);
+}
+#title-overlay.gone{opacity:0;pointer-events:none;}
+#title-overlay .tag{
+  background:#C62828;color:#fff;
+  font-size:13px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  padding:8px 22px;border-radius:20px;
+  margin-bottom:28px;
+  box-shadow:0 0 30px rgba(198,40,40,0.4);
+  opacity:0;animation:pop 0.6s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+#title-overlay h1{
+  font-size:64px;font-weight:900;line-height:1.1;
+  text-align:center;max-width:1000px;
+  background:linear-gradient(135deg,#fff,#94A3B8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  opacity:0;animation:blur-in 1s 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+#title-overlay p{
+  font-size:20px;color:#8A94A6;margin-top:20px;
+  max-width:700px;text-align:center;line-height:1.6;
+  opacity:0;animation:fade-up 0.8s 1.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes pop{from{opacity:0;transform:scale(0.7)}to{opacity:1;transform:scale(1)}}
+@keyframes blur-in{from{opacity:0;transform:translateY(20px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+
+/* CTA overlay */
+#cta-overlay{
+  position:absolute;inset:0;z-index:10;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(6,11,22,0.92);
+  opacity:0;pointer-events:none;
+  transition:opacity 1s;
+}
+#cta-overlay.on{opacity:1;pointer-events:auto;}
+#cta-overlay h2{
+  font-size:56px;font-weight:900;color:#fff;
+  margin-bottom:16px;opacity:0;
+}
+#cta-overlay p{
+  font-size:18px;color:#8A94A6;max-width:600px;
+  text-align:center;line-height:1.6;margin-bottom:28px;opacity:0;
+}
+#cta-overlay .hashtag{font-size:28px;font-weight:800;color:#EF5350;opacity:0;}
+#cta-overlay .url{font-size:16px;color:#5A6478;margin-top:12px;opacity:0;}
+#cta-overlay.on h2{animation:blur-in 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) both;}
+#cta-overlay.on p{animation:fade-up 0.6s 0.7s cubic-bezier(0.16,1,0.3,1) both;}
+#cta-overlay.on .hashtag{animation:pop 0.5s 1.2s cubic-bezier(0.16,1,0.3,1) both;}
+#cta-overlay.on .url{animation:fade-up 0.5s 1.5s cubic-bezier(0.16,1,0.3,1) both;}
+
+/* Legend */
+#legend{
+  position:absolute;top:16px;right:24px;z-index:5;
+  display:flex;gap:14px;opacity:0;transition:opacity 0.6s;
+}
+#legend.on{opacity:1;}
+#legend span{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+#legend .ld{width:7px;height:7px;border-radius:50%;}
+
+/* Controls */
+#controls{
+  position:absolute;bottom:14px;right:24px;z-index:20;
+  font-size:11px;color:#3A4458;
+}
+#progress-bar{
+  position:absolute;bottom:0;left:0;height:3px;width:0;z-index:20;
+  background:linear-gradient(90deg,#C62828,#FF8A65,#B388FF);
+  transition:width 0.3s linear;
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<svg id="lines"></svg>
+
+<!-- Title -->
+<div id="title-overlay">
+  <div class="tag">Impact Analysis</div>
+  <h1>Closing Barcroft:<br>A Cascade of Consequences</h1>
+  <p>One budget line triggers 26 cascading consequences across five thematic threads. Watch it build.</p>
+</div>
+
+<!-- CTA -->
+<div id="cta-overlay">
+  <h2>This Is Preventable.</h2>
+  <p>Fee increases. Partnerships. Fundraising. The community offered alternatives. The county chose elimination without asking.</p>
+  <div class="hashtag">#SaveArlingtonGymnastics</div>
+  <div class="url">savearlingtongymnastics.com</div>
+</div>
+
+<!-- Legend -->
+<div id="legend">
+  <span><div class="ld d-access"></div><span style="color:#60A5FA">Access</span></span>
+  <span><div class="ld d-disability"></div><span style="color:#4ADE80">Inclusion</span></span>
+  <span><div class="ld d-pipeline"></div><span style="color:#FBBF24">Pipeline</span></span>
+  <span><div class="ld d-fiscal"></div><span style="color:#94A3B8">Fiscal</span></span>
+  <span><div class="ld d-democracy"></div><span style="color:#E2E8F0">Democracy</span></span>
+</div>
+
+<div id="controls">SPACE pause &middot; &rarr; skip</div>
+<div id="progress-bar"></div>
+
+<!-- TRIGGER -->
+<div class="node n-trigger" id="T" style="left:700px;top:30px;">
+  <h3>FY2027 Budget: Eliminate All Gymnastics &amp; Close Barcroft</h3>
+  <p>28,000 sq ft facility. Effective May 16, 2026. Zero community input.</p>
+</div>
+
+<!-- TIER LABELS -->
+<div class="tier-label tl-1" id="lbl-1" style="left:24px;top:150px;">1st Order &mdash; Immediate</div>
+<div class="tier-label tl-2" id="lbl-2" style="left:24px;top:410px;">2nd Order &mdash; Downstream</div>
+<div class="tier-label tl-3" id="lbl-3" style="left:24px;top:700px;">3rd Order &mdash; Permanent</div>
+
+<!-- FIRST ORDER (y ~170-370) -->
+<div class="node n-1" id="F1" style="left:30px;top:175px;">
+  <h3>Barcroft Closes</h3><p>28,000 sq ft purpose-built facility goes dark</p>
+  <span class="stat">$0 cost-benefit analysis</span>
+  <div class="dots"><div class="dot d-fiscal"></div></div>
+</div>
+<div class="node n-1" id="F2" style="left:260px;top:175px;">
+  <h3>Aerials Eliminated</h3><p>47-yr girls' JO program. State champs. D1 athletes.</p>
+  <span class="stat">Est. 1979</span>
+  <div class="dots"><div class="dot d-pipeline"></div></div>
+</div>
+<div class="node n-1" id="F3" style="left:490px;top:175px;">
+  <h3>Tigers Eliminated</h3><p>NPR-profiled boys program. 1st at Eastern Nationals.</p>
+  <span class="stat">15 NCAA men's programs left</span>
+  <div class="dots"><div class="dot d-pipeline"></div></div>
+</div>
+<div class="node n-1" id="F4" style="left:720px;top:175px;">
+  <h3>Adaptive Programs Destroyed</h3><p>Only athletic programs for kids w/ disabilities. Zero private alternatives.</p>
+  <span class="stat">Zero alternatives</span>
+  <div class="dots"><div class="dot d-disability"></div></div>
+</div>
+<div class="node n-1" id="F5" style="left:960px;top:175px;">
+  <h3>All Rec Classes Gone</h3><p>Toddler thru adult. Summer camps. 100+ waitlists.</p>
+  <span class="stat">100+ waitlist</span>
+  <div class="dots"><div class="dot d-access"></div></div>
+</div>
+<div class="node n-1" id="F6" style="left:1190px;top:175px;">
+  <h3>Staff &amp; Knowledge Lost</h3><p>Coaches, Therapeutic Rec specialists displaced overnight.</p>
+  <span class="stat">Decades of expertise</span>
+  <div class="dots"><div class="dot d-pipeline"></div><div class="dot d-disability"></div></div>
+</div>
+<div class="node n-1" id="F7" style="left:1470px;top:175px;">
+  <h3>Community Blindsided</h3><p>Survey never asked. 70% would pay more. Closed-door decision.</p>
+  <span class="stat">70% willing — never asked</span>
+  <div class="dots"><div class="dot d-democracy"></div></div>
+</div>
+
+<!-- SECOND ORDER (y ~435-630) -->
+<div class="node n-2" id="S1" style="left:30px;top:440px;">
+  <h3>5 HS Teams Lose Pipeline</h3><p>Yorktown, W-L, Wakefield, TJ, Meridian. Wakefield has no other gym.</p>
+  <span class="stat">5 teams undermined</span>
+  <div class="dots"><div class="dot d-pipeline"></div></div>
+</div>
+<div class="node n-2" id="S2" style="left:250px;top:440px;">
+  <h3>Athletes Stranded Mid-Season</h3><p>JO gymnasts disrupted. Quit, commute, or pay 3-5x more.</p>
+  <span class="stat">Mid-season</span>
+  <div class="dots"><div class="dot d-pipeline"></div><div class="dot d-access"></div></div>
+</div>
+<div class="node n-2" id="S3" style="left:470px;top:440px;">
+  <h3>Affordability Wall</h3><p>Private = $200-$500/mo. Low-income locked out entirely.</p>
+  <span class="stat">$200-$500/mo</span>
+  <div class="dots"><div class="dot d-access"></div></div>
+</div>
+<div class="node n-2" id="S4" style="left:680px;top:440px;">
+  <h3>Kids w/ Disabilities Isolated</h3><p>Gabriel &amp; peers lose only program w/ trained support. No Plan B.</p>
+  <span class="stat">No replacement</span>
+  <div class="dots"><div class="dot d-disability"></div></div>
+</div>
+<div class="node n-2" id="S5" style="left:900px;top:440px;">
+  <h3>Families Lose Community</h3><p>Therapeutic Rec nights gone. Volunteers knew kids by name.</p>
+  <span class="stat">Network dissolved</span>
+  <div class="dots"><div class="dot d-disability"></div><div class="dot d-access"></div></div>
+</div>
+<div class="node n-2" id="S6" style="left:1110px;top:440px;">
+  <h3>Summer Camp Gap</h3><p>Only athletic camp w/ accommodations. No regional replacement.</p>
+  <span class="stat">No summer option</span>
+  <div class="dots"><div class="dot d-disability"></div></div>
+</div>
+<div class="node n-2" id="S7" style="left:30px;top:580px;">
+  <h3>Facility Sits at Risk</h3><p>Purpose-built = hard to repurpose. Vacancy. Deterioration.</p>
+  <span class="stat">No plan announced</span>
+  <div class="dots"><div class="dot d-fiscal"></div></div>
+</div>
+<div class="node n-2" id="S8" style="left:250px;top:580px;">
+  <h3>Engagement Credibility Damaged</h3><p>70% said pay more, county eliminated. Future surveys lose trust.</p>
+  <span class="stat">Surveys meaningless</span>
+  <div class="dots"><div class="dot d-democracy"></div></div>
+</div>
+<div class="node n-2" id="S9" style="left:470px;top:580px;">
+  <h3>Board Promises Contradicted</h3><p>"Investments in children." "People first." "Not elimination." On record.</p>
+  <span class="stat">Their words, their votes</span>
+  <div class="dots"><div class="dot d-democracy"></div></div>
+</div>
+
+<!-- THIRD ORDER (y ~725-920) -->
+<div class="node n-3" id="R1" style="left:30px;top:730px;">
+  <h3>Boys Gym Weakened Nationally</h3><p>Losing NPR model signals public investment not worth it.</p>
+  <span class="stat">National signal</span>
+  <div class="dots"><div class="dot d-pipeline"></div></div>
+</div>
+<div class="node n-3" id="R2" style="left:240px;top:730px;">
+  <h3>HS Programs Collapse</h3><p>2-3 years to roster shortages. Decades of competitive history gone.</p>
+  <span class="stat">2-3 yr window</span>
+  <div class="dots"><div class="dot d-pipeline"></div></div>
+</div>
+<div class="node n-3" id="R3" style="left:450px;top:730px;">
+  <h3>Generation Loses Access</h3><p>Programs rarely return. Tens of thousands never know public gym.</p>
+  <span class="stat">Legacy ends</span>
+  <div class="dots"><div class="dot d-access"></div></div>
+</div>
+<div class="node n-3" id="R4" style="left:660px;top:730px;">
+  <h3>Wealthy-Only Sport</h3><p>No public option. $200-$500/mo gatekeeper. Discipline de-democratized.</p>
+  <span class="stat">Income-gated</span>
+  <div class="dots"><div class="dot d-access"></div></div>
+</div>
+<div class="node n-3" id="R5" style="left:870px;top:730px;">
+  <h3>Inclusion Regresses</h3><p>Model adaptive program erased. Message: inclusion is optional.</p>
+  <span class="stat">Not optional</span>
+  <div class="dots"><div class="dot d-disability"></div></div>
+</div>
+<div class="node n-3" id="R6" style="left:450px;top:890px;">
+  <h3>Vulnerable Pay Most</h3><p>"Our most vulnerable shouldn't lose the most." — Emily Remus</p>
+  <span class="stat">Disproportionate harm</span>
+  <div class="dots"><div class="dot d-disability"></div><div class="dot d-access"></div></div>
+</div>
+<div class="node n-3" id="R7" style="left:1080px;top:730px;">
+  <h3>Precedent Set</h3><p>100+ waitlists cut w/o input. Every youth program at risk. MoCo following.</p>
+  <span class="stat">Domino effect</span>
+  <div class="dots"><div class="dot d-democracy"></div></div>
+</div>
+<div class="node n-3" id="R8" style="left:1300px;top:730px;">
+  <h3>Equity Framework Undermined</h3><p>2019 Resolution, Youth Plan — contradicted. Commitments become slogans.</p>
+  <span class="stat">Slogans, not commitments</span>
+  <div class="dots"><div class="dot d-democracy"></div><div class="dot d-access"></div></div>
+</div>
+<div class="node n-3" id="R9" style="left:1510px;top:730px;">
+  <h3>Investment Stranded</h3><p>Public $ for 28K sq ft yields zero return. No analysis presented.</p>
+  <span class="stat">Zero ROI</span>
+  <div class="dots"><div class="dot d-fiscal"></div></div>
+</div>
+<div class="node n-3" id="R10" style="left:1720px;top:730px;">
+  <h3>Neighborhood Anchor Lost</h3><p>Vacant building. Changed character. Property impact radiates.</p>
+  <span class="stat">Community identity</span>
+  <div class="dots"><div class="dot d-fiscal"></div></div>
+</div>
+
+<script>
+// ── Particles ──
+(function(){
+  var c=document.getElementById('bg'),x=c.getContext('2d'),ps=[];
+  c.width=1920;c.height=1080;
+  for(var i=0;i<40;i++)ps.push({x:Math.random()*1920,y:Math.random()*1080,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.2+0.4,a:Math.random()*0.08+0.02});
+  (function d(){
+    x.clearRect(0,0,1920,1080);
+    ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=1920;if(p.x>1920)p.x=0;if(p.y<0)p.y=1080;if(p.y>1080)p.y=0;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle='rgba(148,163,184,'+p.a+')';x.fill();});
+    for(var i=0;i<ps.length;i++)for(var j=i+1;j<ps.length;j++){var dd=Math.hypot(ps[i].x-ps[j].x,ps[i].y-ps[j].y);if(dd<140){x.beginPath();x.moveTo(ps[i].x,ps[i].y);x.lineTo(ps[j].x,ps[j].y);x.strokeStyle='rgba(148,163,184,'+(0.03*(1-dd/140))+')';x.stroke();}}
+    requestAnimationFrame(d);
+  })();
+})();
+
+// ── Connection definitions ──
+// [fromId, toId, color]
+var connections = [
+  // Trigger → First order
+  ['T','F1','#C62828'],['T','F2','#C62828'],['T','F3','#C62828'],['T','F4','#C62828'],['T','F5','#C62828'],['T','F6','#C62828'],['T','F7','#C62828'],
+  // First → Second
+  ['F2','S1','#E65100'],['F3','S1','#E65100'],['F2','S2','#E65100'],['F3','S2','#E65100'],
+  ['F5','S3','#E65100'],['F4','S4','#E65100'],['F4','S5','#E65100'],['F6','S5','#E65100'],
+  ['F4','S6','#E65100'],['F5','S6','#E65100'],['F1','S7','#E65100'],
+  ['F7','S8','#E65100'],['F7','S9','#E65100'],
+  // Second → Third
+  ['S1','R1','#4A148C'],['S1','R2','#4A148C'],['S2','R2','#4A148C'],
+  ['S3','R3','#4A148C'],['S3','R4','#4A148C'],
+  ['S4','R5','#4A148C'],['S5','R5','#4A148C'],
+  ['S4','R6','#4A148C'],['S3','R6','#4A148C'],['S6','R6','#4A148C'],
+  ['S8','R7','#4A148C'],['S8','R8','#4A148C'],['S9','R8','#4A148C'],
+  ['S7','R9','#4A148C'],['S7','R10','#4A148C']
+];
+
+var svg = document.getElementById('lines');
+var ns = 'http://www.w3.org/2000/svg';
+
+function getCenter(id) {
+  var el = document.getElementById(id);
+  var r = el.getBoundingClientRect();
+  // since body is fixed 1920x1080, offset is 0
+  return { x: el.offsetLeft + el.offsetWidth/2, y: el.offsetTop + el.offsetHeight/2 };
+}
+function getBottom(id) {
+  var el = document.getElementById(id);
+  return { x: el.offsetLeft + el.offsetWidth/2, y: el.offsetTop + el.offsetHeight };
+}
+function getTop(id) {
+  var el = document.getElementById(id);
+  return { x: el.offsetLeft + el.offsetWidth/2, y: el.offsetTop };
+}
+
+function drawConnection(fromId, toId, color, delay) {
+  var from = getBottom(fromId);
+  var to = getTop(toId);
+  var midY = from.y + (to.y - from.y) * 0.5;
+  var d = 'M'+from.x+','+from.y+' C'+from.x+','+midY+' '+to.x+','+midY+' '+to.x+','+to.y;
+  var path = document.createElementNS(ns, 'path');
+  path.setAttribute('d', d);
+  path.setAttribute('stroke', color);
+  path.setAttribute('opacity', '0.35');
+  var len = path.getTotalLength();
+  path.setAttribute('stroke-dasharray', len);
+  path.setAttribute('stroke-dashoffset', len);
+  svg.appendChild(path);
+  setTimeout(function(){
+    path.style.transition = 'stroke-dashoffset 0.6s cubic-bezier(0.16,1,0.3,1)';
+    path.setAttribute('stroke-dashoffset', '0');
+  }, delay);
+}
+
+// ── Sequencer ──
+var progress = document.getElementById('progress-bar');
+var totalTime = 28000; // total ms
+var elapsed = 0;
+var paused = false;
+var timeouts = [];
+
+function at(ms, fn) {
+  timeouts.push(setTimeout(function(){ if(!paused) fn(); }, ms));
+}
+
+function showNode(id, ms) { at(ms, function(){ document.getElementById(id).classList.add('on'); }); }
+function showLabel(id, ms) { at(ms, function(){ document.getElementById(id).classList.add('on'); }); }
+
+// Progress tracker
+var progInterval = setInterval(function(){
+  if(!paused){ elapsed += 100; progress.style.width = Math.min((elapsed/totalTime)*100, 100)+'%'; }
+  if(elapsed >= totalTime) clearInterval(progInterval);
+}, 100);
+
+// ── SEQUENCE ──
+
+// 0s: Title visible (already showing)
+// 4s: Title fades, graph begins
+at(4000, function(){
+  document.getElementById('title-overlay').classList.add('gone');
+  document.getElementById('legend').classList.add('on');
+});
+
+// 5s: Trigger node appears
+showNode('T', 5000);
+
+// 6s: Lines from trigger to first order
+at(6200, function(){
+  for(var i=0;i<7;i++) drawConnection('T','F'+(i+1),'#C62828', i*80);
+});
+
+// 6.5s: First order nodes stagger in
+showLabel('lbl-1', 6400);
+for(var i=0;i<7;i++) showNode('F'+(i+1), 6800 + i*150);
+
+// 9.5s: Lines first → second order
+at(9500, function(){
+  var t2 = connections.filter(function(c){return c[0].charAt(0)==='F';});
+  t2.forEach(function(c,i){ drawConnection(c[0],c[1],c[2], i*60); });
+});
+
+// 10.5s: Second order nodes
+showLabel('lbl-2', 10200);
+for(var i=1;i<=9;i++) showNode('S'+i, 10500 + (i-1)*130);
+
+// 14s: Lines second → third
+at(14000, function(){
+  var t3 = connections.filter(function(c){return c[0].charAt(0)==='S';});
+  t3.forEach(function(c,i){ drawConnection(c[0],c[1],c[2], i*50); });
+});
+
+// 15s: Third order nodes
+showLabel('lbl-3', 14800);
+for(var i=1;i<=10;i++) showNode('R'+i, 15000 + (i-1)*120);
+
+// 19s: Pulse all connections brighter
+at(19000, function(){
+  var paths = svg.querySelectorAll('path');
+  paths.forEach(function(p){
+    p.style.transition = 'opacity 1.5s';
+    p.setAttribute('opacity','0.6');
+  });
+});
+
+// 21s: Fade to CTA
+at(22000, function(){
+  document.getElementById('cta-overlay').classList.add('on');
+});
+
+// Keyboard
+document.addEventListener('keydown', function(e){
+  if(e.code==='Space'){e.preventDefault();paused=!paused;}
+  if(e.code==='ArrowRight'){
+    // Fast-forward: show everything
+    e.preventDefault();
+    document.querySelectorAll('.node').forEach(function(n){n.classList.add('on');});
+    document.querySelectorAll('.tier-label').forEach(function(l){l.classList.add('on');});
+    document.getElementById('title-overlay').classList.add('gone');
+    document.getElementById('legend').classList.add('on');
+    // Draw all lines
+    connections.forEach(function(c,i){drawConnection(c[0],c[1],c[2],i*30);});
+  }
+});
+</script>
+</body>
+</html>

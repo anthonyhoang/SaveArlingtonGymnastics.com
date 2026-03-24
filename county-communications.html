@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>County Communications | Save Arlington Gymnastics</title>
+<meta name="description" content="Official communications from Arlington County regarding the proposed elimination of gymnastics programs and closure of Barcroft Sports &amp; Fitness Center.">
+<link rel="icon" href="https://savearlingtongymnastics.com/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="https://savearlingtongymnastics.com/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://savearlingtongymnastics.com/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://savearlingtongymnastics.com/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://savearlingtongymnastics.com/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --dark-navy: #0F1B33;
+    --red: #C62828;
+    --gold: #F9A825;
+    --off-white: #F5F6FA;
+    --light-gray: #E8EBF0;
+    --med-gray: #8A94A6;
+    --dark-text: #1E2532;
+    --teal: #00796B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--dark-text); line-height: 1.6; background: var(--off-white); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--dark-navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  nav .logo { font-weight: 800; font-size: 1.1rem; color: #fff; letter-spacing: 0.5px; text-decoration: none; }
+  nav .logo span { color: var(--gold); }
+  nav .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  nav .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  nav .nav-links a:hover { color: #fff; }
+  nav .nav-cta { background: var(--red); color: #fff !important; padding: 0.4rem 1rem; border-radius: 4px; font-weight: 600; }
+  nav .nav-cta:hover { background: #B71C1C; }
+  .hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  /* HEADER */
+  .page-header { background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%); color: #fff; padding: 7rem 2rem 3rem; text-align: center; }
+  .page-header h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .page-header p { color: rgba(255,255,255,0.8); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+  /* CONTENT */
+  .content { max-width: 800px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  .back-link { display: inline-block; margin-bottom: 2rem; color: var(--teal); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+  .back-link:hover { text-decoration: underline; }
+
+  /* EMAIL CARD */
+  .email-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 2.5rem; }
+  .email-header { background: var(--navy); color: #fff; padding: 1.25rem 1.5rem; }
+  .email-header h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .email-meta { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.8; }
+  .email-meta strong { color: rgba(255,255,255,0.95); }
+  .email-body { padding: 2rem 1.5rem; font-size: 0.95rem; line-height: 1.75; color: var(--dark-text); }
+  .email-body p { margin-bottom: 1rem; }
+  .email-body ul { margin: 0.75rem 0 0.75rem 1.5rem; }
+  .email-body ul li { margin-bottom: 0.4rem; }
+  .email-body a { color: var(--teal); }
+  .email-signature { border-top: 1px solid var(--light-gray); padding: 1.25rem 1.5rem; font-size: 0.85rem; color: var(--med-gray); line-height: 1.6; }
+
+  /* CONTEXT BOX */
+  .context-box { background: #FBE9E7; border-left: 4px solid var(--red); padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem; }
+  .context-box h3 { color: var(--red); font-size: 1rem; margin-bottom: 0.4rem; }
+  .context-box p { font-size: 0.9rem; color: #555; }
+
+  /* ANALYSIS */
+  .analysis-section { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 2.5rem; }
+  .analysis-header { background: var(--red); color: #fff; padding: 1.25rem 1.5rem; }
+  .analysis-header h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .analysis-header p { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+  .analysis-body { padding: 1.75rem 1.5rem; }
+  .analysis-item { padding: 1rem 0; border-bottom: 1px solid var(--light-gray); }
+  .analysis-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .analysis-item:first-child { padding-top: 0; }
+  .analysis-label { display: inline-block; background: #FBE9E7; color: var(--red); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 0.5rem; }
+  .analysis-item h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem; }
+  .analysis-item p { font-size: 0.92rem; color: #555; line-height: 1.65; }
+  .analysis-quote { background: var(--off-white); border-left: 3px solid var(--med-gray); padding: 0.75rem 1rem; margin: 0.5rem 0; font-style: italic; font-size: 0.9rem; color: #555; border-radius: 0 6px 6px 0; }
+
+  /* VIDEO SECTION */
+  .video-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 2.5rem; }
+  .video-header { background: var(--navy); color: #fff; padding: 1.25rem 1.5rem; }
+  .video-header h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .video-header p { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+  .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
+  .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-body { padding: 1.75rem 1.5rem; }
+  .video-overview { font-size: 0.95rem; color: #555; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  /* TIMESTAMP SECTIONS */
+  .timestamp-section { padding: 1.25rem 0; border-bottom: 1px solid var(--light-gray); }
+  .timestamp-section:last-child { border-bottom: none; padding-bottom: 0; }
+  .timestamp-section:first-of-type { padding-top: 0; }
+  .timestamp-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .timestamp-link { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--navy); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; text-decoration: none; font-family: monospace; }
+  .timestamp-link:hover { background: var(--teal); }
+  .timestamp-link i { font-size: 0.7rem; }
+  .timestamp-speaker { font-size: 0.85rem; font-weight: 700; color: var(--navy); }
+  .timestamp-role { font-size: 0.8rem; color: var(--med-gray); }
+  .timestamp-section h3 { font-size: 1.05rem; color: var(--dark-text); margin-bottom: 0.4rem; }
+  .timestamp-section p { font-size: 0.92rem; color: #555; line-height: 1.65; }
+  .timestamp-quote { background: var(--off-white); border-left: 3px solid var(--gold); padding: 0.75rem 1rem; margin: 0.75rem 0; font-style: italic; font-size: 0.9rem; color: var(--dark-text); border-radius: 0 6px 6px 0; line-height: 1.6; }
+  .timestamp-callout { background: #FBE9E7; border-left: 4px solid var(--red); padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; }
+  .timestamp-callout strong { color: var(--red); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .timestamp-callout p { font-size: 0.88rem; color: #555; margin-top: 0.25rem; }
+
+  /* COMING SOON */
+  .coming-soon { background: #fff; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 2rem 1.5rem; text-align: center; }
+  .coming-soon h3 { color: var(--navy); margin-bottom: 0.5rem; }
+  .coming-soon p { color: var(--med-gray); font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer { background: var(--dark-navy); color: rgba(255,255,255,0.6); text-align: center; padding: 2rem; font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--dark-navy); flex-direction: column; padding: 1rem 2rem; gap: 1rem; }
+    nav .nav-links.open { display: flex; }
+    .hamburger { display: block; }
+    .page-header h1 { font-size: 1.8rem; }
+    .email-body { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Save Arlington <span>Gymnastics</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#what-happened">What Happened</a>
+    <a href="index.html#board">Board Members</a>
+    <a href="index.html#dates">Key Dates</a>
+    <a href="index.html#act" class="nav-cta">Take Action</a>
+  </div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+</nav>
+
+<div class="page-header">
+  <h1>County Communications</h1>
+  <p>Official communications from Arlington County regarding the proposed elimination of gymnastics programs and closure of Barcroft Sports &amp; Fitness Center.</p>
+</div>
+
+<div class="content">
+  <a href="index.html" class="back-link">&larr; Back to Save Arlington Gymnastics</a>
+
+  <div class="context-box">
+    <h3>Why This Page Exists</h3>
+    <p>We believe transparency matters. Below you&rsquo;ll find the official communications Arlington County has sent to gymnastics families, and public discussions of the proposed cuts &mdash; presented unedited so you can read them for yourself and draw your own conclusions.</p>
+  </div>
+
+  <!-- EMAIL #1: DPR Friday Feb 20 Email -->
+  <div class="email-card" id="dpr-feb20-email">
+    <div class="email-header">
+      <h2>DPR FY 2027 Proposed Budget Presentation Tomorrow</h2>
+      <div class="email-meta">
+        <strong>From:</strong> Arlington Parks and Rec &lt;arlingtonva@rectrac.com&gt;<br>
+        <strong>Reply-To:</strong> Ben Harris &lt;bcharris@arlingtonva.us&gt;<br>
+        <strong>Date:</strong> Friday, February 20, 2026 at 2:34 PM EST<br>
+        <strong>Sent to:</strong> Competitive gymnastics families registered through Arlington Parks &amp; Recreation
+      </div>
+    </div>
+    <div class="email-body">
+      <p>Dear Members of the Arlington Parks and Recreation Competitive Gymnastics Community:</p>
+
+      <p>Tomorrow, Saturday, February 21, the County Manager is scheduled to release the <a href="https://www.arlingtonva.us/Government/Programs/Budget-Finance/FY-2027-Budget-Information">Fiscal Year (FY) 2027 Proposed Operating Budget</a>. Ahead of this release, the Department of Parks and Recreation (DPR) wants to ensure competitive gymnastics families are made aware of important impacts to the County&rsquo;s gymnastics programs. The budget proposal addresses guidance given by the County Board, which directed the Manager to prepare a balanced budget that reflects County priorities while acknowledging the economic pressures experienced by taxpayers and homeowners. To balance the budget, the Manager was directed to propose service and program efficiencies as well as reductions that make this year&rsquo;s budget especially challenging.</p>
+
+      <p>As a result, one proposed reduction is the elimination of Arlington&rsquo;s competitive and recreational gymnastics programs with plans to repurpose Barcroft Sports &amp; Fitness Center (BSFC) for other operational needs. If adopted, the BSFC facility would close for at least one year and the competitive Aerials and Tigers gymnastics programs would be discontinued, effective May 16, 2026, which is the last day of the season for each team.</p>
+
+      <p>This is a difficult decision that was not made lightly. While DPR has been able to minimize major reductions in the past, departments across the County are facing significant impacts this year, requiring them to make tough choices. Since the pandemic, DPR&rsquo;s competitive and recreational programs have seen a decline in participation. As a result, these programs have experienced on-going challenges with meeting cost recovery goals, recruiting and retaining staff, and serving a broad range of participants. Despite this difficult news, DPR acknowledges the meaningful impact these programs have had on the area&rsquo;s youth and athletes over the years. While this reduction means DPR would not be able to directly provide these services moving forward, Arlington is fortunate to be part of a region that offers many non-County alternatives.</p>
+
+      <p>We encourage you to learn more about the proposed budget and specific impacts at the County Board&rsquo;s work session with DPR on Thursday, March 5 at 1:00 p.m. While community members are permitted to watch and listen, there is no opportunity for the public to participate in this work session.</p>
+
+      <p>The County Board will host two opportunities for public comments on budget issues:</p>
+      <ul>
+        <li>Tuesday, March 24 at 6:30 p.m. &mdash; Public Budget Hearing</li>
+        <li>Thursday, March 26 at 6:30 p.m. &mdash; Public Tax Rate and Fees Hearing</li>
+      </ul>
+      <p>All hearings and work sessions will be held in the County Board Room at the Bozman Government Center, 2100 Clarendon Blvd, 3rd Floor and are also available to view online. Resources can be found on the <a href="https://www.arlingtonva.us/Government/Departments/County-Board/County-Board-Meetings">County Board meetings and agendas webpage</a>. Community members can also share their views online by emailing <a href="mailto:dmf@arlingtonva.us">dmf@arlingtonva.us</a>.</p>
+
+      <p>Thank you for taking the time to read this update. Should you have any questions or need further information do not hesitate to contact me directly at <a href="mailto:bcharris@arlingtonva.us">bcharris@arlingtonva.us</a> or 703-228-1872.</p>
+
+      <p>Ben Harris</p>
+    </div>
+    <div class="email-signature">
+      Department of Parks and Recreation<br>
+      Arlington County Government<br>
+      <a href="mailto:registration@arlingtonva.us">registration@arlingtonva.us</a> &nbsp;|&nbsp; 703-228-4747 &nbsp;|&nbsp; <a href="https://arlingtonva.us/dpr/">arlingtonva.us/DPR</a>
+    </div>
+  </div>
+
+  <!-- ANALYSIS: What the Email Left Out -->
+  <div class="analysis-section" id="what-they-left-out">
+    <div class="analysis-header">
+      <h2><i class="fa-solid fa-magnifying-glass" style="margin-right:0.5rem;"></i> What This Email Left Out</h2>
+      <p>We present the email above unedited. Below is our analysis of what it says &mdash; and what it doesn&rsquo;t.</p>
+    </div>
+    <div class="analysis-body">
+
+      <div class="analysis-item">
+        <span class="analysis-label">Who was notified</span>
+        <h3>Recreational and adaptive families received nothing</h3>
+        <p>This email was sent only to families registered for <strong>competitive</strong> gymnastics. If your child takes recreational classes or parent-tot classes at Barcroft, you likely never received this notification &mdash; even though your program is being eliminated too. Families of children in <strong>adaptive gymnastics programs for kids with disabilities</strong> were also not notified.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">What&rsquo;s missing</span>
+        <h3>Adaptive programs are not mentioned once</h3>
+        <p>The words &ldquo;adaptive,&rdquo; &ldquo;therapeutic,&rdquo; and &ldquo;disability&rdquo; do not appear anywhere in this email. Barcroft hosts one of the only publicly accessible adaptive athletics programs for children with disabilities in Arlington County. Those families were neither mentioned nor notified. The county&rsquo;s own email erases them from the conversation entirely.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Alternatives claim</span>
+        <h3>&ldquo;Non-County alternatives&rdquo; &mdash; but which ones?</h3>
+        <p>The email states:</p>
+        <div class="analysis-quote">&ldquo;Arlington is fortunate to be part of a region that offers many non-County alternatives.&rdquo;</div>
+        <p>Private gymnastics programs in the region cost 2&ndash;3x what county programs charge. For families who depend on affordable public programming, &ldquo;go elsewhere&rdquo; is not an answer. For adaptive families, there is no comparable alternative &mdash; the county did not name one because none exists in Arlington.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Timing</span>
+        <h3>Friday afternoon, less than 24 hours before the budget release</h3>
+        <p>This email was sent at 2:34 PM on a Friday. The full budget was released Saturday morning. Barcroft staff received severance offers that same day, with less than 45 days to decide. Families had less than 24 hours to absorb the news before the proposal went public. This is notification, not engagement.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Transparency</span>
+        <h3>No details on what Barcroft becomes</h3>
+        <p>The email says the facility will be repurposed for &ldquo;other operational needs&rdquo; but provides no specifics. A 28,000 sq ft purpose-built athletics center &mdash; funded by taxpayers &mdash; will be closed for at least a year, and the public has been given no information about what replaces it. We have filed a <a href="https://www.arlingtonva.us/Government/Departments/Clerk-of-Court/FOIA" style="color:var(--teal);">Virginia FOIA request</a> to find out.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Accountability</span>
+        <h3>The Board directed the budget targets &mdash; not this specific cut</h3>
+        <p>The email states the County Board &ldquo;directed the Manager to prepare a balanced budget.&rdquo; The Board set deficit-reduction targets. The County Manager chose to propose eliminating gymnastics and closing Barcroft. This means the Board can still reverse this specific cut without contradicting their own budget guidance &mdash; they just need to hear from you.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MANAGER'S BUDGET MESSAGE ANALYSIS -->
+  <div class="analysis-section" id="managers-message">
+    <div class="analysis-header" style="background:var(--navy);">
+      <h2><i class="fa-solid fa-file-lines" style="margin-right:0.5rem;"></i> County Manager&rsquo;s Budget Message &mdash; Key Findings</h2>
+      <p>We read the 65-page FY 2027 Manager&rsquo;s Message so you don&rsquo;t have to. Here&rsquo;s what it reveals about gymnastics and Barcroft. <a href="https://www.arlingtonva.us/files/sharedassets/public/v/1/budget/documents/fy-2027/proposed/feb-21-2026-docs/1-fy-2027-managers-message-combined-all-in-one.pdf" target="_blank" style="color:#fff; text-decoration:underline;">Read the full document &rarr;</a></p>
+    </div>
+    <div class="analysis-body">
+
+      <div class="analysis-item">
+        <span class="analysis-label">The framing</span>
+        <h3>County Manager calls gymnastics &ldquo;nice to have&rdquo;</h3>
+        <p>On page 2 of the Manager&rsquo;s Message, County Manager Mark Schwartz explicitly categorizes gymnastics programs as services that are:</p>
+        <div class="analysis-quote">&ldquo;&hellip;nice to have, but not necessary to provide core services&rdquo;</div>
+        <p>He then claims these services &ldquo;continue to be available in our community through private providers.&rdquo; This framing reduces a 30-year public program serving hundreds of children &mdash; including children with disabilities &mdash; to a luxury the county can simply outsource to the private market.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">The math</span>
+        <h3>Less than one-tenth of one percent of the budget</h3>
+        <p>Closing Barcroft and eliminating all gymnastics programs saves <strong>$969,542</strong>. The total county budget is <strong>$1.69 billion</strong>. That means the county is eliminating all competitive, recreational, and adaptive gymnastics to save <strong>0.057%</strong> of the budget &mdash; roughly <strong>6 cents for every $100 spent.</strong></p>
+        <p>For context, the average Arlington homeowner is already paying a <strong>$444/year tax increase</strong> in this budget. The gymnastics savings amount to approximately <strong>$4.50 per Arlington household per year.</strong></p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">No plan</span>
+        <h3>Barcroft will be closed for a year &mdash; before they know what to do with it</h3>
+        <p>The budget document states:</p>
+        <div class="analysis-quote">&ldquo;The Barcroft Center will be closed for a year while staff determine the condition of the facility and assess what work will be needed to reopen the building to provide increased and more diverse programming.&rdquo;</div>
+        <p>Read that carefully: they are proposing to close a 28,000 sq ft purpose-built athletics center, lay off the staff, and end all programs <em>before</em> they have a plan for what comes next. The &ldquo;operational needs&rdquo; cited in the DPR email above? They don&rsquo;t exist yet.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">The jobs</span>
+        <h3>22.75 positions eliminated &mdash; 19.75 currently filled by real people</h3>
+        <p>The Barcroft closure eliminates <strong>13.0 filled permanent positions</strong>, <strong>3.0 vacant permanent positions</strong>, and <strong>6.75 filled temporary positions</strong>. These are coaches, program coordinators, and facility staff &mdash; many of whom have served Arlington families for years. Staff received severance offers the day before the budget was made public.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">The investment</span>
+        <h3>Arlington invested $3.5 million to build Barcroft for gymnastics</h3>
+        <p>Nine years ago, the county invested <strong>$3.5 million</strong> to renovate and expand Barcroft specifically for gymnastics to meet overwhelming demand. Walking away from that investment &mdash; without exploring fee adjustments, partnerships, or other alternatives &mdash; isn&rsquo;t fiscal responsibility. It&rsquo;s waste.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Missing data</span>
+        <h3>No enrollment numbers, no cost recovery data, no alternatives</h3>
+        <p>The 65-page budget document provides detailed participation data for after-school programs (1,028 participants), youth initiatives, and behavioral health services. For gymnastics? <strong>Zero.</strong> No enrollment numbers, no waitlist data, no cost recovery calculations, and no analysis of alternatives like fee increases, public-private partnerships, or phased reductions. The county is asking the Board to eliminate a program without providing the data to evaluate it.</p>
+      </div>
+
+      <div class="analysis-item">
+        <span class="analysis-label">Adaptive erased &mdash; again</span>
+        <h3>The word &ldquo;adaptive&rdquo; does not appear in the DPR section</h3>
+        <p>Just like the DPR email, the Manager&rsquo;s Budget Message makes no mention of adaptive or therapeutic gymnastics in its discussion of the Barcroft closure. The DPR section describes the facility offering &ldquo;classes, recreational and competitive gymnastics, and a fitness center&rdquo; &mdash; but does not acknowledge the adaptive programming that serves children with disabilities. A program that doesn&rsquo;t exist on paper is easy to cut.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOARD BUDGET MEETING -->
+  <div class="video-card" id="board-budget-meeting">
+    <div class="video-header">
+      <h2><i class="fa-solid fa-gavel" style="margin-right:0.5rem;"></i> County Board Budget Meeting &mdash; February 21, 2026</h2>
+      <p>~7-hour meeting where the proposed elimination of gymnastics and closure of Barcroft was publicly discussed for the first time.</p>
+    </div>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/kQCaHLD8wyU" title="Arlington County Board Regular Meeting | February 21, 2026" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-body">
+      <p class="video-overview">On February 21, 2026, County Manager Mark Schwartz presented the FY 2027 Proposed Budget to the Arlington County Board. The meeting lasted approximately 7 hours and covered a $37 million budget gap across a $1.7 billion county budget. Below are the key moments related to gymnastics programs and Barcroft Sports &amp; Fitness Center, with timestamps linked directly to the video.</p>
+
+      <!-- SECTION: County Manager Proposal -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=21361s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 5:56:01</a>
+          <span class="timestamp-speaker">Mark Schwartz</span>
+          <span class="timestamp-role">County Manager</span>
+        </div>
+        <h3>County Manager proposes eliminating gymnastics and closing Barcroft</h3>
+        <p>As part of $10.6 million in service and program reductions, the County Manager formally proposes discontinuing the gymnastics program at Barcroft. The cuts affect 56 FTE positions, of which 24 are currently filled.</p>
+        <div class="timestamp-quote">&ldquo;I&rsquo;m also proposing that we stop the gymnastics program that we have at Barcroft. I know that&rsquo;s already gotten a lot of attention in the community and I welcome the conversation about the value that that program adds and whether there are alternatives in lieu of that.&rdquo;</div>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>The County Manager himself says he &ldquo;welcomes the conversation&rdquo; and acknowledges there may be &ldquo;alternatives.&rdquo; This is not the language of a final decision &mdash; it&rsquo;s an invitation for the community to push back.</p>
+        </div>
+      </div>
+
+      <!-- SECTION: Chair on Fees -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=23046s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 6:24:06</a>
+          <span class="timestamp-speaker">Matt de Ferranti</span>
+          <span class="timestamp-role">Board Chair</span>
+        </div>
+        <h3>Board Chair acknowledges massive community response and requests alternatives</h3>
+        <p>Chair de Ferranti addresses the gymnastics program directly, noting the Board has already received significant community input. He explicitly asks for alternative options over the remaining six-week budget process.</p>
+        <div class="timestamp-quote">&ldquo;We have already heard significantly about the gymnastics program&hellip; I would like that option to be available to us over the course of the next 6 weeks. I&rsquo;m not trying to prejudge that.&rdquo;</div>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>The Board Chair says he is <strong>not prejudging</strong> the decision and explicitly wants <strong>as many options as possible</strong>. This confirms the Board has not made up its mind. Your emails, your testimony, your presence at Open Door Mondays &mdash; it all matters.</p>
+        </div>
+      </div>
+
+      <!-- SECTION: Chair on "Extremely High" Fees -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=23046s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 6:24:06</a>
+          <span class="timestamp-speaker">Matt de Ferranti</span>
+          <span class="timestamp-role">Board Chair</span>
+        </div>
+        <h3>Chair reveals fee analysis shows &ldquo;extremely extremely high&rdquo; costs to self-fund</h3>
+        <p>In the same remarks, Chair de Ferranti discloses that the county has already analyzed what it would cost to make the gymnastics program fully fee-supported &mdash; and the numbers are prohibitive.</p>
+        <div class="timestamp-quote">&ldquo;We are also prepared for that question about what it would take to make that program fully fee supported. I found when we had that conversation internally that the level of fees were extremely extremely high and I&rsquo;ll just leave it at that, but I don&rsquo;t want people to take that out of context because they deserve to see the numbers and weigh the information.&rdquo;</div>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>This is a critical admission. The county&rsquo;s own internal analysis shows that making gymnastics self-funding through fees alone would price families out. This undercuts DPR&rsquo;s suggestion that &ldquo;non-County alternatives&rdquo; (private gyms) are a viable replacement &mdash; if the county itself can&rsquo;t make it work at market rates, how can families be expected to afford private programs? <strong>The community deserves to see those numbers.</strong></p>
+        </div>
+      </div>
+
+      <!-- SECTION: Spain on Community Response -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=23201s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 6:26:41</a>
+          <span class="timestamp-speaker">J.D. Spain Sr.</span>
+          <span class="timestamp-role">Board Member</span>
+        </div>
+        <h3>Board Member Spain commits to &ldquo;due diligence&rdquo; on gymnastics</h3>
+        <p>Board Member Spain names gymnastics explicitly as a major area of community concern and commits the Board to thoroughly reviewing the proposal.</p>
+        <div class="timestamp-quote">&ldquo;We have already received enormous amounts of communication from the community about their concerns, whether it&rsquo;s gymnastics, whether it&rsquo;s libraries&hellip; and we&rsquo;re going to do our due diligence.&rdquo;</div>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>Your voices are being heard. Board Member Spain places gymnastics alongside the library cuts as the two highest-profile concerns. He commits to due diligence &mdash; which means the Board needs to hear <strong>specific, actionable alternatives</strong> from the community, not just opposition.</p>
+        </div>
+      </div>
+
+      <!-- SECTION: Karantonis on Human Impact -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=23657s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 6:34:17</a>
+          <span class="timestamp-speaker">Takis Karantonis</span>
+          <span class="timestamp-role">Board Member</span>
+        </div>
+        <h3>Board Member Karantonis acknowledges the human cost</h3>
+        <p>Board Member Karantonis addresses the impact on the 24 filled positions affected by the proposed cuts, including Barcroft staff who received severance offers the day before.</p>
+        <div class="timestamp-quote">&ldquo;There is no more painful decision when we start thinking about the 56 FTEs, 24 of which are filled, and there are real people with real lives, and we fully understand how this affects them, and that cannot be overstated.&rdquo;</div>
+      </div>
+
+      <!-- SECTION: Barcroft Debt -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=kQCaHLD8wyU&t=22140s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 6:09:00</a>
+          <span class="timestamp-speaker">Emily Hughes</span>
+          <span class="timestamp-role">County Financial Official</span>
+        </div>
+        <h3>County budget faces significant shortfalls &mdash; but gymnastics isn&rsquo;t the cause</h3>
+        <p>During the financial overview, county staff outlined budget pressures from revenue shortfalls, snowstorm costs, and severance packages. Yet no data was presented showing that eliminating gymnastics meaningfully addresses these gaps. The community deserves to know: is the closure driven by program performance, or by broader budget pressures? These are different problems with different solutions.</p>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>The county is proposing to close a purpose-built facility that serves hundreds of families &mdash; without presenting cost recovery data, enrollment trends, or an analysis of alternatives. The budget pressures are real, but the case for eliminating gymnastics specifically has not been made.</p>
+        </div>
+      </div>
+
+      <!-- SECTION: What Was NOT Discussed -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <span class="timestamp-speaker" style="color:var(--red);"><i class="fa-solid fa-triangle-exclamation" style="margin-right:0.3rem;"></i> Notable absences</span>
+        </div>
+        <h3>What was not discussed at the meeting</h3>
+        <p>Despite the gymnastics cuts being one of the most prominent budget proposals, several critical topics were <strong>never raised</strong> during the 7-hour meeting:</p>
+        <div style="margin:0.75rem 0; padding-left:1rem; font-size:0.92rem; color:#555; line-height:1.8;">
+          &bull; No specific cost data for the gymnastics program was presented<br>
+          &bull; No participation or enrollment numbers were shared publicly<br>
+          &bull; No mention of adaptive or therapeutic gymnastics programs<br>
+          &bull; No formal statement from the DPR Director on the gymnastics proposal<br>
+          &bull; No analysis of cost recovery or the operational model<br>
+          &bull; No presentation of alternative options to full elimination<br>
+          &bull; No comparison to other jurisdictions&rsquo; public gymnastics programs
+        </div>
+        <div class="timestamp-callout">
+          <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+          <p>A 7-hour budget meeting discussed a $37 million gap in granular detail &mdash; but the Board received no data, no alternatives analysis, and no program-specific briefing on the gymnastics cuts. How can the Board make an informed decision without this information? We have filed Virginia FOIA requests to obtain it.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FEB 24 PUBLIC HEARING -->
+  <div class="video-card" id="feb24-public-hearing" style="margin-bottom:2.5rem;">
+    <div class="video-header" style="background:linear-gradient(135deg, var(--red) 0%, #8E0000 100%);">
+      <h2><i class="fa-solid fa-microphone" style="margin-right:0.5rem;"></i> Public Hearing &mdash; February 24, 2026</h2>
+      <p>11 speakers stood before the County Board to fight for Arlington Gymnastics. Then the Board responded &mdash; and the County Manager apologized.</p>
+    </div>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/qWlMCJofi-4" title="Arlington County Board Recessed Meeting | February 24, 2026 — Public Hearing" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-body">
+      <p class="video-overview">On February 24, 2026, families, athletes, coaches, and community members packed the County Board room to testify against the proposed elimination of gymnastics programs and closure of Barcroft Sports &amp; Fitness Center. Every single speaker opposed the cuts. Below are the key moments, with timestamps linked to the official video.</p>
+
+      <!-- SECTION LABEL: Community Voices -->
+      <div style="margin:1.5rem 0 1rem; padding:0.5rem 1rem; background:var(--navy); border-radius:6px;">
+        <h3 style="color:#fff; font-size:0.95rem; margin:0; letter-spacing:0.5px;"><i class="fa-solid fa-users" style="margin-right:0.5rem; color:var(--gold);"></i> Community Voices &mdash; 11 Speakers, Zero in Favor of Cuts</h3>
+      </div>
+
+      <!-- Speaker 1: Sarah Yue -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=15799s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:23:19</a>
+          <span class="timestamp-speaker">Sarah Yue</span>
+          <span class="timestamp-role">Parent</span>
+        </div>
+        <h3>&ldquo;Nobody ever asked us&rdquo;</h3>
+        <p>Yue spoke for her 9-year-old daughter with selective mutism who found safety at Barcroft that exists nowhere else in her life. She challenged the myth of private alternatives, noting demand far exceeds capacity regionwide.</p>
+        <div class="timestamp-quote">&ldquo;Gymnastics families are willing to partner with the county to explore options like fee increases and fundraising that would sustain our programs over the long term. But nobody ever asked us.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 2: Meredith Wearing -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=15966s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:26:06</a>
+          <span class="timestamp-speaker">Meredith Wearing</span>
+          <span class="timestamp-role">VP, Aerials Parent Association &amp; Arlington County Sports Commission</span>
+        </div>
+        <h3>Closing Barcroft ends gymnastics at Wakefield High School</h3>
+        <p>Wearing connected Barcroft to high school athletics &mdash; at least half of Yorktown&rsquo;s regional champion team are Arlington Aerials. Wakefield practices at Barcroft because the school has no gymnastics equipment, and closing it would effectively end the sport at a Title I school.</p>
+        <div class="timestamp-quote">&ldquo;If you end the gymnastics program at Barcroft, you are effectively ending gymnastics at Wakefield.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 3: Erin Lester -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=16114s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:28:34</a>
+          <span class="timestamp-speaker">Erin Lester</span>
+          <span class="timestamp-role">Parent &amp; Community Advocate</span>
+        </div>
+        <h3>&ldquo;Arlington County deserves better governance than this&rdquo;</h3>
+        <p>Lester called the closure a rushed elimination announced three months before it would take effect, affecting a 47-year program. She challenged the county to pause and develop sustainable cost recovery strategies together with families.</p>
+        <div class="timestamp-quote">&ldquo;We&rsquo;re not asking you to fund forever without accountability. We&rsquo;re asking for the opportunity to develop alternatives together.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 4: Mike Rosenberger -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=16268s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:31:08</a>
+          <span class="timestamp-speaker">Mike Rosenberger</span>
+          <span class="timestamp-role">Parent (Virtual)</span>
+        </div>
+        <h3>DPR repeatedly denied coaches&rsquo; revenue-generating proposals</h3>
+        <p>Rosenberger revealed that Barcroft coaches had proposed multiple revenue-generating programs &mdash; private coaching, micro camps, birthday parties &mdash; and DPR denied every one. Revenue streams were actively throttled by the department now claiming the program can&rsquo;t sustain itself.</p>
+        <div class="timestamp-quote">&ldquo;As the coaches told me, the answer from the Department of Parks and Recreation is always no.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 5: Malika Mirhanova -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=16407s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:33:27</a>
+          <span class="timestamp-speaker">Malika Mirhanova</span>
+          <span class="timestamp-role">Parent &amp; Immigrant Community Member</span>
+        </div>
+        <h3>&ldquo;Budgets are moral documents. They show what we value.&rdquo;</h3>
+        <p>Mirhanova, whose 10-year-old daughter has trained at Barcroft since age three, drew a parallel between the federal dismantling of the international development sector where she worked and the county&rsquo;s proposal to dismantle her daughter&rsquo;s community.</p>
+        <div class="timestamp-quote">&ldquo;Barcroft is not a luxury. It is part of the fabric of this community built through years of dedication by coaches, staff, and families.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 6: Carrie Garcia -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=16877s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:41:17</a>
+          <span class="timestamp-speaker">Carrie Garcia</span>
+          <span class="timestamp-role">President, Arlington Tigers Parent Association</span>
+        </div>
+        <h3>Tigers president: &ldquo;Reject or pause the proposal&rdquo;</h3>
+        <p>Garcia formally requested the Board reject the proposal or pause it until a transparent evaluation is complete. She raised the issue of campaign signs being removed from Barcroft&rsquo;s public bulletin boards and invited every Board member to visit the gym.</p>
+        <div class="timestamp-quote">&ldquo;Arlington County Gymnastics means inclusivity, accessibility, diversity, community, and health.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 7: Amanda Vipondo -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17044s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:44:04</a>
+          <span class="timestamp-speaker">Amanda Vipondo</span>
+          <span class="timestamp-role">Parent of Three, Special Needs Advocate</span>
+        </div>
+        <h3>Mother of neurodivergent children: &ldquo;They would not have gymnastics in their lives anymore&rdquo;</h3>
+        <p>Vipondo, mother of three children (two neurodivergent), described how gymnastics was the one constant through five different schools. Her son Leo caught up with peers on motor skills through the program; her youngest Xavier learned to follow directions and wait in line.</p>
+        <div class="timestamp-quote">&ldquo;Adapted gymnastics is how many special education families meet, connect, and support each other and their children. We know that our children are accepted, loved, and included at Barcroft.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 8: Katherine Evans -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17233s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:47:13</a>
+          <span class="timestamp-speaker">Katherine Evans</span>
+          <span class="timestamp-role">Parent &amp; Community Member</span>
+        </div>
+        <h3>&ldquo;These are management failures &mdash; not failures of demand&rdquo;</h3>
+        <p>Evans delivered one of the sharpest critiques of the evening, arguing that DPR&rsquo;s chronic understaffing, unfilled positions, and inflexible scheduling created the very problems now used to justify closure. She noted nearby facilities already offer yoga and Pilates, making Barcroft&rsquo;s &ldquo;repurposing&rdquo; redundant.</p>
+        <div class="timestamp-quote">&ldquo;I&rsquo;ve watched this board devote hours to the thoughtful discussion of trees and sightlines in a recent redevelopment program. I respectfully ask that you give our children&rsquo;s development the same level of care.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 9: Veronica Batian -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17431s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:50:31</a>
+          <span class="timestamp-speaker">Veronica Batian</span>
+          <span class="timestamp-role">Parent &amp; Fitness Professional (Virtual)</span>
+        </div>
+        <h3>25-year fitness industry veteran: &ldquo;Once dismantled, impossible to rebuild&rdquo;</h3>
+        <p>Batian, a fitness professional with 25 years of industry experience, warned that a gymnastics community like Barcroft&rsquo;s cannot be recreated once lost. She emphasized the program&rsquo;s role in making gymnastics accessible to families from diverse backgrounds and income levels.</p>
+        <div class="timestamp-quote">&ldquo;This is not just about gymnastics. This is about investing in youth, health, and community.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 10: Rocco Giambalvo -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17598s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:53:18</a>
+          <span class="timestamp-speaker">Rocco Giambalvo</span>
+          <span class="timestamp-role">Yorktown Junior, 11-Year Tiger &amp; Adaptive Program Coach</span>
+        </div>
+        <h3>Student athlete and adaptive coach: &ldquo;From unable to walk to able to jump&rdquo;</h3>
+        <p>Rocco brought a perspective no other speaker could &mdash; as both a competitive athlete facing the loss of his final years and a coach in the adaptive program serving children with disabilities. He described how cutting the program would leave special needs individuals without the community Barcroft has built for them.</p>
+        <div class="timestamp-quote">&ldquo;I&rsquo;ve seen participants go from being unable to walk to being able to jump with very little assistance from our staff.&rdquo;</div>
+      </div>
+
+      <!-- Speaker 11: Jan Worcester -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17780s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:56:20</a>
+          <span class="timestamp-speaker">Jan Worcester</span>
+          <span class="timestamp-role">22-Year Arlington Resident, Wakefield Parent</span>
+        </div>
+        <h3>&ldquo;Arlington is already losing its middle class&rdquo;</h3>
+        <p>Worcester placed the gymnastics cuts in the context of a broader affordability crisis, noting county employees already choose not to live in Arlington. She pointed to the $3.5 million invested in Barcroft just nine years ago and challenged the Board to exhaust every revenue option before cutting services families depend on.</p>
+        <div class="timestamp-quote">&ldquo;Nine years ago, this county invested three and a half million dollars to transform Barcroft into a gymnastics facility&hellip; I&rsquo;m asking you to make that same choice now before cutting what we&rsquo;ve already built.&rdquo;</div>
+      </div>
+
+      <!-- SECTION LABEL: Board Response -->
+      <div style="margin:2rem 0 1rem; padding:0.5rem 1rem; background:var(--navy); border-radius:6px;">
+        <h3 style="color:#fff; font-size:0.95rem; margin:0; letter-spacing:0.5px;"><i class="fa-solid fa-gavel" style="margin-right:0.5rem; color:var(--gold);"></i> Board Member Responses</h3>
+      </div>
+
+      <!-- Board: Chair de Ferranti -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=17984s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 4:59:44</a>
+          <span class="timestamp-speaker">Matt de Ferranti</span>
+          <span class="timestamp-role">Board Chair</span>
+        </div>
+        <h3>Chair commits to exploring alternatives: &ldquo;We are going to pursue that&rdquo;</h3>
+        <p>Chair de Ferranti spoke directly to the gymnastics community, acknowledging the themes of their testimony and committing to working through alternative proposals at the March 5 work session. He was candid about the broader budget context but clear that no final decisions were being made.</p>
+        <div class="timestamp-quote">&ldquo;I am I do think it is reasonable for us to share with you the truth that we are going to seek other alternatives for how to address this. I may have said too much, but I&rsquo;d rather be honest with you.&rdquo;</div>
+      </div>
+
+      <!-- Board: Vice Chair Coffee -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=18355s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 5:05:55</a>
+          <span class="timestamp-speaker">Maureen Coffey</span>
+          <span class="timestamp-role">Vice Chair</span>
+        </div>
+        <h3>Vice Chair: &ldquo;This is the beginning of the process&rdquo;</h3>
+        <p>Coffey assured the community that no doors had been closed, that the Board had only seen the budget for days, and that the absence of a specific vote tonight did not preclude action later. She acknowledged the community&rsquo;s offers of partnership.</p>
+        <div class="timestamp-quote">&ldquo;I don&rsquo;t want anyone to be scared that just because no specific action is taken tonight that it&rsquo;s closing the door on anything else throughout the process.&rdquo;</div>
+      </div>
+
+      <!-- Board: J.D. Spain -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=18532s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 5:08:52</a>
+          <span class="timestamp-speaker">J.D. Spain Sr.</span>
+          <span class="timestamp-role">Board Member</span>
+        </div>
+        <h3>&ldquo;Tell me how to get to yes &mdash; failure can&rsquo;t be an option&rdquo;</h3>
+        <p>Spain, the Board&rsquo;s liaison to the Children, Youth &amp; Well-Being Partnership, delivered the most emotionally direct response. He challenged how the proposal arrived without community collaboration and said he has a personal mandate to find a path forward.</p>
+        <div class="timestamp-quote">&ldquo;I have something written on my wall in the office and most folks see it. It says, &lsquo;Tell me how to get to yes.&rsquo; Because failure can&rsquo;t be an option when we&rsquo;re talking about our youth.&rdquo;</div>
+      </div>
+
+      <!-- Board: Susan Cunningham -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=18695s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 5:11:35</a>
+          <span class="timestamp-speaker">Susan Cunningham</span>
+          <span class="timestamp-role">Board Member</span>
+        </div>
+        <h3>Cunningham calls on County Manager to explain staff notification failure</h3>
+        <p>Cunningham, who had met with 80 community members the night before at Open Door Monday, thanked the young speakers and then turned to the County Manager, asking him to publicly explain what went wrong with the staff severance notifications.</p>
+        <div class="timestamp-quote">&ldquo;Could you please share a bit about what went wrong in notifying staff of this possibility and how it&rsquo;s being cleaned up?&rdquo;</div>
+      </div>
+
+      <!-- COUNTY MANAGER APOLOGY — STANDOUT -->
+      <div style="margin:1.5rem 0; background:linear-gradient(135deg, #FFF3E0 0%, #FBE9E7 100%); border:2px solid var(--red); border-radius:10px; overflow:hidden;">
+        <div style="background:var(--red); color:#fff; padding:0.75rem 1.25rem; display:flex; align-items:center; gap:0.5rem;">
+          <i class="fa-solid fa-exclamation-circle" style="font-size:1.1rem;"></i>
+          <span style="font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.5px;">County Manager&rsquo;s Public Apology</span>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <div class="timestamp-bar" style="margin-bottom:0.75rem;">
+            <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=18750s" target="_blank" class="timestamp-link" style="background:var(--red);"><i class="fa-solid fa-play"></i> 5:12:30</a>
+            <span class="timestamp-speaker">Mark Schwartz</span>
+            <span class="timestamp-role">County Manager</span>
+          </div>
+          <p style="font-size:0.95rem; color:var(--dark-text); line-height:1.7; margin-bottom:0.75rem;">When called upon by Board Member Cunningham, County Manager Mark Schwartz publicly admitted that the severance letters sent to Barcroft staff were wrong and apologized on the record. Staff had been asked to sign severance packages <em>before</em> the Board had voted on the proposal.</p>
+          <div style="background:#fff; border-left:4px solid var(--red); padding:1rem 1.25rem; border-radius:0 8px 8px 0; font-style:italic; font-size:1.05rem; color:var(--dark-text); line-height:1.6;">
+            &ldquo;The letter that was shared with employees originally was <strong>wrong</strong> and I <strong>apologize</strong> for that. That was a mistake that I take full responsibility for and it&rsquo;s <strong>unacceptable</strong>.&rdquo;
+          </div>
+          <div class="timestamp-callout" style="margin-top:0.75rem;">
+            <strong><i class="fa-solid fa-bullhorn" style="margin-right:0.3rem;"></i> Why this matters</strong>
+            <p>The County Manager admitted on the public record that the process was flawed. Staff were sent erroneous severance notices and asked to make career-altering decisions about a proposal the Board hadn&rsquo;t even voted on. This confirms what the community has been saying: this proposal was rushed, poorly communicated, and executed without the care that Arlington&rsquo;s workforce and families deserve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Board: Takis Karantonis -->
+      <div class="timestamp-section">
+        <div class="timestamp-bar">
+          <a href="https://www.youtube.com/watch?v=qWlMCJofi-4&t=19128s" target="_blank" class="timestamp-link"><i class="fa-solid fa-play"></i> 5:18:48</a>
+          <span class="timestamp-speaker">Takis Karantonis</span>
+          <span class="timestamp-role">Board Member</span>
+        </div>
+        <h3>Karantonis: &ldquo;You are pioneering solutions that may work for others&rdquo;</h3>
+        <p>Karantonis was visibly moved, noting he remembered Amanda Vipondo from her advocacy on school funding the previous year. He highlighted two things the community brought clearly: this is about families, not just programs; and hybrid partnership solutions deserve serious exploration. He accepted Carrie Garcia&rsquo;s invitation to visit Barcroft.</p>
+        <div class="timestamp-quote">&ldquo;You said there are hybrid solutions. We can talk about how we fundraise. We can talk about how we make the program viable, sustainable. I&rsquo;m extremely interested in that because you are also pioneering some solutions here that may work for others as well.&rdquo;</div>
+      </div>
+
+      <!-- SECTION LABEL: Summary -->
+      <div style="margin:2rem 0 1rem; padding:1rem 1.25rem; background:linear-gradient(135deg, var(--navy) 0%, #2C3E6B 100%); border-radius:8px; color:#fff;">
+        <h3 style="font-size:1rem; margin:0 0 0.5rem; color:var(--gold);"><i class="fa-solid fa-chart-line" style="margin-right:0.5rem;"></i> The Takeaway</h3>
+        <p style="font-size:0.92rem; line-height:1.65; margin:0; color:rgba(255,255,255,0.9);">Every single public speaker opposed the cuts. The Board committed to exploring alternatives. The County Manager apologized for a flawed process. And every Board member acknowledged the community&rsquo;s voice. <strong style="color:var(--gold);">The fight is working. Keep showing up.</strong></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="index.html">Save Arlington Gymnastics</a> &nbsp;|&nbsp; A grassroots advocacy effort by <a href="http://www.arlingtonaerials.org/">Aerials</a> &amp; <a href="https://sites.google.com/site/arlingtontigersva/">Tigers</a> families</p>
+  <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5">#SaveArlingtonGymnastics</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IG Post — Fox 5 Coverage</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 30px; }
+
+  .carousel-wrapper {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .slide-container {
+    position: relative;
+    width: 410px;
+    height: 440px;
+  }
+
+  .slide-label {
+    color: #888;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transform: scale(0.38);
+    transform-origin: top left;
+    flex-shrink: 0;
+  }
+
+  /* === SLIDE 1: Marina headshot — lead image === */
+  .slide-1 {
+    background: #0a1628;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide-1 img.hero-img {
+    width: 100%;
+    height: 620px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .slide-1 .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 560px;
+    background: linear-gradient(transparent 0%, #0a1628 42%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 55px 65px;
+  }
+  .slide-1 .fox-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 22px;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+  .slide-1 .fox-badge span {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .slide-1 .fox-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #C62828;
+    display: inline-block;
+  }
+  .slide-1 .fox-badge .live-text {
+    color: #C62828;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .slide-1 h2 {
+    font-size: 54px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .slide-1 h2 span { color: #F9A825; }
+  .slide-1 .sub-text {
+    font-size: 28px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .slide-1 .sub-text strong { color: rgba(255,255,255,0.85); font-weight: 700; }
+
+  /* Thumbnail previews of broadcast segments */
+  .slide-1 .segment-previews {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 3;
+  }
+  .slide-1 .segment-thumb {
+    width: 240px;
+    height: 148px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    opacity: 0.85;
+  }
+  .slide-1 .segment-thumb:first-child {
+    transform: rotate(2.5deg);
+  }
+  .slide-1 .segment-thumb:last-child {
+    transform: rotate(-1.5deg);
+  }
+
+  /* === SLIDE 2 & 3: Full-bleed screenshots === */
+  .slide-screenshot {
+    background: #0a1628;
+  }
+  .slide-screenshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* === SLIDE 4: Thank you + invitation === */
+  .slide-4 {
+    background: #0a1628;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px;
+  }
+  .slide-4 .avatar-row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  .slide-4 .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.15);
+  }
+  .slide-4 .avatar-info {
+    text-align: left;
+  }
+  .slide-4 .avatar-info .name {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .slide-4 .avatar-info .handle {
+    font-size: 24px;
+    color: #F9A825;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .slide-4 .avatar-info .outlet {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+  .slide-4 .thank-msg {
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+  .slide-4 .thank-msg span { color: #F9A825; }
+  .slide-4 .divider {
+    width: 100px;
+    height: 3px;
+    background: rgba(249,168,37,0.4);
+    border-radius: 2px;
+    margin-bottom: 40px;
+  }
+  .slide-4 .invite-msg {
+    font-size: 30px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+    max-width: 800px;
+  }
+  .slide-4 .invite-msg em {
+    color: #fff;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .slide-4 .sg-watermark {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  /* === SLIDE 5: CTA === */
+  .slide-5 {
+    background: #0a1628;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px;
+  }
+  .slide-5 .cta-label {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #F9A825;
+    margin-bottom: 40px;
+  }
+  .slide-5 .cta-main {
+    font-size: 72px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 50px;
+  }
+  .slide-5 .cta-main span { color: #F9A825; }
+  .slide-5 .cta-divider {
+    width: 120px;
+    height: 4px;
+    background: #F9A825;
+    border-radius: 2px;
+    margin-bottom: 50px;
+  }
+  .slide-5 .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .slide-5 .cta-action {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .slide-5 .cta-action .icon {
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+  .slide-5 .cta-action .text {
+    text-align: left;
+  }
+  .slide-5 .cta-action .text .title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .slide-5 .cta-action .text .detail {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+  .slide-5 .cta-site {
+    margin-top: 50px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #F9A825;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel-wrapper">
+
+  <!-- SLIDE 1: Marina avatar headshot — lead -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 1 — Lead</div>
+    <div class="slide slide-1">
+      <img class="hero-img" src="fox-news-marina-marraco-instagram-avatar.png" alt="Marina Marraco, Fox 5 DC">
+      <div class="segment-previews">
+        <img class="segment-thumb" src="fox-news-reporter-at-barcroft.png" alt="Live report at Barcroft">
+        <img class="segment-thumb" src="fox-news-daytime-segment-webstream-with-marina-featured.png" alt="Daytime studio segment">
+      </div>
+      <div class="bottom-bar">
+        <div class="fox-badge">
+          <span>FOX 5 DC</span>
+          <div class="dot"></div>
+          <span class="live-text">Live</span>
+        </div>
+        <h2>The Word Is<br><span>Getting Out.</span></h2>
+        <div class="sub-text"><strong>@marinamarracodc</strong> and <strong>@fox5dc</strong> came to Barcroft to tell our story.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Full screenshot — reporter at Barcroft -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 2 — Live Report</div>
+    <div class="slide slide-screenshot">
+      <img src="fox-news-reporter-at-barcroft.png" alt="Marina Marraco reporting live at Barcroft">
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Full screenshot — article headline -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 3 — Article</div>
+    <div class="slide slide-screenshot">
+      <img src="fox-news-webstream-screenshot-with-headline.png" alt="Fox 5 article: Arlington proposes tax hike, cuts to gymnastics programs">
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Full screenshot — daytime segment -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 4 — Daytime Segment</div>
+    <div class="slide slide-screenshot">
+      <img src="fox-news-daytime-segment-webstream-with-marina-featured.png" alt="Fox 5 daytime segment with parents">
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Thank you + invitation to learn more -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 5 — Thank You + Invite</div>
+    <div class="slide slide-4">
+      <div class="avatar-row">
+        <img class="avatar" src="fox-news-marina-marraco-instagram-avatar.png" alt="Marina Marraco">
+        <div class="avatar-info">
+          <div class="name">Marina Marraco</div>
+          <div class="handle">@marinamarracodc</div>
+          <div class="outlet">FOX 5 Washington DC</div>
+        </div>
+      </div>
+      <div class="thank-msg">On behalf of <span>our<br>entire community</span> &mdash;<br>thank you.</div>
+      <div class="divider"></div>
+      <div class="invite-msg">We&rsquo;d love for anyone to come see these <em>amazing programs</em> in action. Decades of history, thousands of kids, and families who show up for each other.<br><br>Don&rsquo;t be shy &mdash; <em>come learn what makes them so special.</em></div>
+      <div class="sg-watermark">Save Arlington Gymnastics</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: CTA -->
+  <div class="slide-container">
+    <div class="slide-label">Slide 6 — CTA</div>
+    <div class="slide slide-5">
+      <div class="cta-label">The story is out. Now it&rsquo;s your turn.</div>
+      <div class="cta-main">SHOW UP<br><span>FOR THEM</span></div>
+      <div class="cta-divider"></div>
+      <div class="cta-actions">
+        <div class="cta-action">
+          <div class="icon">&#128227;</div>
+          <div class="text">
+            <div class="title">Speak Tonight</div>
+            <div class="detail">County Board Budget Meeting &middot; No earlier than 6:30 PM</div>
+          </div>
+        </div>
+        <div class="cta-action">
+          <div class="icon">&#9999;&#65039;</div>
+          <div class="text">
+            <div class="title">Sign the Petition</div>
+            <div class="detail">change.org/SaveArlingtonGymnastics</div>
+          </div>
+        </div>
+        <div class="cta-action">
+          <div class="icon">&#128220;</div>
+          <div class="text">
+            <div class="title">Hand Out Flyers</div>
+            <div class="detail">Sign up via link in bio</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-site">savearlingtongymnastics.com</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

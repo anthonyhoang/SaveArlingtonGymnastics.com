@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arlington Gymnastics — Board Scenario Planner (Single View)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f1f5f9;--card:#ffffff;--border:#e2e8f0;
+  --navy:#1e3a5f;--blue:#2563eb;--teal:#0d9488;--green:#059669;
+  --amber:#d97706;--red:#dc2626;--purple:#7c3aed;
+  --text:#1e293b;--muted:#64748b;--light:#94a3b8;
+  --t1:#059669;--t2:#0d9488;--t3:#2563eb;--t4:#7c3aed;--t5:#dc2626;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+
+/* === LAYOUT === */
+.app{display:grid;grid-template-columns:360px 1fr;grid-template-rows:42px 1fr 24px;height:100vh}
+
+/* Header */
+.hdr{grid-column:1/-1;background:#0F1B33;padding:0 20px;display:flex;align-items:center;gap:12px}
+.hdr .logo{font-size:11px;font-weight:900;color:#fff;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
+.hdr .logo span{color:#F9A825}
+.hdr .divider{width:1px;height:20px;background:rgba(255,255,255,0.2)}
+.hdr h1{font-size:13px;font-weight:700;color:rgba(255,255,255,0.9);white-space:nowrap}
+.hdr .tag{font-size:8px;font-weight:700;padding:2px 7px;border-radius:10px}
+.hdr .tag-blue{background:rgba(37,99,235,0.2);color:#93c5fd}
+.hdr .tag-green{background:rgba(5,150,105,0.2);color:#6ee7b7}
+.hdr .r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.hdr .site-link{font-size:9px;font-weight:700;color:#F9A825;text-decoration:none;letter-spacing:0.5px;padding:4px 10px;border:1px solid rgba(249,168,37,0.4);border-radius:4px;transition:all 0.2s;white-space:nowrap}
+.hdr .site-link:hover{background:rgba(249,168,37,0.15);border-color:#F9A825}
+
+/* Footer */
+.foot{grid-column:1/-1;background:#0F1B33;border-top:none;padding:0 16px;font-size:7px;color:rgba(255,255,255,0.5);display:flex;align-items:center}
+
+/* === LEFT PANEL === */
+.left{display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--card);overflow:hidden}
+
+/* Tab strip */
+.tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.tab{flex:1;padding:8px 4px;font-size:8px;font-weight:700;text-align:center;cursor:pointer;color:var(--light);border-bottom:2px solid transparent;transition:.12s;text-transform:uppercase;letter-spacing:.3px;line-height:1.2}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue);background:rgba(37,99,235,0.03)}
+
+/* Tab content */
+.tab-body{flex:1;overflow-y:auto;padding:10px}
+.tab-body::-webkit-scrollbar{width:4px}
+.tab-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Section headers */
+.sh{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:8px 0 4px;padding-bottom:3px;border-bottom:1px solid var(--bg)}
+.sh:first-child{margin-top:0}
+
+/* Presets */
+.presets{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+.pre{padding:3px 8px;font-size:8px;font-weight:600;border:1px solid var(--border);border-radius:12px;cursor:pointer;background:var(--card);color:var(--muted);transition:.12s}
+.pre:hover{border-color:var(--blue);color:var(--blue)}
+.pre.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Sliders */
+.sg{margin-bottom:6px}
+.sg-top{display:flex;justify-content:space-between;margin-bottom:2px}
+.sg-top span{font-size:9px;color:var(--muted)}
+.sg-top .v{font-size:10px;font-weight:700;color:var(--blue)}
+input[type=range]{width:100%;height:4px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--blue);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+
+/* Toggle switches */
+.tg{display:flex;align-items:center;gap:6px;padding:4px 6px;background:var(--bg);border-radius:5px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;transition:.1s;min-height:28px}
+.tg:hover{border-color:var(--border)}.tg.on{background:rgba(5,150,105,0.06);border-color:var(--green)}
+.tg input{display:none}
+.tg-sw{width:24px;height:13px;background:var(--border);border-radius:7px;position:relative;transition:.15s;flex-shrink:0}
+.tg-sw::after{content:'';position:absolute;top:1.5px;left:1.5px;width:10px;height:10px;background:#fff;border-radius:50%;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.tg.on .tg-sw{background:var(--green)}.tg.on .tg-sw::after{left:12.5px}
+.tg-n{font-size:9px;color:var(--text);font-weight:500;flex:1;line-height:1.3}
+.tg-d{font-size:8px;color:var(--light);flex-shrink:0;font-weight:600}
+
+/* Mini params inside toggles */
+.mp{display:flex;gap:4px;align-items:center;margin-top:3px;flex-wrap:wrap}
+.mp label{font-size:7px;color:var(--light)}
+.mp input[type=number]{width:48px;padding:2px 4px;border:1px solid var(--border);border-radius:3px;font-size:8px;font-family:inherit}
+.mp .calc{font-size:8px;font-weight:700;color:var(--green)}
+
+/* Pyramid (compact) */
+.pyramid{display:flex;flex-direction:column;gap:2px}
+.tier{border-radius:5px;padding:5px 8px;display:flex;align-items:center;gap:6px;min-height:38px;border:1.5px dashed transparent;transition:.2s}
+.tier.drag-over{border-color:var(--blue);background:rgba(37,99,235,0.05)}
+.tier-info{width:80px;flex-shrink:0}
+.tier-info .tn{font-size:9px;font-weight:700}.tier-info .tp{font-size:7px;color:var(--muted)}
+.tier-chips{flex:1;display:flex;flex-wrap:wrap;gap:3px;min-height:24px}
+.tier-pct{width:44px;flex-shrink:0;display:flex;align-items:center;gap:3px}
+.tier-pct input[type=range]{width:30px;height:3px}
+.tier-pct .pv{font-size:9px;font-weight:700;color:var(--blue);width:28px;text-align:right}
+.chip{padding:2px 6px;border-radius:4px;font-size:7px;font-weight:600;cursor:grab;border:1px solid var(--border);background:#fff;color:var(--text);white-space:nowrap;user-select:none}
+.chip:active{cursor:grabbing;transform:scale(1.05)}
+.chip.rec{border-color:#86efac;background:#f0fdf4;color:#166534}
+.chip.comp{border-color:#93c5fd;background:#eff6ff;color:#1e40af}
+.chip.new{border-color:#fcd34d;background:#fffbeb;color:#92400e}
+.chip.partner{border-color:#c4b5fd;background:#f5f3ff;color:#5b21b6}
+.tier-1{background:rgba(5,150,105,0.04)}.tier-2{background:rgba(13,148,136,0.04)}
+.tier-3{background:rgba(37,99,235,0.04)}.tier-4{background:rgba(124,58,237,0.04)}
+.tier-5{background:rgba(220,38,38,0.04)}
+
+/* Radio group (compact) */
+.rg{display:flex;flex-direction:column;gap:3px;margin:4px 0}
+.ro{display:flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:.12s;font-size:9px}
+.ro:hover{border-color:var(--blue)}.ro.active{border-color:var(--blue);background:rgba(37,99,235,0.03)}
+.ro .dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ro.active .dot{border-color:var(--blue)}.ro.active .dot::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.ro-t{font-weight:600;color:var(--text)}.ro-d{color:var(--muted);font-size:8px}
+
+/* Note */
+.note{font-size:8px;color:var(--muted);margin-top:6px;line-height:1.4;padding:6px;background:var(--bg);border-radius:4px}
+
+/* === RIGHT PANEL (DASHBOARD) === */
+.right{display:grid;grid-template-rows:auto 1fr 1fr;gap:8px;padding:10px 12px;overflow:hidden}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.kpi{background:var(--card);border-radius:8px;border:1px solid var(--border);padding:10px 12px;border-top:3px solid var(--border)}
+.kpi.green{border-top-color:var(--green)}.kpi.blue{border-top-color:var(--blue)}
+.kpi.amber{border-top-color:var(--amber)}.kpi.purple{border-top-color:var(--purple)}
+.kpi.red{border-top-color:var(--red)}
+.kpi-l{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
+.kpi-v{font-size:20px;font-weight:900;margin-top:2px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.kpi-s{font-size:9px;color:var(--light);margin-top:1px}
+
+/* Chart grid */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
+.ccard{background:var(--card);border-radius:8px;border:1px solid var(--border);padding:10px 12px;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.ccard-t{display:inline-block;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#fff;background:#0F1B33;padding:4px 12px;border-radius:20px;margin-bottom:8px;flex-shrink:0}
+.cwrap{flex:1;min-height:0;position:relative}
+.cwrap canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
+.ccard-scroll{flex:1;min-height:0;overflow-y:auto}
+.ccard-scroll::-webkit-scrollbar{width:3px}
+.ccard-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* Revenue breakdown bars */
+.rb-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.rb-label{width:110px;text-align:right;font-size:9px;color:var(--muted);flex-shrink:0}
+.rb-track{flex:1;height:18px;background:var(--bg);border-radius:3px;overflow:hidden}
+.rb-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:6px;font-size:8px;font-weight:700;color:#fff;transition:width .3s}
+
+/* Market bars */
+.mkt-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.mkt-name{width:70px;font-size:9px;font-weight:500;color:var(--muted);text-align:right;flex-shrink:0}
+.mkt-track{flex:1;height:16px;background:var(--bg);border-radius:3px;overflow:hidden}
+.mkt-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:5px;font-size:8px;font-weight:700;color:#fff;transition:width .3s}
+.mkt-name.you{color:var(--green);font-weight:700}
+
+/* Comp fee table */
+.ft{width:100%;border-collapse:collapse;font-size:9px}
+.ft th{text-align:left;font-weight:700;color:var(--muted);font-size:7px;text-transform:uppercase;letter-spacing:.3px;padding:4px 6px;border-bottom:2px solid var(--border)}
+.ft td{padding:4px 6px;border-bottom:1px solid var(--bg)}.ft .num{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* === CONFETTI === */
+@keyframes kimFall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(var(--drift)) rotate(var(--rot)); opacity: 0; }
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 768px) {
+  html,body{height:auto;overflow:auto}
+  .app{display:flex;flex-direction:column;height:auto;min-height:100vh}
+  .hdr{flex-wrap:wrap;padding:8px 12px;gap:6px}
+  .hdr .logo{font-size:10px}
+  .hdr h1{font-size:11px}
+  .hdr .tag{font-size:7px}
+  .hdr .r{width:100%;justify-content:center;gap:6px;margin-left:0;margin-top:2px}
+  .hdr .site-link{font-size:8px;padding:3px 8px}
+  .hdr .divider{display:none}
+  .left{overflow:visible;border-right:none;border-bottom:1px solid var(--border)}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+  .tab{min-width:60px;font-size:8px;padding:6px 8px}
+  .tab-body{max-height:none;overflow:visible;padding:10px}
+  .right{overflow:visible;padding:12px}
+  .kpis{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important}
+  .kpi{min-width:0 !important}
+  .chart-grid{grid-template-columns:1fr !important;gap:10px}
+  .ccard{min-height:220px}
+  .cwrap{min-height:200px}
+  .foot{padding:8px 12px;text-align:center;flex-wrap:wrap}
+  .sg{padding-right:0}
+  .tg .mp{flex-wrap:wrap}
+  .mp input[type="number"]{width:55px}
+}
+@media (max-width: 480px) {
+  .hdr .logo{font-size:9px;letter-spacing:1px}
+  .hdr h1{font-size:10px}
+  .kpis{grid-template-columns:1fr !important}
+  .kpi-v{font-size:16px !important}
+  .tab{min-width:50px;font-size:7px;padding:5px 6px}
+  .ccard-t{font-size:8px;padding:3px 10px}
+  .mkt-name{width:55px;font-size:8px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="logo">Save Arlington <span>Gymnastics</span></div>
+  <div class="divider"></div>
+  <h1>Board Scenario Planner</h1>
+  <div class="tag tag-blue">FOIA C-7656</div>
+  <div class="tag tag-green">Interactive</div>
+  <div class="r">
+    <a href="https://www.dprdata.com" target="_blank" class="site-link" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7)">DPRdata.com &#8599;</a>
+    <a href="https://savearlingtongymnastics.com" target="_blank" class="site-link">SaveArlingtonGymnastics.com &#8599;</a>
+  </div>
+</div>
+
+<!-- LEFT: CONTROLS -->
+<div class="left">
+  <div class="tabs">
+    <div class="tab active" data-tab="t1" onclick="showTab('t1')">Cost<br>Recovery</div>
+    <div class="tab" data-tab="t2" onclick="showTab('t2')">Fees &<br>Rates</div>
+    <div class="tab" data-tab="t3" onclick="showTab('t3')">Capacity</div>
+    <div class="tab" data-tab="t4" onclick="showTab('t4')">Revenue<br>Streams</div>
+    <div class="tab" data-tab="t5" onclick="showTab('t5')">Acct &<br>Overhead</div>
+  </div>
+  <div class="tab-body">
+
+    <!-- TAB 1: COST RECOVERY -->
+    <div class="tab-panel active" id="t1">
+      <div class="sh">Presets</div>
+      <div class="presets">
+        <div class="pre" onclick="applyPyramidPreset('current')">DPR Today</div>
+        <div class="pre" onclick="applyPyramidPreset('moderate')">Moderate</div>
+        <div class="pre" onclick="applyPyramidPreset('market')">Market</div>
+        <div class="pre" onclick="applyPyramidPreset('full')">Full Recovery</div>
+      </div>
+      <div class="sh">Cost Recovery Pyramid — drag programs between tiers</div>
+      <div class="pyramid" id="pyramid"></div>
+      <div class="note" id="pyramidNote"></div>
+    </div>
+
+    <!-- TAB 2: FEES & RATES -->
+    <div class="tab-panel" id="t2">
+      <div class="sh">Rec / Adaptive Fee</div>
+      <div class="sg"><div class="sg-top"><span>Fee per class (now $13.80)</span><span class="v" id="d_rf"></span></div>
+        <input type="range" id="rf" min="10" max="35" step="0.25" value="13.80" oninput="calc()"></div>
+      <div id="impliedNote" style="font-size:8px;color:var(--muted);margin-bottom:6px"></div>
+
+      <div class="sh">Rec Market Position (per class)</div>
+      <div id="mktBars"></div>
+
+      <div class="sh">Competitive Rate</div>
+      <div class="sg"><div class="sg-top"><span>Base $/hr (now ~$8.02)</span><span class="v" id="d_cr"></span></div>
+        <input type="range" id="cr" min="5" max="15" step="0.25" value="8" oninput="calc()"></div>
+      <div class="sg"><div class="sg-top"><span>Volume discount (20+ hrs/wk)</span><span class="v" id="d_vd"></span></div>
+        <input type="range" id="vd" min="0" max="25" step="5" value="0" oninput="calc()"></div>
+      <div class="sg"><div class="sg-top"><span>Non-resident surcharge (now 15%)</span><span class="v" id="d_nr"></span></div>
+        <input type="range" id="nr" min="15" max="50" step="5" value="15" oninput="calc()"></div>
+
+      <div class="sh">Competitive Market Position (20 hr/wk annual)</div>
+      <div id="compMktBars"></div>
+
+      <div class="sh">Competitive Fee Impact (sample)</div>
+      <table class="ft" id="compTable"></table>
+    </div>
+
+    <!-- TAB 3: CAPACITY & WORKFORCE -->
+    <div class="tab-panel" id="t3">
+      <div class="sh">Add Capacity</div>
+      <div class="sg"><div class="sg-top"><span>Additional rec sections</span><span class="v" id="d_as"></span></div>
+        <input type="range" id="as" min="0" max="100" step="5" value="0" oninput="calc()"></div>
+      <div class="sg"><div class="sg-top"><span>Avg students/section (now 8)</span><span class="v" id="d_cs"></span></div>
+        <input type="range" id="cs" min="6" max="14" step="1" value="8" oninput="calc()"></div>
+
+      <div class="sh">Fill Vacant Positions</div>
+      <label class="tg" id="t_fillVacant" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Hire 3 Vacant Instructor FTE</div>
+          <div class="tg-d">+75 sections, adds cost + revenue</div>
+        </div>
+      </label>
+      <div class="note" id="fillNote" style="font-size:8px;color:var(--muted);margin-top:2px"></div>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px;border-left:2px solid var(--amber);padding-left:6px"><b>Context:</b> 1 position is the program manager (DPR leadership considers essential to operations). 2 are rec lead instructors needed to expand classes, birthday parties, and open gym — the same programming SAG advocates for. Freezing these positions improves budget numbers but limits the program's ability to grow. <i>Question: Can we advocate for more capacity while also freezing the hires needed to deliver it?</i></div>
+
+      <div class="sh">Comp Coach → Rec Allocation</div>
+      <div class="sg"><div class="sg-top"><span>% of comp coach hours to rec</span><span class="v" id="d_ca"></span></div>
+        <input type="range" id="coachAlloc" min="0" max="30" step="5" value="0" oninput="calc()"></div>
+      <div class="note" id="coachAllocNote" style="font-size:8px;color:var(--muted);margin-top:2px"></div>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px">Industry standard: comp coaches teach rec classes during off-peak hours (mornings, early afternoons). Shifts salary burden from comp → rec, improving comp cost recovery while adding rec capacity without new hires.</div>
+
+      <div class="sh">Grow Competitive Program</div>
+      <div class="sg"><div class="sg-top"><span>Additional comp athletes</span><span class="v" id="d_compGrow"></span></div>
+        <input type="range" id="compGrow" min="0" max="60" step="5" value="0" oninput="calc()"></div>
+      <div class="note" id="compGrowNote" style="font-size:8px;color:var(--muted);margin-top:2px"></div>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px">Program peaked at 202 athletes (2020) vs 154 today. Growth through waitlist conversion, Xcel track expansion, and restored community confidence. Added athletes need marginal temp coaching (~1 coach per 20 athletes). Res/NR mix held at current 76%/24%.</div>
+
+      <div class="sh">Workforce</div>
+      <label class="tg" id="t_gwuAth" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">GWU NCAA Athletes as Instructors</div><div class="tg-d">-20% temp staff + 20 rec sections</div></label>
+      <label class="tg" id="t_kim" onclick="T(this);kimConfetti()"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="display:flex;align-items:center;gap:8px;flex:1">
+          <img src="kim-headshot.jpg" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--amber);flex-shrink:0" alt="Kim Klingler">
+          <div><div class="tg-n">Commissioner of Revenue Kim Klingler</div><div class="tg-d">Gymnastics Executive-in-Residence &amp; Coach</div></div>
+        </div>
+      </label>
+      <div class="note" id="kimNote" style="font-size:8px;color:var(--muted);margin-top:2px;margin-bottom:4px"></div>
+      <label class="tg" id="t_contract" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Contract Coach Positions &amp; Enable Direct Hire</div><div class="tg-d">+50 classes/session</div></label>
+      <label class="tg" id="t_mini" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Mini Sessions Between Terms</div><div class="tg-d">+80 classes</div></label>
+
+      <div class="sh">Reintroduce Classes</div>
+      <label class="tg" id="t_cheer" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Tumbling for Cheerleading</div><div class="tg-d">+15</div></label>
+      <label class="tg" id="t_adv" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Level 3/4 Advanced (Xcel feeder)</div><div class="tg-d">+12</div></label>
+      <label class="tg" id="t_stars" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Rising Stars (pre-pre team)</div><div class="tg-d">+10</div></label>
+      <label class="tg" id="t_ninja" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Ninja Classes</div><div class="tg-d">+12</div></label>
+      <label class="tg" id="t_adult" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Adult Gymnastics (evening)</div><div class="tg-d">+10</div></label>
+
+      <div class="note" id="waitNote"></div>
+    </div>
+
+    <!-- TAB 4: NEW REVENUE STREAMS -->
+    <div class="tab-panel" id="t4">
+      <div class="sh">Programs (AAPA/ATPA Proposals)</div>
+
+      <label class="tg" id="t_bday" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Birthday Parties</div>
+          <div class="mp"><label>$/party</label><input type="number" id="bp_r" value="450" min="200" max="800" onclick="event.stopPropagation()" onchange="calc()">
+          <label>×/mo</label><input type="number" id="bp_f" value="6" min="1" max="20" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="bp_c"></span></div>
+        </div>
+      </label>
+
+      <label class="tg" id="t_priv" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Private Lessons (1-on-1)</div>
+          <div class="mp"><label>$/hr</label><input type="number" id="pl_r" value="75" min="40" max="150" onclick="event.stopPropagation()" onchange="calc()">
+          <label>hrs/wk</label><input type="number" id="pl_h" value="10" min="2" max="30" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="pl_c"></span></div>
+        </div>
+      </label>
+
+      <label class="tg" id="t_og" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Open Gym</div>
+          <div class="mp"><label>$</label><input type="number" id="og_r" value="15" min="8" max="25" onclick="event.stopPropagation()" onchange="calc()">
+          <label>kids</label><input type="number" id="og_k" value="20" min="5" max="40" onclick="event.stopPropagation()" onchange="calc()">
+          <label>×/wk</label><input type="number" id="og_f" value="3" min="1" max="7" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="og_c"></span></div>
+        </div>
+      </label>
+
+      <label class="tg" id="t_clin" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Specialized Clinics</div>
+          <div class="mp"><label>$</label><input type="number" id="cl_r" value="50" min="25" max="100" onclick="event.stopPropagation()" onchange="calc()">
+          <label>kids</label><input type="number" id="cl_k" value="15" min="5" max="30" onclick="event.stopPropagation()" onchange="calc()">
+          <label>×/yr</label><input type="number" id="cl_f" value="12" min="4" max="24" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="cl_c"></span></div>
+        </div>
+      </label>
+
+      <label class="tg" id="t_camp" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Break Camps</div>
+          <div class="mp"><label>$/day</label><input type="number" id="ca_r" value="75" min="40" max="150" onclick="event.stopPropagation()" onchange="calc()">
+          <label>kids</label><input type="number" id="ca_k" value="25" min="10" max="40" onclick="event.stopPropagation()" onchange="calc()">
+          <label>days/yr</label><input type="number" id="ca_d" value="20" min="5" max="40" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="ca_c"></span></div>
+        </div>
+      </label>
+
+      <label class="tg" id="t_pno" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Parents Night Out / Shop & Drop</div>
+          <div class="mp"><label>$/kid</label><input type="number" id="pn_r" value="40" min="20" max="75" onclick="event.stopPropagation()" onchange="calc()">
+          <label>kids</label><input type="number" id="pn_k" value="15" min="5" max="30" onclick="event.stopPropagation()" onchange="calc()">
+          <label>×/yr</label><input type="number" id="pn_f" value="24" min="6" max="48" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="pn_c"></span></div>
+        </div>
+      </label>
+
+      <div class="sh">Facility Rentals (Off-Peak)</div>
+      <label class="tg" id="t_offpeak" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Additional Off-Peak Rentals</div>
+          <div class="mp"><label>$/hr</label><input type="number" id="op_r" value="80" min="40" max="200" onclick="event.stopPropagation()" onchange="calc()">
+          <label>hrs/wk</label><input type="number" id="op_h" value="10" min="2" max="30" onclick="event.stopPropagation()" onchange="calc()">
+          <label>wks/yr</label><input type="number" id="op_w" value="48" min="20" max="52" onclick="event.stopPropagation()" onchange="calc()">
+          <span class="calc" id="op_c"></span></div>
+          <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px">Beyond GWU: evenings, weekends, other tenants. GWU pays $110/hr ($275 ÷ 2.5hr) at in-county rate; published non-res rate is $256/hr.</div>
+        </div>
+      </label>
+
+      <div class="sh">Fixed-Estimate Programs</div>
+      <label class="tg" id="t_spon" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Sponsorships & Banners</div><div class="tg-d">$15K</div></label>
+      <label class="tg" id="t_merch" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Merchandise & Supplies</div><div class="tg-d">$12K</div></label>
+      <label class="tg" id="t_meet" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Increase Home Meet Revenue</div><div class="tg-d">$20K</div></label>
+      <label class="tg" id="t_coach" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Coach Trainings & Certifications</div><div class="tg-d">$8K</div></label>
+      <label class="tg" id="t_offS" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Off-Season HS/College Training</div><div class="tg-d">$10K</div></label>
+      <label class="tg" id="t_aFit" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Adult Fitness Classes</div><div class="tg-d">$18K</div></label>
+    </div>
+
+    <!-- TAB 5: ACCOUNTING & OVERHEAD -->
+    <div class="tab-panel" id="t5">
+      <div class="sh">DPR Cost Reconciliation</div>
+      <div class="note" style="font-size:8px;color:var(--muted);margin-top:2px;margin-bottom:6px">DPR Slide 15 shows $2,291,040 total expense and $1,321,498 revenue = <b>$969,542 net</b>. Our FOIA-based cost build totals <span id="ourCostNote"></span> — <b id="mysteryNote"></b> higher. DPR never provided a line-item breakdown reconciling slides 20 &amp; 23 to slide 15.</div>
+      <label class="tg on" id="t_dprReconcile" onclick="T(this)"><input type="checkbox" checked><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Apply DPR Reconciliation</div><div class="tg-d" id="dprReconD">Anchors to $970K</div>
+        </div>
+      </label>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px"><b>Slide 15 (3/5/26):</b> Expense $2.29M − Revenue $1.32M = $970K. Our comp cost build ($1.17M from FOIA salaries) exceeds DPR's slide 20 ($985K) by $189K; facility+mgmt allocations account for the rest. This toggle subtracts the unexplained difference so the model starts at DPR's presented number.</div>
+
+      <div class="sh" style="margin-top:10px">Excluded Revenue (Accounting Corrections)</div>
+      <label class="tg" id="t_enjoyClasses" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div style="flex:1"><div class="tg-n">Include Enjoy Arlington Classes</div><div class="tg-d">+$50K–$150K</div>
+        </div>
+      </label>
+      <div class="sg" style="margin-top:4px"><div class="sg-top"><span>Est. annual Enjoy revenue</span><span class="v" id="d_enjoy"></span></div>
+        <input type="range" id="enjoyRev" min="50000" max="150000" step="10000" value="80000" oninput="calc()"></div>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px"><b>FOIA C-7656-0112:</b> "Enjoy classes in other spaces such as the wellness room and boxing studio are also not factored into the revenue reduction." <b>C-7656-0050</b> (DPR staff): 462 enrollment slots, 377 enrolled Winter '26, 37 waitlisted — dance, martial arts, fitness, wellness in rooms separate from gym.</div>
+
+      <div class="sh" style="margin-top:10px">GWU Revenue</div>
+      <label class="tg" id="t_gwuInc" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Include GWU Rental in Model</div><div class="tg-d">+$88K</div></label>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px"><b>FOIA C-7656-0077:</b> GWU practice M–F 7am–10:30am, $275/practice, $88K/yr. <b>C-7656-0112:</b> "Revenues generated from GWU Gymnastics… are not included in the reduction."</div>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px;border-left:2px solid var(--amber);padding-left:6px"><b>Context:</b> GWU offered equipment to the gym program, but county policy prohibits accepting used equipment due to lack of warranty and safety concerns. <i>Question: Does this limit the partnership's upside beyond rental revenue?</i></div>
+      <div class="sg"><div class="sg-top"><span>Rate adjustment (1.0× = current $88K)</span><span class="v" id="d_gr"></span></div>
+        <input type="range" id="gr" min="1" max="2.5" step="0.1" value="1" oninput="calc()"></div>
+      <label class="tg" id="t_navy" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Navy Club Revenue</div><div class="tg-d">$20K</div></label>
+      <div class="note" style="font-size:7px;color:var(--muted);margin-top:2px;border-left:2px solid var(--amber);padding-left:6px"><b>Context:</b> A coach reported Navy interest, but Alex asked the coach to have Navy contact DPR directly — unclear if they followed up. Much of this was discussed over Teams/phone (not captured in FOIA). <i>Question: How firm was this offer?</i></div>
+      <label class="tg" id="t_hs" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div><div class="tg-n">Charge HS Teams (Wakefield/Meridian)</div><div class="tg-d">$10K</div></label>
+
+      <div class="sh">Overhead Allocation</div>
+      <div class="sg"><div class="sg-top"><span>Rec share of mgmt overhead</span><span class="v" id="d_os"></span></div>
+        <input type="range" id="os" min="20" max="80" step="5" value="50" oninput="calc()"></div>
+      <div class="presets" style="margin-bottom:6px">
+        <div class="pre" onclick="$('os').value=50;calc()">50/50</div>
+        <div class="pre" onclick="$('os').value=80;calc()">80/20 txn vol</div>
+      </div>
+
+      <div class="sh">Management FTE</div>
+      <div class="rg" id="mgmtRG">
+        <div class="ro active" onclick="setMgmt(3,this)"><div class="dot"></div><div><span class="ro-t">3 FTE</span> <span class="ro-d">Current (~$255K)</span></div></div>
+        <div class="ro" onclick="setMgmt(2,this)"><div class="dot"></div><div><span class="ro-t">2 FTE</span> <span class="ro-d">Moderate (~$170K)</span></div></div>
+        <div class="ro" onclick="setMgmt(1.5,this)"><div class="dot"></div><div><span class="ro-t">1.5 FTE</span> <span class="ro-d">AAPA proposal (~$127K)</span></div></div>
+      </div>
+
+      <div class="sh">Vacant Instructor Positions</div>
+      <label class="tg" id="t_stripVacant" onclick="T(this)"><input type="checkbox"><div class="tg-sw"></div>
+        <div class="tg-n">Remove 3 Unfilled FTE from Cost Base</div><div class="tg-d">-$310K</div></label>
+      <div class="note" style="font-size:8px;color:var(--muted);margin-top:2px">3 instructor positions budgeted but not hired — $73.3K median salary × 1.41 fringe × 3 = $310K phantom cost removed</div>
+
+      <div class="sh">DPR Overhead Rate</div>
+      <div class="sg"><div class="sg-top"><span>Overhead % (DPR standard: 13%)</span><span class="v" id="d_op"></span></div>
+        <input type="range" id="op" min="5" max="20" step="1" value="13" oninput="calc()"></div>
+    </div>
+
+  </div><!-- /tab-body -->
+</div><!-- /left -->
+
+<!-- RIGHT: DASHBOARD -->
+<div class="right">
+  <div class="kpis" id="kpis"></div>
+  <div class="chart-grid">
+    <div class="ccard"><div class="ccard-t">Revenue: DPR Baseline vs. Your Scenario</div><div class="cwrap"><canvas id="stackChart"></canvas></div></div>
+    <div class="ccard"><div class="ccard-t">Costs: DPR Baseline vs. Your Scenario</div><div class="cwrap"><canvas id="costChart"></canvas></div></div>
+  </div>
+  <div class="chart-grid">
+    <div class="ccard"><div class="ccard-t">Incremental Revenue + Savings by Lever</div><div class="cwrap"><canvas id="leverChart"></canvas></div></div>
+    <div class="ccard"><div class="ccard-t">Cost Recovery by Program</div><div class="cwrap"><canvas id="recovChart"></canvas></div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">DPR Slides 15, 20, 23 (3/5/26) · FOIA C-7656 (159 docs) · GWU: C-7656-0071/0077/0108 · Enjoy Classes: C-7656-0050/0112 · Comp: C-7656-0042/0046 · Recovery: C-7656-0128 · Revenue ideas: AAPA/ATPA Feb 2026</div>
+
+</div><!-- /app -->
+
+<script>
+// ===== DATA =====
+const D = {
+  rec: { rev: 527672, students: 1866, fee: 13.80, cps: 20.5, recov: 0.57 },
+  comp: { rev: 672690, cost: 1174093, ath: 148, res: 113, nr: 35, perm: 882777, temp: 156243, oh: 135073, recov: 0.66 },
+  facility: 290808, gwu: { base: 88000 },
+  navy: 20000, other: 121136, dprCut: 969542, mgmtPerFTE: 85000
+};
+D.rec.implCost = D.rec.rev / D.rec.recov;
+// Strip baseline mgmt so we don't double-count when modeling FTE/allocation changes
+D.rec.baseMgmt = 3 * D.mgmtPerFTE * 0.5; // baseline: 3 FTE at 50/50
+D.rec.baseCost = D.rec.implCost - D.rec.baseMgmt; // direct rec cost excl mgmt
+D.rec.vacantFTE = 3; // instructor positions budgeted but unfilled all year
+D.rec.costPerInstr = 73320; // median rec instructor salary from FOIA salary data ($60K-$81K range)
+D.rec.fringeRate = 0.41; // ~41% avg fringe from C-7656-0042 coach data (range 32%-52%)
+D.rec.loadedPerInstr = D.rec.costPerInstr * (1 + D.rec.fringeRate); // ~$103.4K loaded
+D.rec.sectPerInstr = 25; // sections an instructor can teach per year
+D.rec.rfBase = null; // set in initBaseline() — the browser-snapped default fee
+D.baseline = null; // set in initBaseline()
+
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + Math.round(Math.abs(n)).toLocaleString();
+const fK = n => Math.abs(n) >= 1e3 ? '$' + Math.round(Math.abs(n) / 1e3) + 'K' : '$' + Math.round(Math.abs(n));
+
+// ===== TABS =====
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === id));
+}
+
+// ===== TOGGLES =====
+function T(el) { setTimeout(() => { const c = el.querySelector('input'); c.checked = !c.checked; el.classList.toggle('on', c.checked); calc(); }, 0); }
+function on(id) { return $(id)?.querySelector('input')?.checked || false; }
+
+// ===== PYRAMID =====
+const TIERS = [
+  { id: 5, name: 'Enterprise', range: [80,150], def: 100, color: 'var(--t5)' },
+  { id: 4, name: 'Individual', range: [60,120], def: 85, color: 'var(--t4)' },
+  { id: 3, name: 'Balanced', range: [40,100], def: 60, color: 'var(--t3)' },
+  { id: 2, name: 'Community', range: [15,75], def: 40, color: 'var(--t2)' },
+  { id: 1, name: 'Public Good', range: [0,40], def: 10, color: 'var(--t1)' },
+];
+const PROGS = [
+  { id: 'comp', name: 'Comp Teams', cls: 'comp', dt: 5 },
+  { id: 'privL', name: 'Private Lessons', cls: 'new', dt: 5 },
+  { id: 'bday', name: 'Birthdays', cls: 'new', dt: 5 },
+  { id: 'facR', name: 'Facility Rent', cls: 'partner', dt: 5 },
+  { id: 'adltR', name: 'Adult Rec', cls: 'rec', dt: 4 },
+  { id: 'clin', name: 'Clinics', cls: 'new', dt: 4 },
+  { id: 'offS', name: 'Off-Season', cls: 'new', dt: 4 },
+  { id: 'yRec', name: 'Youth Rec', cls: 'rec', dt: 3 },
+  { id: 'camps', name: 'Camps', cls: 'new', dt: 3 },
+  { id: 'ninj', name: 'Ninja/Tumble', cls: 'rec', dt: 3 },
+  { id: 'adapt', name: 'Adaptive', cls: 'rec', dt: 2 },
+  { id: 'comm', name: 'Community', cls: 'rec', dt: 2 },
+  { id: 'oGym', name: 'Open Gym', cls: 'rec', dt: 1 },
+];
+let tierMap = {}, tierPct = {};
+let mgmtFTE = 3;
+let stackObj = null, costObj = null, leverObj = null, recovObj = null;
+
+// Chart.js plugin: draw dashed target lines per bar
+const targetLinePlugin = {
+  id: 'targetLines',
+  afterDatasetsDraw(chart) {
+    const targets = chart.options.plugins.targetLines;
+    if (!targets || !targets.lines) return;
+    const { ctx, chartArea, scales } = chart;
+    const xScale = scales.x, yScale = scales.y;
+    targets.lines.forEach(t => {
+      const y = yScale.getPixelForValue(t.value);
+      if (y < chartArea.top || y > chartArea.bottom) return;
+      // Draw across the specific bar's x range
+      const meta = chart.getDatasetMeta(0);
+      const bar = meta.data[t.barIndex];
+      if (!bar) return;
+      const halfW = bar.width / 2 + 12;
+      const cx = bar.x;
+      ctx.save();
+      ctx.beginPath();
+      ctx.setLineDash([5, 3]);
+      ctx.strokeStyle = t.color || '#ef4444';
+      ctx.lineWidth = 2;
+      ctx.moveTo(cx - halfW, y);
+      ctx.lineTo(cx + halfW, y);
+      ctx.stroke();
+      ctx.fillStyle = t.color || '#ef4444';
+      ctx.font = 'bold 9px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText(t.label, cx, y - 5);
+      ctx.restore();
+    });
+  }
+};
+
+// ===== KIM CONFETTI =====
+function kimConfetti() {
+  setTimeout(() => {
+    if (!on('t_kim')) return;
+    const colors = ['#F9A825','#2563eb','#dc2626','#059669','#7c3aed','#f43f5e','#0d9488'];
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden';
+    document.body.appendChild(container);
+    for (let i = 0; i < 120; i++) {
+      const p = document.createElement('div');
+      const size = Math.random() * 8 + 4;
+      const x = Math.random() * 100;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const shape = Math.random() > 0.5 ? '50%' : (Math.random() > 0.5 ? '0' : '2px');
+      const drift = (Math.random() - 0.5) * 200;
+      const dur = Math.random() * 1.5 + 1.5;
+      const delay = Math.random() * 0.6;
+      const rot = Math.random() * 720 - 360;
+      p.style.cssText = `position:absolute;top:-10px;left:${x}%;width:${size}px;height:${size * (Math.random() * 0.6 + 0.7)}px;background:${color};border-radius:${shape};opacity:1;animation:kimFall ${dur}s ${delay}s ease-in forwards`;
+      p.style.setProperty('--drift', drift + 'px');
+      p.style.setProperty('--rot', rot + 'deg');
+      container.appendChild(p);
+    }
+    setTimeout(() => container.remove(), 3500);
+  }, 50);
+}
+
+function initPyramid() {
+  PROGS.forEach(p => tierMap[p.id] = p.dt);
+  TIERS.forEach(t => tierPct[t.id] = t.def);
+  buildPyramid();
+}
+
+function buildPyramid() {
+  $('pyramid').innerHTML = TIERS.map(t => {
+    const chips = PROGS.filter(p => tierMap[p.id] === t.id);
+    return `<div class="tier tier-${t.id}" data-tier="${t.id}"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropP(event,${t.id});this.classList.remove('drag-over')">
+      <div class="tier-info"><div class="tn" style="color:${t.color}">T${t.id}</div><div class="tp">${t.name}</div></div>
+      <div class="tier-chips">${chips.map(p => `<div class="chip ${p.cls}" draggable="true" data-pid="${p.id}" ondragstart="event.dataTransfer.setData('text','${p.id}')">${p.name}</div>`).join('')}</div>
+      <div class="tier-pct">
+        <input type="range" min="${t.range[0]}" max="${t.range[1]}" step="5" value="${tierPct[t.id]}" oninput="tierPct[${t.id}]=+this.value;this.nextElementSibling.textContent=this.value+'%';calc()">
+        <div class="pv">${tierPct[t.id]}%</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function dropP(e, tid) { e.preventDefault(); tierMap[e.dataTransfer.getData('text')] = tid; buildPyramid(); calc(); }
+
+function applyPyramidPreset(k) {
+  const P = {
+    current:  { t:{5:100,4:85,3:57,2:40,1:10}, m:{} },
+    moderate: { t:{5:100,4:85,3:70,2:50,1:15}, m:{adapt:2} },
+    market:   { t:{5:110,4:90,3:75,2:50,1:20}, m:{adapt:2} },
+    full:     { t:{5:120,4:100,3:80,2:60,1:25}, m:{yRec:4,adapt:2} },
+  };
+  const p = P[k];
+  Object.assign(tierPct, p.t);
+  PROGS.forEach(pr => tierMap[pr.id] = p.m[pr.id] || pr.dt);
+  buildPyramid(); calc();
+}
+
+// ===== MGMT FTE =====
+function setMgmt(n, el) { mgmtFTE = n; document.querySelectorAll('#mgmtRG .ro').forEach(o => o.classList.remove('active')); el.classList.add('active'); calc(); }
+
+// ===== CALC =====
+function calc() {
+  const rf = +$('rf').value, cr = +$('cr').value, vd = +$('vd').value/100, nr = +$('nr').value/100;
+  const as = +$('as').value, cs = +$('cs').value;
+  const os = +$('os').value/100, op = +$('op').value/100, gr = +$('gr').value;
+
+  // Display values
+  $('d_rf').textContent = '$' + rf.toFixed(2);
+  $('d_cr').textContent = '$' + cr.toFixed(2);
+  $('d_vd').textContent = (vd*100) + '%';
+  $('d_nr').textContent = (nr*100) + '%';
+  $('d_as').textContent = '+' + as;
+  $('d_cs').textContent = cs;
+  $('d_os').textContent = (os*100) + '% rec / ' + (100-os*100) + '% comp';
+  $('d_op').textContent = (op*100) + '%';
+  $('d_gr').textContent = gr.toFixed(1) + '× → ' + fK(D.gwu.base * gr);
+  const ca_pct = +$('coachAlloc').value / 100;
+  $('d_ca').textContent = ($('coachAlloc').value) + '%';
+  const enjoyVal = +$('enjoyRev').value;
+  $('d_enjoy').textContent = fK(enjoyVal);
+
+  // --- REC REVENUE ---
+  let reintro = 0;
+  if (on('t_cheer')) reintro += 15;
+  if (on('t_adv')) reintro += 12;
+  if (on('t_stars')) reintro += 10;
+  if (on('t_ninja')) reintro += 12;
+  if (on('t_adult')) reintro += 10;
+  const contractSlots = on('t_contract') ? 50 * cs : 0;
+  const newSlots = as * cs + contractSlots;
+  // Vacant FTE capacity
+  const fillVacant = on('t_fillVacant');
+  const fillSections = fillVacant ? D.rec.vacantFTE * D.rec.sectPerInstr : 0;
+  const fillStudents = fillSections * cs;
+  // --- COACH ALLOCATION (comp → rec) ---
+  const coachShiftCost = ca_pct * D.comp.perm; // salary burden shifted to rec
+  const compCoaches = 8; // perm comp coaching staff from FOIA
+  const caRecSections = Math.round(compCoaches * ca_pct * D.rec.sectPerInstr); // implied rec sections
+  const caRecStudents = caRecSections * cs;
+
+  // --- KIM KLINGLER (0.5 Coach FTE) ---
+  const kimOn = on('t_kim');
+  const kimSections = kimOn ? Math.round(0.5 * D.rec.sectPerInstr) : 0; // 0.5 × 25 = ~13
+  const kimStudents = kimSections * cs;
+
+  const totalRecSt = D.rec.students + newSlots + reintro + fillStudents + caRecStudents + kimStudents;
+  // Ratio-based: anchors to DPR's $527,672 at defaults, scales by fee change and student growth
+  const recRev = D.rec.rev * (rf / D.rec.rfBase) * (totalRecSt / D.rec.students);
+  const miniRev = on('t_mini') ? 80 * cs * rf : 0;
+  const gwuRecRev = on('t_gwuAth') ? 20 * 8 * rf * 8 : 0; // GWU/CWA athletes teach 20 rec sections
+  const totalRecRev = recRev + miniRev + gwuRecRev;
+
+  // Coach alloc note
+  if ($('coachAllocNote')) $('coachAllocNote').innerHTML = ca_pct > 0
+    ? `<b>${fK(coachShiftCost)}</b> perm salary shifts comp → rec · <b>+${caRecSections}</b> rec sections (+${caRecStudents} students) · <b style="color:var(--green)">${fK(caRecStudents * D.rec.cps * rf)}</b> added rec rev`
+    : '';
+
+  // Kim Klingler note
+  if ($('kimNote')) $('kimNote').innerHTML = kimOn
+    ? `0.5 FTE → <b>+${kimSections}</b> rec sections (+${kimStudents} students) · <b style="color:var(--green)">${fK(kimStudents * D.rec.cps * rf)}</b> added rec rev`
+    : '';
+
+  // --- COMP GROWTH ---
+  const compGrow = +$('compGrow').value;
+  $('d_compGrow').textContent = '+' + compGrow;
+  const growRes = Math.round(compGrow * (D.comp.res / D.comp.ath)); // maintain res/NR ratio
+  const growNR = compGrow - growRes;
+  const totalRes = D.comp.res + growRes;
+  const totalNR = D.comp.nr + growNR;
+
+  // --- COMP REVENUE ---
+  const crRatio = cr / 8; // baseline $8/hr matches Arlington FY26 Tigers 6-10
+  const revPerAth = D.comp.rev / D.comp.ath;
+  const compRes = totalRes * revPerAth * crRatio;
+  const compNR = totalNR * revPerAth * crRatio * (1 + nr) / (1 + 0.15);
+  const totalCompRev = compRes + compNR;
+
+  // --- COMP COSTS ---
+  const tempRed = on('t_gwuAth') ? 0.20 : 0;
+  // Marginal cost: ~1 temp coach per 20 additional athletes
+  const growTempCost = compGrow > 0 ? Math.ceil(compGrow / 20) * (D.comp.temp / 8) : 0; // ~8 temp staff baseline
+  const compPers = (D.comp.perm - coachShiftCost) + (D.comp.temp + growTempCost) * (1 - tempRed);
+  const compOH = compPers * op;
+  const totalCompCost = compPers + compOH;
+
+  // Comp growth note
+  if ($('compGrowNote')) $('compGrowNote').innerHTML = compGrow > 0
+    ? `<b>+${growRes} res / +${growNR} NR</b> → ${totalRes + totalNR} total (peak was 202) · <b style="color:var(--green)">${fK(compGrow * revPerAth * crRatio)}</b> added rev · <b style="color:var(--red)">${fK(growTempCost)}</b> marginal temp cost`
+    : '';
+
+  // --- MGMT ---
+  const mgmtCost = mgmtFTE * D.mgmtPerFTE;
+  const mgmtToRec = mgmtCost * os;
+  const mgmtToComp = mgmtCost * (1 - os);
+  const mgmtSavings = (3 - mgmtFTE) * D.mgmtPerFTE;
+
+  // --- PARTNERSHIPS ---
+  let partRev = 0;
+  const gwuRental = on('t_gwuInc') ? D.gwu.base * gr : 0;
+  partRev += gwuRental;
+  if (on('t_navy')) partRev += D.navy;
+  if (on('t_hs')) partRev += 10000;
+
+  // --- NEW STREAMS ---
+  const bp = on('t_bday') ? +$('bp_r').value * +$('bp_f').value * 12 : 0;
+  const pl = on('t_priv') ? +$('pl_r').value * +$('pl_h').value * 48 : 0;
+  const og = on('t_og') ? +$('og_r').value * +$('og_k').value * +$('og_f').value * 48 : 0;
+  const cl = on('t_clin') ? +$('cl_r').value * +$('cl_k').value * +$('cl_f').value : 0;
+  const ca = on('t_camp') ? +$('ca_r').value * +$('ca_k').value * +$('ca_d').value : 0;
+  const pn = on('t_pno') ? +$('pn_r').value * +$('pn_k').value * +$('pn_f').value : 0;
+  const sp = on('t_spon') ? 15000 : 0;
+  const mr = on('t_merch') ? 12000 : 0;
+  const mt = on('t_meet') ? 20000 : 0;
+  const ct = on('t_coach') ? 8000 : 0;
+  const of_ = on('t_offS') ? 10000 : 0;
+  const af = on('t_aFit') ? 18000 : 0;
+  const opk = on('t_offpeak') ? +$('op_r').value * +$('op_h').value * +$('op_w').value : 0;
+  const newRev = bp + pl + og + cl + ca + pn + sp + mr + mt + ct + of_ + af + opk;
+
+  // --- ENJOY CLASSES (accounting correction — existing excluded revenue) ---
+  const enjoyRev = on('t_enjoyClasses') ? enjoyVal : 0;
+
+  // Mini calcs
+  if ($('bp_c')) $('bp_c').textContent = '= ' + fK(bp) + '/yr';
+  if ($('pl_c')) $('pl_c').textContent = '= ' + fK(pl) + '/yr';
+  if ($('og_c')) $('og_c').textContent = '= ' + fK(og) + '/yr';
+  if ($('cl_c')) $('cl_c').textContent = '= ' + fK(cl) + '/yr';
+  if ($('ca_c')) $('ca_c').textContent = '= ' + fK(ca) + '/yr';
+  if ($('pn_c')) $('pn_c').textContent = '= ' + fK(pn) + '/yr';
+  if ($('op_c')) $('op_c').textContent = '= ' + fK(opk) + '/yr';
+
+  // --- VACANT FTE (loaded with 41% fringe per C-7656-0042) ---
+  const stripVacant = on('t_stripVacant');
+  const vacantLoaded = D.rec.vacantFTE * D.rec.loadedPerInstr; // 3 × $56.5K = $169.5K
+  const vacantAdj = stripVacant ? -vacantLoaded : 0; // remove phantom cost
+  if ($('fillNote')) $('fillNote').innerHTML = fillVacant
+    ? `<b>${fillSections}</b> sections × ${cs} students = <b>${fillStudents}</b> students → <b style="color:var(--green)">${fK(fillStudents * D.rec.cps * rf)}</b> added rev (positions already budgeted — no new cost)`
+    : '';
+
+  // --- COST SAVINGS (flow into gap) ---
+  const vacantSavings = (stripVacant && !fillVacant) ? vacantLoaded : 0;
+  const tempSavings = on('t_gwuAth') ? D.comp.temp * 0.20 : 0;
+  const totalCostSavings = mgmtSavings + vacantSavings + tempSavings;
+
+  // --- TOTALS ---
+  const totalRev = totalRecRev + totalCompRev + D.other + partRev + newRev + enjoyRev;
+  const incRev = totalRev - D.baseline;
+  const pctGain = incRev / D.baseline * 100;
+  const recCost = D.rec.baseCost + mgmtToRec + vacantAdj + coachShiftCost;
+  const recRecov = totalRecRev / recCost;
+  const compRecov = totalCompRev / (totalCompCost + mgmtToComp);
+  const totalImprovement = incRev + totalCostSavings; // revenue gains + cost savings
+  const gapPct = Math.round(totalImprovement / D.dprCut * 100);
+  const gapColor = gapPct >= 100 ? 'var(--green)' : gapPct >= 50 ? 'var(--amber)' : 'var(--red)';
+  const gapCls = gapPct >= 100 ? 'green' : gapPct >= 50 ? 'amber' : 'red';
+
+  // Net Tax Support = total program cost - total program revenue
+  const totalProgramCost = recCost + totalCompCost + mgmtToComp + D.facility;
+  const rawNetTax = totalProgramCost - totalRev;
+  // DPR reconciliation: our FOIA cost build exceeds DPR's presented $2,291,040 by a mystery amount
+  // When toggle is ON, subtract this gap so baseline = DPR's $969,542
+  const baselineCost0 = D.rec.baseCost + 3 * D.mgmtPerFTE * 0.5 + D.comp.perm + D.comp.temp + (D.comp.perm + D.comp.temp) * 0.13 + 3 * D.mgmtPerFTE * 0.5 + D.facility;
+  const baselineRawNetTax = baselineCost0 - D.baseline;
+  const dprReconAdj = baselineRawNetTax - D.dprCut; // mystery gap (~$227K)
+  const applyRecon = on('t_dprReconcile');
+  const netTaxSupport = applyRecon ? rawNetTax - dprReconAdj : rawNetTax;
+  const baselineNetTax = applyRecon ? D.dprCut : baselineRawNetTax;
+  const taxChange = netTaxSupport - baselineNetTax;
+  // Update reconciliation notes
+  if ($('ourCostNote')) $('ourCostNote').textContent = '$' + Math.round(totalProgramCost).toLocaleString();
+  if ($('mysteryNote')) $('mysteryNote').textContent = '$' + Math.round(dprReconAdj).toLocaleString();
+  if ($('dprReconD')) $('dprReconD').textContent = applyRecon ? 'Subtracts $' + Math.round(dprReconAdj).toLocaleString() : 'Off — raw FOIA costs';
+
+  // Pyramid implied fee
+  const yTier = tierMap['yRec'];
+  const yTgt = tierPct[yTier] / 100;
+  const implFee = (D.rec.implCost * yTgt) / (D.rec.students * D.rec.cps);
+  $('impliedNote').innerHTML = `Pyramid implies <b>$${implFee.toFixed(2)}/class</b> for youth rec (Tier ${yTier} @ ${tierPct[yTier]}%)`;
+  $('pyramidNote').innerHTML = `<b>Youth Rec:</b> Tier ${yTier} → ${tierPct[yTier]}% recovery → ~$${implFee.toFixed(2)}/class. <b>Competitive:</b> Tier ${tierMap['comp']} → ${tierPct[tierMap['comp']]}%. <b>Adaptive:</b> Tier ${tierMap['adapt']} → ${tierPct[tierMap['adapt']]}%.`;
+
+  // Waitlist
+  $('waitNote').innerHTML = `<b>${newSlots}</b> new slots from sections + <b>${reintro}</b> from reintro = <b style="color:var(--green)">${newSlots + reintro}</b> of 350–560 waitlisted served → <b style="color:var(--green)">${fK((newSlots + reintro) * D.rec.cps * rf)}</b> incremental rev`;
+
+  // Competitive market bars (annual cost at 20 hrs/wk benchmark)
+  // Your Model at 20hr/wk: rate * 1040 hrs/yr, with volume discount
+  const yourComp20 = cr * 1040 * (1 - vd);
+  const compBars = [
+    { n: 'Your Model', v: yourComp20, c: 'var(--green)', y: true },
+    { n: 'Arlington Now', v: 8345, c: 'var(--red)' },
+    { n: 'Hill\'s Gym*', v: 10200, c: '#94a3b8' },
+    { n: 'St. James (Gym)*', v: 10800, c: '#7c3aed' },
+    { n: 'Dominique Dawes*', v: 9360, c: '#94a3b8' },
+    { n: 'Natl Avg (20hr)', v: 7200, c: '#64748b' },
+    { n: 'Dynamite Gym*', v: 6600, c: '#94a3b8' },
+    { n: 'Capital (20.5hr)', v: 6475, c: '#94a3b8' },
+    { n: 'Capital (16hr)', v: 5851, c: '#94a3b8' },
+    { n: 'Fairfax Gym*', v: 5400, c: '#94a3b8' },
+  ]; // * = Gemini estimate; Capital = ChatGPT verified (2025-26 Team Schedule PDF)
+  const compMax = Math.max(...compBars.map(b => b.v)) * 1.08;
+  $('compMktBars').innerHTML = compBars.map(m => `<div class="mkt-row"><div class="mkt-name${m.y?' you':''}">${m.n}</div><div class="mkt-track"><div class="mkt-fill" style="width:${m.v/compMax*100}%;background:${m.c}">${fK(m.v)}</div></div></div>`).join('');
+
+  // Comp fee table
+  const samples = [
+    { n: 'Cubs JR (6hr)', h: 312, fy: 1720 },
+    { n: 'Tigers 5 (20hr)', h: 1040, fy: 6390 },
+    { n: 'Tigers 6-10 (20hr)', h: 1040, fy: 8345 },
+    { n: 'Xcel Gold (8hr)', h: 416, fy: 3780 },
+    { n: 'Level 4 (12hr)', h: 624, fy: 5650 },
+    { n: 'Level 7-10 (20hr)', h: 1040, fy: 7320 },
+  ];
+  $('compTable').innerHTML = `<tr><th>Level</th><th>FY26</th><th>Model</th><th>Chg</th></tr>` +
+    samples.map(l => {
+      const disc = (l.h / 52) >= 20 ? vd : 0;
+      const prop = l.h * cr * (1 - disc);
+      const chg = ((prop - l.fy) / l.fy * 100).toFixed(0);
+      const clr = prop >= l.fy ? 'var(--green)' : 'var(--red)';
+      return `<tr><td>${l.n}</td><td class="num">${fmt(l.fy)}</td><td class="num" style="color:var(--blue)">${fmt(prop)}</td><td class="num" style="color:${clr}">${chg>0?'+':''}${chg}%</td></tr>`;
+    }).join('');
+
+  // Rec market bars
+  $('mktBars').innerHTML = [
+    { n: 'Your Model', v: rf, c: 'var(--green)', y: true },
+    { n: 'Arlington Now', v: 13.80, c: 'var(--red)' },
+    { n: 'Dynamic', v: 28.75, c: '#94a3b8' },
+    { n: 'YMCA', v: 30, c: '#94a3b8' },
+    { n: 'Little Gym', v: 35, c: '#94a3b8' },
+  ].map(m => `<div class="mkt-row"><div class="mkt-name${m.y?' you':''}">${m.n}</div><div class="mkt-track"><div class="mkt-fill" style="width:${m.v/38*100}%;background:${m.c}">$${m.v.toFixed(2)}</div></div></div>`).join('');
+
+  // === KPIs ===
+  const costSavingsBreakdown = [];
+  if (mgmtSavings > 0) costSavingsBreakdown.push('Mgmt ' + fK(mgmtSavings));
+  if (vacantSavings > 0) costSavingsBreakdown.push('Vacant ' + fK(vacantSavings));
+  if (tempSavings > 0) costSavingsBreakdown.push('Temp ' + fK(tempSavings));
+  const gapRemaining = D.dprCut - Math.max(0, totalImprovement);
+  $('kpis').innerHTML = `
+    <div class="kpi green"><div class="kpi-l">Incremental Revenue</div><div class="kpi-v" style="color:var(--green)">${incRev>=0?'+':''}${fmt(incRev)}</div><div class="kpi-s">${pctGain.toFixed(0)}% above baseline</div></div>
+    <div class="kpi" style="border-left:3px solid #22c55e"><div class="kpi-l">Cost Reductions</div><div class="kpi-v" style="color:#22c55e">${totalCostSavings>0?'-':''}${fmt(totalCostSavings)}</div><div class="kpi-s">${costSavingsBreakdown.join(' + ') || 'None'}</div></div>
+    <div class="kpi amber"><div class="kpi-l">Rec/Adaptive</div><div class="kpi-v" style="color:var(--amber)">${fmt(totalRecRev)}</div><div class="kpi-s">${(recRecov*100).toFixed(0)}% recovery (was 57%)</div></div>
+    <div class="kpi purple"><div class="kpi-l">Competitive</div><div class="kpi-v" style="color:var(--purple)">${fmt(totalCompRev)}</div><div class="kpi-s">${(compRecov*100).toFixed(0)}% recovery (was 66%)</div></div>
+    <div class="kpi ${netTaxSupport <= 0 ? 'green' : gapCls}"><div class="kpi-l">${netTaxSupport <= 0 ? 'Net Tax <b style="color:var(--green)">Surplus</b>' : 'Net Tax Support'}</div><div class="kpi-v" style="color:${netTaxSupport <= 0 ? 'var(--green)' : gapColor}">${netTaxSupport <= 0 ? '<b style="color:var(--green)">+' + fmt(Math.abs(netTaxSupport)) + '</b>' : fmt(netTaxSupport)}</div><div class="kpi-s">${taxChange<-50?'<span style="color:var(--green)">'+fK(Math.abs(taxChange))+' less</span>':taxChange>50?'<span style="color:var(--red)">'+fK(taxChange)+' more</span>':'no change'} vs baseline · ${gapPct}% of $970K offset</div></div>`;
+
+  // === STACKED BAR ===
+  if (stackObj) stackObj.destroy();
+  stackObj = new Chart($('stackChart'), { type: 'bar',
+    data: { labels: ['DPR Baseline', 'Your Scenario'], datasets: [
+      { label: 'Rec/Adaptive', data: [D.rec.rev, totalRecRev], backgroundColor: '#0d9488' },
+      { label: 'Competitive', data: [D.comp.rev, totalCompRev], backgroundColor: '#2563eb' },
+      { label: 'Enjoy Classes', data: [0, enjoyRev], backgroundColor: '#f43f5e' },
+      { label: 'Partnerships', data: [0, partRev], backgroundColor: '#7c3aed' },
+      { label: 'New Streams', data: [0, newRev], backgroundColor: '#d97706' },
+      { label: 'Other', data: [D.other, D.other], backgroundColor: '#94a3b8' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 9, family: 'Inter' }, color: '#64748b', boxWidth: 8, padding: 6 } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fK(c.raw) } } },
+      scales: { x: { stacked: true, ticks: { font: { size: 10 }, color: '#64748b' }, grid: { display: false } },
+        y: { stacked: true, ticks: { font: { size: 9 }, color: '#94a3b8', callback: v => fK(v) }, grid: { color: '#f1f5f9' } } }
+    }
+  });
+
+  // === COST STACKED BAR ===
+  // Baseline cost segments (before any levers)
+  const blRecOps = D.rec.baseCost; // rec operations excl mgmt
+  const blVacant = D.rec.vacantFTE * D.rec.loadedPerInstr; // vacant positions in budget
+  const blCompPerm = D.comp.perm;
+  const blCompTemp = D.comp.temp;
+  const blCompOH = (D.comp.perm + D.comp.temp) * 0.13; // DPR standard 13%
+  const blMgmt = 3 * D.mgmtPerFTE;
+  const blFacility = D.facility;
+  // Scenario cost segments (respond to levers)
+  const scRecOps = D.rec.baseCost + coachShiftCost; // absorbs shifted comp coach cost
+  const scVacant = stripVacant ? 0 : blVacant; // positions already budgeted — fill only adds capacity, not cost
+  const scCompPerm = D.comp.perm - coachShiftCost; // reduced by shifted amount
+  const scCompTemp = D.comp.temp * (1 - tempRed);
+  const scCompOH = (scCompPerm + scCompTemp) * op;
+  const scMgmt = mgmtFTE * D.mgmtPerFTE;
+  const scFacility = D.facility;
+
+  if (costObj) costObj.destroy();
+  costObj = new Chart($('costChart'), { type: 'bar',
+    data: { labels: ['DPR Baseline', 'Your Scenario'], datasets: [
+      { label: 'Rec Operations', data: [blRecOps, scRecOps], backgroundColor: '#0d9488' },
+      { label: 'Vacant Positions', data: [blVacant, scVacant], backgroundColor: '#f97316' },
+      { label: 'Comp Coaches (Perm)', data: [blCompPerm, scCompPerm], backgroundColor: '#2563eb' },
+      { label: 'Comp Staff (Temp)', data: [blCompTemp, scCompTemp], backgroundColor: '#60a5fa' },
+      { label: 'DPR Overhead', data: [blCompOH, scCompOH], backgroundColor: '#a78bfa' },
+      { label: 'Management', data: [blMgmt, scMgmt], backgroundColor: '#f59e0b' },
+      { label: 'Facility', data: [blFacility, scFacility], backgroundColor: '#94a3b8' },
+    ]},
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 9, family: 'Inter' }, color: '#64748b', boxWidth: 8, padding: 6 } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fK(c.raw) } } },
+      scales: { x: { stacked: true, ticks: { font: { size: 10 }, color: '#64748b' }, grid: { display: false } },
+        y: { stacked: true, ticks: { font: { size: 9 }, color: '#94a3b8', callback: v => fK(v) }, grid: { color: '#f1f5f9' } } }
+    }
+  });
+
+  // === LEVER BAR ===
+  const levers = [];
+  const rfGain = (rf - D.rec.fee) / D.rec.fee * D.rec.rev;
+  if (rfGain > 0) levers.push({ l: 'Rec Fee', v: rfGain, c: '#0d9488' });
+  const capGain = (newSlots + reintro) * D.rec.cps * rf;
+  if (capGain > 0) levers.push({ l: 'New Capacity', v: capGain, c: '#06b6d4' });
+  const fillGain = fillStudents * D.rec.cps * rf;
+  if (fillGain > 0) levers.push({ l: 'Fill Vacant FTE', v: fillGain, c: '#10b981' });
+  const kimGain = kimStudents * D.rec.cps * rf;
+  if (kimGain > 0) levers.push({ l: 'Kim Klingler', v: kimGain, c: '#F9A825' });
+  if (miniRev > 0) levers.push({ l: 'Mini Sessions', v: miniRev, c: '#14b8a6' });
+  if (gwuRecRev > 0) levers.push({ l: 'GWU Athlete Rec', v: gwuRecRev, c: '#059669' });
+  const caRecGain = caRecStudents * D.rec.cps * rf;
+  if (caRecGain > 0) levers.push({ l: 'Coach → Rec', v: caRecGain, c: '#0891b2' });
+  const compGrowRev = compGrow * revPerAth * crRatio;
+  const cRateGain = totalCompRev - D.comp.rev - compGrowRev;
+  if (cRateGain > 0) levers.push({ l: 'Comp Rate', v: cRateGain, c: '#2563eb' });
+  if (compGrowRev > 0) levers.push({ l: 'Comp Growth', v: compGrowRev, c: '#7c3aed' });
+  if (gwuRental > 0) levers.push({ l: 'GWU Rental', v: gwuRental, c: '#7c3aed' });
+  if (on('t_navy')) levers.push({ l: 'Navy', v: D.navy, c: '#a78bfa' });
+  if (enjoyRev > 0) levers.push({ l: 'Enjoy Classes (excl.)', v: enjoyRev, c: '#f43f5e' });
+  if (newRev > 0) levers.push({ l: 'New Programs', v: newRev, c: '#d97706' });
+  if (mgmtSavings > 0) levers.push({ l: 'Mgmt Savings', v: mgmtSavings, c: '#22c55e' });
+  if (vacantSavings > 0) levers.push({ l: 'Vacant FTE Savings', v: vacantSavings, c: '#16a34a' });
+  if (tempSavings > 0) levers.push({ l: 'Temp Staff Savings', v: tempSavings, c: '#15803d' });
+  if (!levers.length) levers.push({ l: 'No changes', v: 0, c: '#e2e8f0' });
+
+  if (leverObj) leverObj.destroy();
+  leverObj = new Chart($('leverChart'), { type: 'bar',
+    data: { labels: levers.map(l => l.l), datasets: [{ data: levers.map(l => l.v), backgroundColor: levers.map(l => l.c), borderRadius: 3, barPercentage: 0.7 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => '+' + fK(c.raw) } } },
+      scales: { x: { ticks: { font: { size: 9 }, color: '#94a3b8', callback: v => fK(v) }, grid: { color: '#f1f5f9' } },
+        y: { ticks: { font: { size: 9, family: 'Inter' }, color: '#64748b' }, grid: { display: false } } }
+    }
+  });
+
+  // === RECOVERY CHART with pyramid target lines ===
+  const recTarget = tierPct[tierMap['yRec']] || 0;
+  const compTarget = tierPct[tierMap['comp']] || 0;
+  if (recovObj) recovObj.destroy();
+  recovObj = new Chart($('recovChart'), { type: 'bar',
+    plugins: [targetLinePlugin],
+    data: { labels: ['Rec/Adaptive', 'Competitive', 'Aquatics (comp)', 'Aquatics (rec)'],
+      datasets: [
+        { label: 'Current', data: [57, 66, 81, 90], backgroundColor: '#e2e8f0', borderRadius: 3 },
+        { label: 'Your Scenario', data: [Math.round(recRecov*100), Math.round(compRecov*100), 81, 90], backgroundColor: '#2563eb', borderRadius: 3 },
+      ]},
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { font: { size: 9, family: 'Inter' }, color: '#64748b', boxWidth: 8 } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw + '%' } },
+        targetLines: { lines: [
+          { barIndex: 0, value: recTarget, color: '#0d9488', label: 'Target ' + recTarget + '%' },
+          { barIndex: 1, value: compTarget, color: '#7c3aed', label: 'Target ' + compTarget + '%' },
+        ]}
+      },
+      scales: { x: { ticks: { font: { size: 9 }, color: '#64748b' }, grid: { display: false } },
+        y: { max: 150, ticks: { font: { size: 9 }, color: '#94a3b8', callback: v => v + '%' }, grid: { color: '#f1f5f9' } } }
+    }
+  });
+}
+
+// ===== BOOT =====
+// Compute baseline from actual browser-snapped slider values so incRev starts at $0
+(function initBaseline() {
+  D.rec.rfBase = +document.getElementById('rf').value; // browser-snapped fee for ratio calc
+  // Baseline uses DPR's actual revenue figures directly — no rounding/snap issues
+  D.baseline = D.rec.rev + D.comp.rev + D.other; // $527,672 + $672,690 + $121,136 = $1,321,498
+})();
+initPyramid();
+calc();
+// Force Chart.js resize after layout settles
+requestAnimationFrame(() => { requestAnimationFrame(() => {
+  [stackObj, costObj, leverObj, recovObj].forEach(c => c && c.resize());
+});});
+window.addEventListener('resize', () => {
+  [stackObj, costObj, leverObj, recovObj].forEach(c => c && c.resize());
+});
+</script>
+</body>
+</html>

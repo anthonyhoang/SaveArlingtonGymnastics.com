@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IG Reel — A Mother's Voice | Save Arlington Gymnastics</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; background: #222;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  .frame {
+    width: 1080px; height: 1920px;
+    background: #0F1B33;
+    position: relative; overflow: hidden;
+    transform: scale(0.45);
+    transform-origin: center center;
+  }
+
+  /* === SLIDES === */
+  .slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; z-index: 1;
+  }
+  .slide.active { opacity: 1; z-index: 10; }
+
+  /* === ANIMATIONS === */
+  @keyframes slamIn {
+    0% { transform: scale(1.8); opacity: 0; }
+    60% { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes slideInLeft {
+    0% { transform: translateX(-60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideInRight {
+    0% { transform: translateX(60px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+  @keyframes growWidth {
+    0% { width: 0; }
+    100% { width: 240px; }
+  }
+
+  /* === SLIDE 0: TITLE — A Mother's Voice === */
+  #slide0 {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+  }
+  #slide0 .sg-label { font-size: 28px; font-weight: 900; color: #F9A825; letter-spacing: 4px; text-transform: uppercase; }
+  #slide0 .program-badge {
+    display: inline-block; border: 3px solid #F9A825; border-radius: 16px;
+    padding: 18px 50px; margin-top: 50px;
+    font-size: 42px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 3px;
+  }
+  #slide0 .program-badge span { color: #F9A825; }
+  #slide0 .title-line { width: 0; height: 6px; background: #F9A825; margin: 50px auto; }
+  #slide0 .title-main { font-size: 120px; font-weight: 900; color: #fff; text-transform: uppercase; line-height: 1.05; text-align: center; }
+  #slide0 .title-main span { color: #F9A825; }
+  #slide0 .title-line2 { width: 0; height: 6px; background: #F9A825; margin: 50px auto; }
+  #slide0 .title-name { font-size: 46px; font-weight: 700; color: #a0a8ba; text-align: center; line-height: 1.4; }
+  #slide0 .title-name strong { color: #fff; font-weight: 900; }
+
+  #slide0.active .sg-label { animation: fadeIn 0.5s ease-out both; }
+  #slide0.active .program-badge { animation: fadeUp 0.6s 0.3s ease-out both; }
+  #slide0.active .title-line { animation: growWidth 0.5s 0.7s ease-out both; }
+  #slide0.active .title-main { animation: fadeUp 0.6s 0.9s ease-out both; }
+  #slide0.active .title-line2 { animation: growWidth 0.5s 1.3s ease-out both; }
+  #slide0.active .title-name { animation: fadeUp 0.5s 1.6s ease-out both; }
+
+  /* === SLIDE 1: HOOK === */
+  #slide1 {
+    background: #C62828;
+  }
+  #slide1 .hook-text { font-size: 100px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; line-height: 1.08; padding: 0 60px; }
+  #slide1 .hook-text .em { color: #F9A825; }
+
+  #slide1.active .hook-text { animation: slamIn 0.6s ease-out both; }
+
+  /* === SLIDE 2: MEET GABRIEL — big smile photo === */
+  #slide2 {
+    background: #000;
+  }
+  #slide2 > img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+  #slide2 .photo-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 80px 60px 80px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    z-index: 2;
+  }
+  #slide2 .photo-name { font-size: 96px; font-weight: 900; color: #fff; text-transform: uppercase; }
+  #slide2 .photo-desc { font-size: 40px; font-weight: 400; color: rgba(255,255,255,0.85); margin-top: 10px; line-height: 1.4; }
+
+  #slide2.active .photo-name { animation: fadeUp 0.6s 0.3s ease-out both; }
+  #slide2.active .photo-desc { animation: fadeUp 0.5s 0.7s ease-out both; }
+
+  /* === AVATAR CAPTION BOX === */
+  .avatar-box {
+    display: flex; align-items: center; gap: 20px; margin-top: 40px;
+    background: rgba(255,255,255,0.08); border-radius: 60px;
+    padding: 12px 36px 12px 12px;
+  }
+  .avatar-box img {
+    width: 88px; height: 88px; border-radius: 50%; object-fit: cover;
+    border: 3px solid #F9A825; flex-shrink: 0;
+  }
+  .avatar-box .avatar-info { display: flex; flex-direction: column; }
+  .avatar-box .avatar-name { font-size: 28px; font-weight: 900; color: #fff; }
+  .avatar-box .avatar-role { font-size: 22px; font-weight: 600; color: #F9A825; }
+
+  /* Dark variant for photo overlays & gold backgrounds */
+  .avatar-box.dark {
+    background: rgba(0,0,0,0.5);
+  }
+
+  /* === QUOTE SLIDES === */
+  .slide-quote-full {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 70px;
+  }
+  .slide-quote-full .qmark { font-size: 180px; color: #F9A825; opacity: 0.4; line-height: 0.8; margin-bottom: 10px; font-family: Georgia, serif; }
+  .slide-quote-full blockquote { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.35; text-align: center; }
+
+  .slide-quote-full.active .qmark { animation: fadeIn 0.5s ease-out both; }
+  .slide-quote-full.active blockquote { animation: fadeUp 0.7s 0.3s ease-out both; }
+  .slide-quote-full.active .avatar-box { animation: fadeUp 0.5s 0.8s ease-out both; }
+
+  /* === PHOTO + QUOTE COMBO SLIDES === */
+  .slide-photoquote {
+    background: #0F1B33;
+  }
+  .slide-photoquote .pq-photo { width: 100%; height: 55%; object-fit: cover; display: block; }
+  .slide-photoquote .pq-text {
+    width: 100%; height: 45%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 50px 70px; text-align: center;
+  }
+  .slide-photoquote .pq-text blockquote { font-size: 44px; font-weight: 700; color: #fff; line-height: 1.35; }
+
+  .slide-photoquote.active .pq-photo { animation: fadeIn 0.5s ease-out both; }
+  .slide-photoquote.active blockquote { animation: fadeUp 0.6s 0.4s ease-out both; }
+  .slide-photoquote.active .avatar-box { animation: fadeUp 0.5s 0.8s ease-out both; }
+
+  /* === PHOTO OVERLAY SLIDES (full bleed image + text overlay) === */
+  .slide-photo-overlay { background: #000; }
+  .slide-photo-overlay > img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+  .slide-photo-overlay .po-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 100px 60px 80px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.92));
+    z-index: 2;
+  }
+  .slide-photo-overlay .po-text { font-size: 48px; font-weight: 700; color: #fff; line-height: 1.35; }
+
+  .slide-photo-overlay.active .po-text { animation: fadeUp 0.6s 0.3s ease-out both; }
+  .slide-photo-overlay.active .avatar-box { animation: fadeUp 0.5s 0.8s ease-out both; }
+
+  /* === SLIDE 7: CONTRAST — County vs Reality === */
+  #slide7 {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 60px;
+  }
+  #slide7 .contrast-label {
+    font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px;
+    margin-bottom: 25px;
+  }
+  .contrast-card {
+    width: 100%; border-radius: 28px; padding: 70px 60px; margin-bottom: 0;
+    text-align: center;
+  }
+  .contrast-card.county {
+    background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.12);
+  }
+  .contrast-card.county .contrast-label { color: #C62828; }
+  .contrast-card.county .contrast-quote { font-size: 58px; font-weight: 900; color: #fff; line-height: 1.25; }
+  .contrast-card.county .contrast-source { font-size: 26px; color: #a0a8ba; margin-top: 20px; font-weight: 400; }
+
+  .contrast-card.reality {
+    background: #F9A825; border: none;
+  }
+  .contrast-card.reality .contrast-label { color: #0F1B33; }
+  .contrast-card.reality .contrast-quote { font-size: 54px; font-weight: 900; color: #0F1B33; line-height: 1.25; }
+
+  .contrast-divider {
+    font-size: 72px; font-weight: 900; color: #C62828;
+    margin: 35px 0;
+  }
+
+  #slide7.active .contrast-card:nth-child(1) { animation: slideInLeft 0.6s ease-out both; }
+  #slide7.active .contrast-divider { animation: slamIn 0.5s 0.5s ease-out both; }
+  #slide7.active .contrast-card:nth-child(3) { animation: slideInRight 0.6s 0.9s ease-out both; }
+
+  /* === SLIDE 10: BEHIND EVERY LINE === */
+  #slide10 {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+    padding: 0 60px;
+  }
+  #slide10 .bel-qmark { font-size: 180px; color: #F9A825; opacity: 0.4; line-height: 0.8; font-family: Georgia, serif; }
+  #slide10 .bel-quote { font-size: 62px; font-weight: 900; color: #fff; text-align: center; line-height: 1.25; margin-top: 20px; }
+  #slide10 .bel-quote span { color: #F9A825; }
+  #slide10.active .bel-qmark { animation: fadeIn 0.5s ease-out both; }
+  #slide10.active .bel-quote { animation: fadeUp 0.7s 0.3s ease-out both; }
+  #slide10.active .avatar-box { animation: fadeUp 0.5s 0.9s ease-out both; }
+
+  /* === SLIDE 11: CTA === */
+  #slide11 {
+    background: linear-gradient(165deg, #1B2A4A 0%, #0F1B33 50%, #0a1220 100%);
+  }
+  #slide11 .cta-main { font-size: 80px; font-weight: 900; color: #fff; text-transform: uppercase; text-align: center; line-height: 1.1; padding: 0 60px; }
+  #slide11 .cta-main span { color: #F9A825; }
+  #slide11 .cta-sub { font-size: 36px; font-weight: 400; color: #a0a8ba; text-align: center; margin-top: 40px; line-height: 1.5; padding: 0 80px; }
+  #slide11 .cta-btn {
+    display: inline-block; background: #F9A825; color: #0F1B33;
+    font-size: 48px; font-weight: 900; padding: 30px 80px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 2px; margin-top: 50px;
+  }
+  #slide11 .cta-links { font-size: 26px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin-top: 40px; }
+  #slide11 .cta-site { font-size: 32px; font-weight: 900; color: #F9A825; margin-top: 15px; }
+
+  #slide11.active .cta-main { animation: slamIn 0.6s ease-out both; }
+  #slide11.active .cta-sub { animation: fadeUp 0.5s 0.5s ease-out both; }
+  #slide11.active .cta-btn { animation: fadeUp 0.5s 0.8s ease-out both, pulse 1.5s 1.6s ease-in-out infinite; }
+  #slide11.active .cta-links { animation: fadeIn 0.4s 1.1s ease-out both; }
+  #slide11.active .cta-site { animation: fadeIn 0.4s 1.3s ease-out both; }
+
+  /* === EXTERNAL CONTROLS === */
+  .controls {
+    position: fixed; top: 20px; right: 20px;
+    display: flex; gap: 10px; z-index: 999;
+  }
+  .ctrl-btn {
+    background: #444; color: #fff; border: none; padding: 10px 24px; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { background: #666; }
+  .ctrl-btn.play { background: #F9A825; color: #0F1B33; }
+  .ctrl-btn.play:hover { background: #e09800; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button class="ctrl-btn play" onclick="startSequence()">&#9654; Play</button>
+  <button class="ctrl-btn" onclick="replaySequence()">&#8634; Replay</button>
+</div>
+
+<div class="frame">
+
+  <!-- SLIDE 0: Title — A Mother's Voice -->
+  <div class="slide active" id="slide0" data-duration="3500">
+    <div class="sg-label">Save Arlington Gymnastics</div>
+    <div class="program-badge">Barcroft <span>Adaptive</span> Gymnastics</div>
+    <div class="title-line"></div>
+    <div class="title-main">A Mother&rsquo;s<br><span>Voice</span></div>
+    <div class="title-line2"></div>
+    <div class="title-name"><strong>Gabriel</strong> &mdash; as told by his mom, Emily Remus</div>
+  </div>
+
+  <!-- SLIDE 1: Hook -->
+  <div class="slide" id="slide1" data-duration="3000">
+    <div class="hook-text">Arlington<br>wants to cut<br>the <span class="em">only</span><br>adaptive<br>gymnastics<br>in Arlington</div>
+  </div>
+
+  <!-- SLIDE 2: Meet Gabriel — big smile -->
+  <div class="slide" id="slide2" data-duration="3200">
+    <img src="gabriel-big-smile-doing-gynmastics.png" alt="Gabriel">
+    <div class="photo-overlay">
+      <div class="photo-name">Meet Gabriel</div>
+      <div class="photo-desc">He has Down Syndrome.<br>Family Gymnastics Night is his favorite event.</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Quote — favorite family event -->
+  <div class="slide slide-quote-full" id="slide3" data-duration="6000">
+    <div class="qmark">&ldquo;</div>
+    <blockquote>This is his favorite family event. All of his brothers come, and our family gets a rare night where each kid is challenged, engaged, and entertained.</blockquote>
+    <div class="avatar-box"><img src="emily-remus.png" alt="Emily Remus"><div class="avatar-info"><span class="avatar-name">Emily Remus</span><span class="avatar-role">Pediatrician &middot; Gabriel&rsquo;s Mom</span></div></div>
+  </div>
+
+  <!-- SLIDE 4: Family photo + volunteers quote -->
+  <div class="slide slide-photoquote" id="slide4" data-duration="5500">
+    <img class="pq-photo" src="gabriel-remus-with-siblings-and-mom.png" alt="Gabriel with family at Barcroft">
+    <div class="pq-text">
+      <blockquote>&ldquo;The volunteers know Gabriel. They provide supports so our family gets a break from being the ones who provide his accommodations.&rdquo;</blockquote>
+      <div class="avatar-box"><img src="emily-remus.png" alt="Emily Remus"><div class="avatar-info"><span class="avatar-name">Emily Remus</span><span class="avatar-role">Pediatrician &middot; Gabriel&rsquo;s Mom</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Running photo — joy -->
+  <div class="slide slide-photo-overlay" id="slide5" data-duration="3200">
+    <img src="gabriel-running-activity-good-motion-at-barcroft.png" alt="Gabriel running at Barcroft">
+    <div class="po-overlay">
+      <div class="po-text">The only adaptive gymnastics program in Arlington County</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Quote — left out -->
+  <div class="slide slide-quote-full" id="slide6" data-duration="5500">
+    <div class="qmark">&ldquo;</div>
+    <blockquote>There are not other programs with adaptive programming. Our kids would just be left out.</blockquote>
+    <div class="avatar-box"><img src="emily-remus.png" alt="Emily Remus"><div class="avatar-info"><span class="avatar-name">Emily Remus</span><span class="avatar-role">Pediatrician &middot; Gabriel&rsquo;s Mom</span></div></div>
+  </div>
+
+  <!-- SLIDE 7: County vs Reality contrast -->
+  <div class="slide" id="slide7" data-duration="5000">
+    <div class="contrast-card county">
+      <div class="contrast-label">The County Manager called it</div>
+      <div class="contrast-quote">&ldquo;Nice to have,<br>but not necessary&rdquo;</div>
+      <div class="contrast-source">FY 2027 Manager&rsquo;s Budget Message, p. 2</div>
+    </div>
+    <div class="contrast-divider">VS</div>
+    <div class="contrast-card reality">
+      <div class="contrast-label">The Reality</div>
+      <div class="contrast-quote">The word &ldquo;adaptive&rdquo; doesn&rsquo;t appear once in the County Manager&rsquo;s Budget Message</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Staff photo + core strength quote -->
+  <div class="slide slide-photoquote" id="slide8" data-duration="5500">
+    <img class="pq-photo" src="gabriel-with-barcroft-staff-doing-floor-exercise-activity.png" alt="Gabriel with Barcroft staff">
+    <div class="pq-text">
+      <blockquote>&ldquo;Gymnastics helps Gabriel improve his core strength and balance &mdash; especially important for kids like him with low tone.&rdquo;</blockquote>
+      <div class="avatar-box"><img src="emily-remus.png" alt="Emily Remus, MD"><div class="avatar-info"><span class="avatar-name">Emily Remus, MD</span><span class="avatar-role">Pediatrician &middot; Gabriel&rsquo;s Mom</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Siblings photo — most vulnerable -->
+  <div class="slide slide-photo-overlay" id="slide9" data-duration="5500">
+    <img src="gabriel-with-siblings-joyful-at-barcroft.png" alt="Gabriel with brothers at Barcroft">
+    <div class="po-overlay">
+      <div class="po-text">&ldquo;In times of hardship, our most vulnerable communities shouldn&rsquo;t be the ones who lose the most.&rdquo;</div>
+      <div class="avatar-box dark" style="margin-top:25px;"><img src="emily-remus.png" alt="Emily Remus"><div class="avatar-info"><span class="avatar-name">Emily Remus</span><span class="avatar-role">Pediatrician &middot; Gabriel&rsquo;s Mom</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Behind every line -->
+  <div class="slide" id="slide10" data-duration="5500">
+    <div class="bel-qmark">&ldquo;</div>
+    <div class="bel-quote">Behind every line on the budget are <span>people whose stories matter</span> &mdash; here are the faces of 4 of them.</div>
+    <div class="avatar-box" style="margin-top:50px;"><img src="emily-remus.png" alt="Emily Remus, MD"><div class="avatar-info"><span class="avatar-name">Emily Remus, MD</span><span class="avatar-role">Pediatrician &middot; Howie Kallum Award Recipient</span></div></div>
+  </div>
+
+  <!-- SLIDE 11: CTA -->
+  <div class="slide" id="slide11" data-duration="99999">
+    <div class="cta-main">Gabriel deserves<br>to keep<br><span>his favorite night</span></div>
+    <div class="cta-sub">Barcroft&rsquo;s adaptive gymnastics is the only<br>program like it in Arlington County.</div>
+    <div class="cta-btn">Help Save It</div>
+    <div class="cta-links">Link in bio + comments</div>
+    <div class="cta-site">savearlingtongymnastics.com</div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+  let timer = null;
+  let isPlaying = false;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function advanceSlide() {
+    if (currentSlide >= slides.length - 1) {
+      clearTimeout(timer);
+      isPlaying = false;
+      return;
+    }
+    const nextIndex = currentSlide + 1;
+    showSlide(nextIndex);
+    const duration = parseInt(slides[nextIndex].getAttribute('data-duration')) || 3000;
+    timer = setTimeout(advanceSlide, duration);
+  }
+
+  function startSequence() {
+    if (isPlaying) return;
+    isPlaying = true;
+    if (currentSlide === 0) {
+      const duration = parseInt(slides[0].getAttribute('data-duration')) || 3000;
+      timer = setTimeout(advanceSlide, duration);
+    } else {
+      advanceSlide();
+    }
+  }
+
+  function replaySequence() {
+    clearTimeout(timer);
+    isPlaying = false;
+    showSlide(0);
+    setTimeout(() => startSequence(), 100);
+  }
+</script>
+</body>
+</html>
