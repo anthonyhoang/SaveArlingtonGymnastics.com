@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save Arlington Gymnastics | 56 Speakers, Two Hearings, One Message</title>
+<meta name="description" content="56 community voices spoke across two historic FY 2027 budget hearings to save Barcroft, Arlington Aerials, Arlington Tigers, adaptive and recreational gymnastics.">
+<meta property="og:title" content="Save Arlington Gymnastics — 56 Speakers">
+<meta property="og:description" content="56 community voices. Two historic hearings. One message: Keep Barcroft open.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://savearlingtongymnastics.com/share-card.png">
+<meta property="og:url" content="https://savearlingtongymnastics.com/save-arlington-gymnastics-speakers.html">
+<link rel="icon" href="https://savearlingtongymnastics.com/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="https://savearlingtongymnastics.com/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="https://savearlingtongymnastics.com/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --dark-navy: #0F1B33;
+    --red: #C62828;
+    --gold: #F9A825;
+    --off-white: #F5F6FA;
+    --light-gray: #E8EBF0;
+    --med-gray: #8A94A6;
+    --dark-text: #1E2532;
+    --teal: #00796B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--dark-text); line-height: 1.6; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--dark-navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  nav .logo { font-weight: 800; font-size: 1.1rem; color: #fff; letter-spacing: 0.5px; text-decoration: none; }
+  nav .logo span { color: var(--gold); }
+  nav .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  nav .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  nav .nav-links a:hover { color: #fff; }
+  nav .nav-cta-petition {
+    display: inline-flex !important; align-items: center; gap: 0.4rem;
+    background: #ED1C24 !important; color: #fff !important;
+    padding: 0.4rem 1rem; border-radius: 4px; font-weight: 700; letter-spacing: 0.3px;
+  }
+  nav .nav-cta-petition:hover { background: #d41920 !important; }
+  .nav-petition-icon { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; border: 1.5px solid #fff; }
+  nav .nav-cta { background: var(--gold); color: var(--dark-navy) !important; padding: 0.4rem 1rem; border-radius: 4px; font-weight: 700; }
+  nav .nav-cta:hover { background: #F57F17; }
+  .hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%); color: #fff; padding: 8rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .hero-content { position: relative; max-width: 800px; margin: 0 auto; }
+  .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 .highlight { color: var(--gold); }
+  .hero .subtitle { font-size: 1.15rem; color: rgba(255,255,255,0.85); margin-bottom: 2rem; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+
+  /* STATS BAR */
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .stat-item { text-align: center; background: rgba(255,255,255,0.08); padding: 1.25rem 0.5rem; border-radius: 10px; }
+  .stat-number { font-size: 2.2rem; font-weight: 800; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
+  /* HERO ACTIONS */
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+  .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 6px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-gold { background: var(--gold); color: var(--dark-navy); }
+  .btn-gold:hover { background: #F57F17; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  /* FEATURED QUOTES CAROUSEL */
+  .quotes-section {
+    background: linear-gradient(160deg, #0a1222 0%, #162035 40%, #1a2744 100%);
+    color: #fff; padding: 4rem 2rem; position: relative;
+  }
+  .quotes-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+  .quotes-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .quotes-container h2 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 2rem; text-align: center; }
+  .quote-carousel { position: relative; height: 280px; display: flex; align-items: center; justify-content: center; }
+  .quote-slide { position: absolute; width: 100%; text-align: center; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .quote-slide.active { opacity: 1; }
+  .quote-text { font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 1.25rem; line-height: 1.4; font-style: italic; color: rgba(255,255,255,0.95); max-width: 700px; }
+  .quote-text::before { content: '\201C'; font-size: 4rem; color: var(--gold); line-height: 0.5; display: block; margin-bottom: 0.75rem; font-style: normal; }
+  .quote-attribution { font-size: 1rem; font-weight: 700; color: #fff; }
+  .quote-role { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s ease; }
+  .dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+  /* SECTIONS */
+  section { padding: 4rem 2rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-title { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+  .section-subtitle { color: var(--med-gray); font-size: 1.05rem; margin-bottom: 2rem; }
+
+  /* FILTER BAR */
+  .voices-filter { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .voices-filter button {
+    background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.12);
+    padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+    color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.2s; font-family: inherit;
+  }
+  .voices-filter button:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+  .voices-filter button.active { background: var(--gold); color: var(--dark-navy); border-color: var(--gold); }
+  .voices-filter-light button {
+    background: #fff; border: 2px solid var(--light-gray);
+    padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+    color: var(--med-gray); cursor: pointer; transition: all 0.2s; font-family: inherit;
+  }
+  .voices-filter-light button:hover { border-color: var(--navy); color: var(--navy); }
+  .voices-filter-light button.active { background: var(--gold); color: var(--dark-navy); border-color: var(--gold); }
+
+  /* VOICE CARDS — dark version (March 24 section) */
+  .voices-section {
+    background: linear-gradient(160deg, #0a1222 0%, #162035 40%, #1a2744 100%);
+    color: #fff; position: relative;
+  }
+  .voices-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+  .voices-section .container { position: relative; z-index: 1; }
+  .voices-section .section-title { color: #fff; }
+  .voices-section .section-subtitle { color: rgba(255,255,255,0.65); }
+
+  .voices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .voice-card {
+    background: rgba(255,255,255,0.06); backdrop-filter: blur(4px);
+    padding: 1.5rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);
+    text-align: left; position: relative; display: flex; flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .voice-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .voice-card .voice-quote {
+    font-size: 0.92rem; color: rgba(255,255,255,0.88); line-height: 1.65;
+    flex: 1; font-style: italic;
+  }
+  .voice-card .voice-quote::before { content: '\201C'; font-size: 2.5rem; color: var(--gold); line-height: 0.5; display: block; margin-bottom: 0.4rem; font-style: normal; }
+  .voice-card .voice-meta { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .voice-card .voice-name { font-weight: 700; color: #fff; font-size: 0.9rem; }
+  .voice-card .voice-bio { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .voice-card .voice-tag {
+    font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.6rem;
+    border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;
+  }
+  .voice-tag.athlete { background: rgba(46,125,50,0.25); color: #81C784; }
+  .voice-tag.parent { background: rgba(21,101,192,0.25); color: #64B5F6; }
+  .voice-tag.alumni { background: rgba(230,81,0,0.25); color: #FFB74D; }
+  .voice-tag.adaptive { background: rgba(123,31,162,0.25); color: #CE93D8; }
+  .voice-tag.coach { background: rgba(198,40,40,0.25); color: #EF9A9A; }
+  .voice-tag.policy { background: rgba(0,105,92,0.25); color: #80CBC4; }
+  .voice-card .voice-watch { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); text-decoration: none; margin-top: 0.75rem; transition: color 0.2s; }
+  .voice-card .voice-watch:hover { color: var(--gold); }
+  .voice-card .voice-watch i { font-size: 0.7rem; }
+
+  /* VOICE CARDS — light version (March 26 section) */
+  .voices-section-light { background: var(--off-white); }
+  .voices-grid-light .voice-card {
+    background: #fff; border: 1px solid var(--light-gray); backdrop-filter: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .voices-grid-light .voice-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  .voices-grid-light .voice-card .voice-quote { color: var(--dark-text); }
+  .voices-grid-light .voice-card .voice-quote::before { color: var(--gold); }
+  .voices-grid-light .voice-card .voice-name { color: var(--navy); }
+  .voices-grid-light .voice-card .voice-bio { color: var(--med-gray); }
+  .voices-grid-light .voice-card .voice-watch { color: var(--med-gray); }
+  .voices-grid-light .voice-card .voice-watch:hover { color: var(--navy); }
+  .voices-grid-light .voice-tag.athlete { background: rgba(46,125,50,0.12); color: #2E7D32; }
+  .voices-grid-light .voice-tag.parent { background: rgba(21,101,192,0.12); color: #1565C0; }
+  .voices-grid-light .voice-tag.adaptive { background: rgba(123,31,162,0.12); color: #7B1FA2; }
+  .voices-grid-light .voice-tag.coach { background: rgba(198,40,40,0.12); color: #C62828; }
+  .voices-grid-light .voice-tag.policy { background: rgba(0,105,92,0.12); color: #00695C; }
+
+  /* DIVIDER */
+  .section-divider {
+    background: var(--navy); padding: 2.5rem 2rem; text-align: center; color: #fff;
+  }
+  .section-divider h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.25rem; }
+  .section-divider p { font-size: 0.95rem; color: rgba(255,255,255,0.65); }
+  .section-divider .divider-badge {
+    display: inline-block; background: var(--gold); color: var(--dark-navy);
+    padding: 0.3rem 0.8rem; border-radius: 4px; font-weight: 800; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;
+  }
+
+  /* CTA */
+  .cta-section { background: var(--red); color: #fff; text-align: center; padding: 4rem 2rem; }
+  .cta-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+  .cta-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .cta-actions .btn { font-size: 1.1rem; padding: 1rem 2.5rem; }
+  .btn-white { background: #fff; color: var(--red); }
+  .btn-white:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5); }
+  .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  /* FOOTER */
+  footer { background: var(--dark-navy); color: rgba(255,255,255,0.5); text-align: center; padding: 2rem; font-size: 0.85rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 0.75rem; flex-wrap: wrap; }
+
+  /* HIDDEN CLASS FOR FILTERING */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    nav .logo { font-size: 0.95rem; }
+    nav .nav-links {
+      display: none; position: absolute; top: 56px; left: 0; right: 0;
+      background: var(--dark-navy); flex-direction: column; gap: 0;
+      padding: 0.25rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    nav .nav-links.open { display: flex; }
+    nav .nav-links a { padding: 0.5rem 1.25rem; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    nav .nav-cta-petition, nav .nav-cta { margin: 0.4rem 1.25rem; text-align: center; padding: 0.5rem 1rem; border-radius: 6px; justify-content: center; }
+    .hamburger { display: block; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .stat-number { font-size: 1.8rem; }
+    .voices-grid { grid-template-columns: 1fr; }
+    .quote-carousel { height: 260px; }
+    .quote-text { font-size: 1.2rem; }
+    section { padding: 3rem 1.25rem; }
+    .cta-section h2 { font-size: 1.8rem; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .cta-actions .btn { width: 100%; max-width: 320px; text-align: center; }
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .voices-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://savearlingtongymnastics.com" class="logo">SAVE ARLINGTON <span>GYMNASTICS</span></a>
+  <div class="nav-links">
+    <a href="https://savearlingtongymnastics.com">Home</a>
+    <a href="#march24">March 24</a>
+    <a href="#march26">March 26</a>
+    <a href="https://www.youtube.com/watch?v=kqr_OrqAObI" target="_blank"><i class="fa-brands fa-youtube"></i> Mar 24 Video</a>
+    <a href="https://www.youtube.com/watch?v=at-yPvdnWJ0" target="_blank"><i class="fa-brands fa-youtube"></i> Mar 26 Video</a>
+    <a href="https://www.change.org/p/save-arlington-gymnastics-stop-cutting-aerials-tigers-rec-barcroft" target="_blank" class="nav-cta-petition"><img src="change-org-avatar-logo.png" alt="" class="nav-petition-icon">Sign the Petition</a>
+  </div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>56 Voices. One <span class="highlight">Message.</span></h1>
+    <p class="subtitle">Across two historic FY 2027 budget hearings, 56 members of the Arlington community stepped to the microphone to fight for Barcroft, Aerials, Tigers, adaptive and rec gymnastics. These are their stories.</p>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">56</div>
+        <div class="stat-label">Speakers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Hearings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6,320+</div>
+        <div class="stat-label">Petition Sigs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1,000+</div>
+        <div class="stat-label">Emails Sent</div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#march24" class="btn btn-gold">Read Their Stories</a>
+      <a href="https://www.change.org/p/save-arlington-gymnastics-stop-cutting-aerials-tigers-rec-barcroft" target="_blank" class="btn btn-outline">Sign the Petition</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED QUOTES CAROUSEL -->
+<section class="quotes-section">
+  <div class="quotes-container">
+    <h2><i class="fa-solid fa-quote-left" style="margin-right:0.5rem;"></i> Voices That Moved a Community</h2>
+    <div class="quote-carousel">
+      <div class="quote-slide active">
+        <div class="quote-text">It's not a luxury program. It's a lifeline.</div>
+        <div class="quote-attribution">Dr. Tommy Jones</div>
+        <div class="quote-role">Boxing room veteran, 12 years training</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">Gymnastics is 33% of my life. I sleep, I do school, and I do gymnastics.</div>
+        <div class="quote-attribution">Isla Polidor</div>
+        <div class="quote-role">Level 5 Aerials gymnast, age 10</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">We aren't here to fight. We're here to fix.</div>
+        <div class="quote-attribution">Rocco Giambalvo</div>
+        <div class="quote-role">Parent of 3 gymnasts</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">When you close Barcroft, you don't just lose a gym. You lose the bridge between those kids and a better future.</div>
+        <div class="quote-attribution">Mike James</div>
+        <div class="quote-role">Barcroft boxing room advocate, 18 years</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">Closing this program doesn't create a transition, it creates a void.</div>
+        <div class="quote-attribution">Kari Garcia</div>
+        <div class="quote-role">AAG Boosters President</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">Gymnastics is just 1% of this budget, but it is 100% of my day-to-day.</div>
+        <div class="quote-attribution">Anna Bonitez</div>
+        <div class="quote-role">Full-time recreational gymnastics coach</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">The children are worth it. Please do the right thing.</div>
+        <div class="quote-attribution">Jenni Hogan</div>
+        <div class="quote-role">Former county coach (2008&ndash;2020)</div>
+      </div>
+      <div class="quote-slide">
+        <div class="quote-text">Barcroft is not just a place we go to train. It's a place we've grown up in.</div>
+        <div class="quote-attribution">15-year-old Tigers Gymnast</div>
+        <div class="quote-role">Barcroft since age 5, State Champion</div>
+      </div>
+    </div>
+    <div class="carousel-dots">
+      <div class="dot active" onclick="goToSlide(0)"></div>
+      <div class="dot" onclick="goToSlide(1)"></div>
+      <div class="dot" onclick="goToSlide(2)"></div>
+      <div class="dot" onclick="goToSlide(3)"></div>
+      <div class="dot" onclick="goToSlide(4)"></div>
+      <div class="dot" onclick="goToSlide(5)"></div>
+      <div class="dot" onclick="goToSlide(6)"></div>
+      <div class="dot" onclick="goToSlide(7)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCH 24 SECTION — dark bg like Community Voices -->
+<section class="voices-section" id="march24">
+  <div class="container">
+    <div class="section-title">March 24, 2026</div>
+    <div class="section-subtitle">The Night 162 Showed Up &mdash; an unprecedented community turnout made history at the FY 2027 budget hearing.</div>
+
+    <div class="voices-filter" id="march24-filters">
+      <button class="active" onclick="filterCards('march24', 'all', this)">All <span style="opacity:0.6">(27)</span></button>
+      <button onclick="filterCards('march24', 'parent', this)">Parents</button>
+      <button onclick="filterCards('march24', 'athlete', this)">Athletes</button>
+      <button onclick="filterCards('march24', 'coach', this)">Coaches</button>
+      <button onclick="filterCards('march24', 'adaptive', this)">Adaptive</button>
+      <button onclick="filterCards('march24', 'policy', this)">Policy</button>
+    </div>
+
+    <div class="voices-grid" id="march24-cards"></div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="divider-badge">Carryover Hearing</div>
+  <h3>They Came Back</h3>
+  <p>When one hearing wasn't enough, the community returned with even more intensity.</p>
+</div>
+
+<!-- MARCH 26 SECTION — light bg for contrast -->
+<section class="voices-section-light" id="march26">
+  <div class="container">
+    <div class="section-title">March 26, 2026</div>
+    <div class="section-subtitle">The Carryover &mdash; speakers from March 24 who were unable to present returned with even more urgency.</div>
+
+    <div class="voices-filter voices-filter-light" id="march26-filters">
+      <button class="active" onclick="filterCards('march26', 'all', this)">All <span style="opacity:0.6">(28)</span></button>
+      <button onclick="filterCards('march26', 'parent', this)">Parents</button>
+      <button onclick="filterCards('march26', 'athlete', this)">Athletes</button>
+      <button onclick="filterCards('march26', 'coach', this)">Coaches</button>
+      <button onclick="filterCards('march26', 'adaptive', this)">Adaptive</button>
+      <button onclick="filterCards('march26', 'policy', this)">Policy</button>
+    </div>
+
+    <div class="voices-grid voices-grid-light" id="march26-cards"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>The Community Has Spoken.</h2>
+  <p>56 speakers. Two hearings. Thousands of emails and petition signatures. Now it's time for the Arlington County Board to listen.</p>
+  <div class="cta-actions">
+    <a href="https://www.change.org/p/save-arlington-gymnastics-stop-cutting-aerials-tigers-rec-barcroft" target="_blank" class="btn btn-white">Sign the Petition</a>
+    <a href="https://savearlingtongymnastics.com" class="btn btn-outline-white">Visit SaveArlingtonGymnastics.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>Save Arlington Gymnastics &mdash; 56 speakers across two historic budget hearings</div>
+  <div class="footer-links">
+    <a href="https://savearlingtongymnastics.com">Home</a>
+    <a href="https://www.youtube.com/watch?v=kqr_OrqAObI" target="_blank">March 24 Hearing</a>
+    <a href="https://www.youtube.com/watch?v=at-yPvdnWJ0" target="_blank">March 26 Hearing</a>
+    <a href="https://www.change.org/p/save-arlington-gymnastics-stop-cutting-aerials-tigers-rec-barcroft" target="_blank">Petition</a>
+  </div>
+</footer>
+
+<script>
+// SPEAKER DATA
+const march24Speakers = [
+  { name: "Julia Olree", bio: "Aerials Parents Association Treasurer, 18-year resident", quote: "The proposed impact is $969,000, less than 2% of DPR's $65M budget.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=4291s", category: "parent" },
+  { name: "Nicky Polidor", bio: "Parent of Arlington Aerials gymnast", quote: "Our family's joy and memories are rooted in this community center.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=4870s", category: "parent" },
+  { name: "Laurel Braverman", bio: "Mother of adaptive gymnast, Tigers program", quote: "The adaptive program has changed my son's entire life and confidence.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=5516s", category: "adaptive" },
+  { name: "Liz Rugaber", bio: "32-year Arlington resident, Maywood", quote: "High value, low-cost programs. That is the sweet spot for government services.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=9484s", category: "parent" },
+  { name: "Sierra Frischknecht", bio: "Maywood resident, parent of 4", quote: "She kept crying and saying she wanted to go back to the place where the teachers were nice.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=9609s", category: "parent" },
+  { name: "Alex Munoz", bio: "Father of 2 Tigers gymnasts, non-resident", quote: "My sons didn't just lose a team, they lost a community.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7364s", category: "parent" },
+  { name: "Alexandra Olree", bio: "Young Aerials gymnast, 8 years old", quote: "I love gymnastics because it makes me happy and strong.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=4840s", category: "athlete" },
+  { name: "Isla Polidor", bio: "Level 5 Aerials gymnast, age 10", quote: "Gymnastics is 33% of my life. I sleep, I do school, and I do gymnastics.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=4939s", category: "athlete" },
+  { name: "Dean Munoz", bio: "Level 5 Tigers gymnast", quote: "I want to keep doing gymnastics with my friends at Barcroft.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7494s", category: "athlete" },
+  { name: "Jordan Christofek", bio: "Barcroft Tigers gymnast", quote: "Barcroft is where I learned to be brave and believe in myself.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7585s", category: "athlete" },
+  { name: "Lucy Lyons", bio: "Arlington Aerials gymnast", quote: "My teammates are like my second family.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7712s", category: "athlete" },
+  { name: "Unnamed Tigers Gymnast", bio: "15 years old, at Barcroft since age 5, state champion", quote: "Barcroft is not just a place we go to train. It's a place we've grown up in.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7945s", category: "athlete" },
+  { name: "Ellie Kravitz", bio: "Barcroft gymnast", quote: "I'm so grateful for the coaches who believe in me every single day.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=9825s", category: "athlete" },
+  { name: "Kaia Brown", bio: "16 years old, Aerials for 7 years, bronze to platinum level", quote: "When I was about nine, my mom finally got me into the Barcroft recreational classes.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=11282s", category: "athlete" },
+  { name: "Rowan Wilson", bio: "Arlington Aerials gymnast", quote: "This sport taught me discipline and perseverance.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=7088s", category: "athlete" },
+  { name: "Ruth Wilson", bio: "Barcroft team member", quote: "The community here is unlike anywhere else I've trained.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=11465s", category: "athlete" },
+  { name: "Kirsten Braun", bio: "Aerials gymnast", quote: "My coach believes in me even when I don't believe in myself.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=12924s", category: "athlete" },
+  { name: "Alex Marvick", bio: "Gymnastics program supporter", quote: "This program changed the trajectory of my athletic career.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=11991s", category: "athlete" },
+  { name: "Level 10 Gymnast", bio: "8-year Tiger, 2x nationals finalist, future West Point athlete", quote: "Next year, I will compete for the United States Military Academy at West Point.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=13723s", category: "athlete" },
+  { name: "Diego Deville Lozano", bio: "Coach with 30+ years experience", quote: "To think that gymnastics is merely a hobby is to misunderstand the sport entirely.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=10334s", category: "coach" },
+  { name: "Unnamed 36-Year Coach", bio: "Arlington gymnastics coach for 36 years", quote: "Gymnastics has high demand, consistent cash flow, and established infrastructure.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=13294s", category: "coach" },
+  { name: "Kassandra Lopez", bio: "Part-time coach, former JO national team member", quote: "The fight, grit, and resilience you're seeing in this room — that is the epitome of gymnastics.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=14564s", category: "coach" },
+  { name: "Rebecca Hantman", bio: "17-year Barcroft coach", quote: "Over 17 years, I've witnessed thousands of kids come through our program.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=14164s", category: "coach" },
+  { name: "Dr. Jennifer Lager", bio: "Clinical psychologist, sport psychology specialist, Aerials parent", quote: "These programs actively support not only physical development but also good mental health.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=6906s", category: "adaptive" },
+  { name: "Amelia Buczek", bio: "Junior in high school, Barcroft adaptive program", quote: "This program gave me confidence and a community when I needed it most.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=13858s", category: "adaptive" },
+  { name: "Belen Berhanu", bio: "13 years old, Level 6 Aerials, immigrated at age 4", quote: "When I stepped into the gym for the first time at 4 years old, I felt a feeling more than happiness.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=14040s", category: "athlete" },
+  { name: "Megan Powers", bio: "Budget and policy advocate, DPR parent", quote: "The numbers show this program is both beloved and essential.", youtube: "https://www.youtube.com/watch?v=kqr_OrqAObI&t=9349s", category: "policy" }
+];
+
+const march26Speakers = [
+  { name: "Dr. Tommy Jones", bio: "Boxing room veteran, 12 years training", quote: "It's not a luxury program. It's a lifeline.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=180s", category: "parent" },
+  { name: "Mike James", bio: "Barcroft boxing room advocate, 18 years", quote: "When you close Barcroft, you don't just lose a gym. You lose the bridge between those kids and a better future.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=299s", category: "parent" },
+  { name: "Patricia Stasco", bio: "Parent of 3 gymnasts, 17-year resident", quote: "There is not another option like it in Arlington or neighboring jurisdictions.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=450s", category: "parent" },
+  { name: "Charlotte Malerich", bio: "South Arlington community advocate", quote: "South Arlington families depend on this facility for equity and access.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=1297s", category: "parent" },
+  { name: "Kari Garcia", bio: "AAG Boosters President, 10 years involved", quote: "Closing this program doesn't create a transition, it creates a void.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=1490s", category: "parent" },
+  { name: "Rocco Giambalvo", bio: "Parent of 3 gymnasts since 2016", quote: "We aren't here to fight. We're here to fix.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=1663s", category: "parent" },
+  { name: "Anthony Hoang", bio: "Father of 2 gymnasts, attended every meeting", quote: "Over a thousand emails sent. Hundreds of ideas on how to fix this program.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=2247s", category: "parent" },
+  { name: "Tia Alfred", bio: "Budget priorities advocate", quote: "A budget is more than numbers. It is a reflection of those priorities.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=2453s", category: "policy" },
+  { name: "Erin Lester", bio: "Former D1 gymnast, parent of 2", quote: "We chose Barcroft for many reasons. All other facilities are 30 minutes away.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=2657s", category: "parent" },
+  { name: "Joseph Bookbinder", bio: "Gymnastics aunt and taxpayer", quote: "I originally got involved to save her passion from the chopping block.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=3785s", category: "parent" },
+  { name: "Mike Rosenberger", bio: "Gymnastics and boxing advocate", quote: "Youth may find belonging at Barcroft in few other places in the community.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=4152s", category: "policy" },
+  { name: "Bethany Hoang", bio: "Mother of 2 gymnasts", quote: "DPR upper management has left millions of dollars on the table.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=6652s", category: "parent" },
+  { name: "Samantha Thomas", bio: "Adult gymnastics advocate", quote: "Barcroft could easily implement a robust class structure for adults.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=894s", category: "parent" },
+  { name: "Jake Frishknecht", bio: "Parent and community advocate", quote: "These areas are safe havens and third places.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=1174s", category: "parent" },
+  { name: "Janna Smith", bio: "Alumni, gymnast at Barcroft since 2007", quote: "I was a gymnast at Barcroft. I started working there in 2007.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=2842s", category: "athlete" },
+  { name: "Jack Ezzelle", bio: "Junior at Wakefield, 13-year gymnast, Arlington Tiger", quote: "I've been doing gymnastics at Barcroft for 13 years and with the Tigers for 11.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5086s", category: "athlete" },
+  { name: "Young Gymnast", bio: "Youth athlete, passionate advocate", quote: "We will lose a place where we grow, learn confidence, and feel like we belong.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=4964s", category: "athlete" },
+  { name: "Youth Petition Leader", bio: "Young gymnast, petition organizer", quote: "6,000 signatures... the people of Arlington believe in kids who might be the next Simone Biles.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5090s", category: "athlete" },
+  { name: "Anna Bonitez", bio: "Full-time recreational gymnastics coach", quote: "Gymnastics is just 1% of this budget, but it is 100% of my day-to-day.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=1868s", category: "coach" },
+  { name: "Sarah Yue", bio: "Parent, reading for Coach Vanessa Cox (18.5 years)", quote: "My daughter with selective mutism found her place of safety on the Aerials team.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=4678s", category: "coach" },
+  { name: "Jeff Farr", bio: "Parent, Arlington Tigers level 9", quote: "This program is giving my child skills and resilience for life.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5836s", category: "parent" },
+  { name: "Jenni Hogan", bio: "Former county coach (2008–2020), started Empower Kids", quote: "The children are worth it. Please do the right thing.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=6850s", category: "coach" },
+  { name: "Selin Hur", bio: "Adaptive program advocate", quote: "The adaptive program has changed my child's life in profound ways.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=3985s", category: "adaptive" },
+  { name: "Hatty Hoang", bio: "Barcroft adaptive gymnastics parent", quote: "This program is the only place where my child truly thrives.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=4854s", category: "adaptive" },
+  { name: "Dr. Julia Aziz", bio: "Medical perspective, 6-year-old adaptive gymnast parent", quote: "Speaking from both medical and parenting perspectives in support of the program.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5078s", category: "adaptive" },
+  { name: "John MacKinnon", bio: "Gymnastics and boxing advocate", quote: "These programs build character and opportunity in ways nothing else can.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5286s", category: "policy" },
+  { name: "David Martell", bio: "Cherrydale Library, multi-facility advocate", quote: "Keeping the gymnastics program open is crucial to Arlington's community promise.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=5462s", category: "policy" },
+  { name: "Bernie Berne", bio: "DPR accountability advocate", quote: "We need leadership that invests in our youth, not abandons them.", youtube: "https://www.youtube.com/watch?v=at-yPvdnWJ0&t=6272s", category: "policy" }
+];
+
+// RENDER CARDS
+function createVoiceCard(speaker) {
+  const card = document.createElement('div');
+  card.className = 'voice-card';
+  card.setAttribute('data-category', speaker.category);
+  const tagLabel = speaker.category.charAt(0).toUpperCase() + speaker.category.slice(1);
+  card.innerHTML = `
+    <div class="voice-quote">${speaker.quote}</div>
+    <div class="voice-meta">
+      <div>
+        <div class="voice-name">${speaker.name}</div>
+        <div class="voice-bio">${speaker.bio}</div>
+      </div>
+      <span class="voice-tag ${speaker.category}">${tagLabel}</span>
+    </div>
+    <a href="${speaker.youtube}" target="_blank" class="voice-watch"><i class="fa-brands fa-youtube"></i> Watch testimony</a>
+  `;
+  return card;
+}
+
+function renderAll() {
+  const m24 = document.getElementById('march24-cards');
+  const m26 = document.getElementById('march26-cards');
+  march24Speakers.forEach(s => m24.appendChild(createVoiceCard(s)));
+  march26Speakers.forEach(s => m26.appendChild(createVoiceCard(s)));
+}
+
+// FILTER
+function filterCards(date, category, btn) {
+  const container = document.getElementById(date + '-cards');
+  const filterBar = document.getElementById(date + '-filters');
+  filterBar.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  container.querySelectorAll('.voice-card').forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+// QUOTE CAROUSEL
+let currentQuote = 0;
+const totalQuotes = 8;
+
+function goToSlide(index) {
+  currentQuote = index;
+  updateCarousel();
+}
+
+function updateCarousel() {
+  const slides = document.querySelectorAll('.quote-slide');
+  const dots = document.querySelectorAll('.dot');
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    dots[i].classList.remove('active');
+  });
+  slides[currentQuote].classList.add('active');
+  dots[currentQuote].classList.add('active');
+}
+
+function nextQuote() {
+  currentQuote = (currentQuote + 1) % totalQuotes;
+  updateCarousel();
+}
+
+setInterval(nextQuote, 6000);
+
+document.addEventListener('DOMContentLoaded', renderAll);
+</script>
+</body>
+</html>

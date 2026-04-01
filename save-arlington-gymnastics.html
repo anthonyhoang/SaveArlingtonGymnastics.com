@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Save Arlington Gymnastics | A Coalition for Barcroft, Adaptive, Rec, Aerials, Tigers, Wakefield, W&amp;L &amp; Yorktown</title>
-<meta name="description" content="Arlington County proposes closing Barcroft Sports &amp; Fitness Center and eliminating every gymnastics program it houses — adaptive programs for children with disabilities, recreational classes, Arlington Aerials, and Arlington Tigers. Eight communities. One facility. Sign the petition. Take action before March 24, 2026.">
+<meta name="description" content="Arlington County proposes closing Barcroft Sports &amp; Fitness Center and eliminating every gymnastics program it houses — adaptive programs for children with disabilities, recreational classes, Arlington Aerials, and Arlington Tigers. Eight communities. One facility. 56 speakers across two historic hearings. Sign the petition. Budget adoption vote: April 22, 2026.">
 <meta property="og:title" content="Save Arlington Gymnastics">
 <meta property="og:description" content="Arlington County wants to close Barcroft and eliminate every gymnastics program — adaptive, rec, Aerials, Tigers. Eight communities, one coalition. Sign the petition.">
 <meta property="og:type" content="website">
@@ -145,7 +145,7 @@
   .hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
   /* HERO */
-  .hero { background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%); color: #fff; padding: 8rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero { background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy) 100%); color: #fff; padding: 10rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
   .hero-content { position: relative; max-width: 800px; margin: 0 auto; }
   .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.75rem; }
@@ -1231,17 +1231,48 @@
   <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
 </nav>
 
-<!-- ANNOUNCEMENT BANNER -->
-<a href="#gym-support" id="announce-banner" style="display:block; background:var(--gold); color:var(--dark-navy); text-align:center; padding:0.45rem 1rem; font-family:'Poppins',sans-serif; font-size:0.8rem; font-weight:700; text-decoration:none; margin-top:56px; letter-spacing:0.3px;">
-  <span style="background:var(--dark-navy); color:#fff; font-size:0.6rem; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:0.15rem 0.5rem; border-radius:3px; margin-right:0.5rem;">NEW</span>
-  Local gyms speak out &mdash; Dynamic Gymnastics &amp; Fairfax Gymnastics Academy send letters to the County Board
-  <span style="margin-left:0.4rem;">&darr;</span>
-</a>
+<!-- ANNOUNCEMENT BAR -->
+<style>
+  @keyframes announcePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .announce-bar { position:fixed; top:56px; left:0; right:0; z-index:999; background:linear-gradient(90deg, #F9A825, #FFD54F, #F9A825); border-bottom:2px solid rgba(0,0,0,0.15); padding:0.45rem 1rem; overflow-x:auto; white-space:nowrap; text-align:center; box-shadow:0 2px 12px rgba(249,168,37,0.3); }
+  .announce-bar .announce-inner { display:inline-flex; align-items:center; gap:1.75rem; font-family:'Poppins',sans-serif; font-size:0.78rem; }
+  .announce-bar a { display:inline-flex; align-items:center; gap:0.4rem; color:#1a1a2e; text-decoration:none; font-weight:600; transition:opacity 0.2s; }
+  .announce-bar a:hover { opacity:0.7; }
+  .announce-bar .announce-icon { animation: announcePulse 2s ease-in-out infinite; font-size:0.9rem; }
+  .announce-bar .announce-new { background:#E53935; color:#fff; font-size:0.55rem; font-weight:800; padding:0.15rem 0.45rem; border-radius:3px; letter-spacing:0.5px; animation: announcePulse 1.5s ease-in-out infinite; }
+  .announce-bar .announce-sep { color:rgba(0,0,0,0.2); font-weight:300; }
+  .announce-bar .announce-arrow { font-weight:800; margin-left:0.15rem; }
+</style>
+<div class="announce-bar">
+  <div class="announce-inner">
+    <a href="#whats-new">
+      <span class="announce-new">NEW APP</span>
+      <span class="announce-icon">&#128736;</span>
+      <span><strong>Board Scenario Planner</strong> &mdash; evaluate 50+ solutions in real time</span>
+      <span class="announce-arrow">&darr;</span>
+    </a>
+    <span class="announce-sep">|</span>
+    <a href="#whats-new">
+      <span class="announce-icon">&#128202;</span>
+      <span><strong>DPR Data analysis</strong> &mdash; did they show the full picture?</span>
+      <span class="announce-arrow">&darr;</span>
+    </a>
+    <span class="announce-sep">|</span>
+    <a href="#whats-new">
+      <span class="announce-icon">&#127909;</span>
+      <span><strong>Gunston students speak out</strong> &mdash; watch the video</span>
+      <span class="announce-arrow">&darr;</span>
+    </a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="urgency">BUDGET HEARING: MARCH 24, 2026</div>
+    <div class="urgency">56 SPEAKERS. TWO HEARINGS. NOW: THE BUDGET VOTE.</div>
     <h1>Save Arlington <span class="highlight">Gymnastics</span></h1>
     <div class="coalition-strip">
       <span class="coalition-label">A Coalition For</span>
@@ -1256,7 +1287,7 @@
         <span>Yorktown</span>
       </div>
     </div>
-    <p class="subtitle">Arlington County wants to close <a href="https://www.arlingtonva.us/Government/Departments/Parks-Recreation/Locations/Fitness/Barcroft-Sports-Fitness-Center" style="color:var(--gold);text-decoration:underline">Barcroft Sports &amp; Fitness Center</a> and eliminate every gymnastics program that calls it home &mdash; adaptive programs for children with disabilities, recreational classes, Arlington Aerials, and Arlington Tigers. Eight communities. One facility. <span id="days-left"></span> days to save it all.</p>
+    <p class="subtitle">Arlington County wants to close <a href="https://www.arlingtonva.us/Government/Departments/Parks-Recreation/Locations/Fitness/Barcroft-Sports-Fitness-Center" style="color:var(--gold);text-decoration:underline">Barcroft Sports &amp; Fitness Center</a> and eliminate every gymnastics program that calls it home &mdash; adaptive programs for children with disabilities, recreational classes, Arlington Aerials, and Arlington Tigers. Eight communities. One facility. 56 speakers across two hearings. Budget adoption vote: April 22.</p>
     <!-- CHANGE.ORG HERO CTA -->
     <div class="hero-petition-box">
       <div class="hero-petition-header">
@@ -1294,6 +1325,121 @@
     <div class="hero-actions">
       <a href="#act" class="btn btn-gold">Take Action Now</a>
       <a href="#testimonials" class="btn btn-outline">Share Your Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHAT'S NEW — 3 content pieces ═══════ -->
+<style>
+  .wn-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; overflow:hidden; text-decoration:none; display:flex; flex-direction:column; transition:all 0.3s ease; }
+  .wn-card:hover { background:rgba(255,255,255,0.08); border-color:rgba(249,168,37,0.3); transform:translateY(-2px); }
+  .wn-card .wn-header { display:flex; align-items:center; gap:0.75rem; padding:1rem 1.25rem; border-bottom:1px solid rgba(255,255,255,0.06); flex-wrap:wrap; }
+  .wn-card .wn-badge { display:inline-flex; align-items:center; gap:0.3rem; background:rgba(249,168,37,0.12); color:var(--gold); font-family:'Poppins',sans-serif; font-size:0.55rem; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:3px; border:1px solid rgba(249,168,37,0.25); }
+  .wn-card .wn-title { font-family:'Poppins',sans-serif; font-weight:700; font-size:0.9rem; color:#fff; }
+  .wn-card .wn-img { width:100%; aspect-ratio:16/9; overflow:hidden; }
+  .wn-card .wn-img img { width:100%; height:100%; object-fit:cover; }
+  /* App-style window chrome */
+  .wn-app-frame { margin:1rem 1.25rem 0; border-radius:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+  .wn-app-titlebar { background:linear-gradient(180deg, #3a3a3a, #2a2a2a); padding:0.5rem 0.75rem; display:flex; align-items:center; gap:0.5rem; }
+  .wn-app-dots { display:flex; gap:5px; }
+  .wn-app-dots span { width:10px; height:10px; border-radius:50%; }
+  .wn-app-dots .dot-red { background:#ff5f57; }
+  .wn-app-dots .dot-yellow { background:#febc2e; }
+  .wn-app-dots .dot-green { background:#28c840; }
+  .wn-app-url { flex:1; background:rgba(255,255,255,0.08); border-radius:4px; padding:0.2rem 0.6rem; font-size:0.65rem; color:rgba(255,255,255,0.5); font-family:monospace; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .wn-app-screen { width:100%; }
+  .wn-app-screen img { width:100%; display:block; }
+  .wn-card .wn-body { padding:1.25rem; flex:1; display:flex; flex-direction:column; }
+  .wn-card .wn-body h3 { font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem; color:#fff; line-height:1.35; margin:0 0 0.5rem; }
+  .wn-card .wn-body p { font-size:0.8rem; color:rgba(255,255,255,0.6); line-height:1.55; margin:0 0 0.75rem; }
+  .wn-card .wn-meta { font-size:0.72rem; color:rgba(255,255,255,0.35); margin-top:auto; }
+  .wn-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media (max-width: 768px) { .wn-grid { grid-template-columns:1fr !important; } }
+</style>
+<section id="whats-new" style="background:linear-gradient(135deg, #0F1B33, #1a1a2e); padding:3rem 1.5rem; scroll-margin-top:110px;">
+  <div class="container" style="max-width:960px;">
+    <div style="text-align:center; margin-bottom:0.5rem;">
+      <span style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(249,168,37,0.15); color:var(--gold); font-family:'Poppins',sans-serif; font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:0.35rem 1rem; border-radius:4px; border:1px solid rgba(249,168,37,0.3);">&#9733; Just Published</span>
+    </div>
+    <h2 class="section-title" style="color:#fff; margin-bottom:0.3rem;">What&rsquo;s New</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.6); margin-bottom:2.5rem;">New tools, new analysis, new voices &mdash; the community isn&rsquo;t waiting.</p>
+
+    <!-- 1. BOARD SCENARIO TOOL (featured, full width) -->
+    <a href="tool/" target="_blank" class="wn-card" style="margin-bottom:1.5rem;">
+      <div class="wn-header">
+        <span class="wn-badge" style="background:rgba(233,30,30,0.12); color:#ff4444; border-color:rgba(233,30,30,0.25);">&#9881; NEW APP</span>
+        <span class="wn-title">Board Scenario Planner</span>
+      </div>
+      <div class="wn-app-frame">
+        <div class="wn-app-titlebar">
+          <div class="wn-app-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <div class="wn-app-url">savearlingtongymnastics.com/tool</div>
+        </div>
+        <div class="wn-app-screen">
+          <img src="board-scenario-tool.png" alt="Board Scenario Planner — 50+ community solutions">
+        </div>
+      </div>
+      <div class="wn-body">
+        <h3>50+ Community Solutions the Board Can Evaluate in Real Time</h3>
+        <p>The gymnastics community isn&rsquo;t just asking to be saved &mdash; they&rsquo;re showing how. This interactive app lets County Board members, DPR, and DMF model 50+ revenue, cost, and program solutions and see the financial impact instantly. Fee adjustments, new programming, capacity changes, staffing efficiencies &mdash; every lever, one dashboard.</p>
+        <div class="wn-meta">Interactive App &middot; Published for County Board, DPR &amp; DMF</div>
+      </div>
+    </a>
+
+    <!-- 2. DPR DATA + 3. GUNSTON VIDEO (side by side) -->
+    <div class="wn-grid">
+
+      <!-- DPRData.com -->
+      <a href="https://www.dprdata.com" target="_blank" class="wn-card">
+        <div class="wn-header">
+          <span class="wn-badge">&#128202; ANALYSIS</span>
+          <span class="wn-title">DPRdata.com</span>
+        </div>
+        <div class="wn-app-frame">
+          <div class="wn-app-titlebar">
+            <div class="wn-app-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <div class="wn-app-url">dprdata.com</div>
+          </div>
+          <div class="wn-app-screen">
+            <img src="dprdata-dotcom.png" alt="DPRdata.com — Community analysis of DPR's March 5 presentation">
+          </div>
+        </div>
+        <div class="wn-body">
+          <h3>Did DPR Give the Board the Full Picture?</h3>
+          <p>A community analysis of DPR&rsquo;s March 5 presentation to the County Board. Was the crisis self-inflicted? Were all solutions explored? Get informed about how Arlington&rsquo;s gymnastics programs can be better managed &mdash; and what DPR left out.</p>
+          <div class="wn-meta">Community Analysis &middot; DPRdata.com</div>
+        </div>
+      </a>
+
+      <!-- Gunston YouTube Video -->
+      <div class="wn-card">
+        <div class="wn-header">
+          <span class="wn-badge" style="background:rgba(255,0,0,0.1); color:#ff4444; border-color:rgba(255,0,0,0.2);">&#9658; VIDEO</span>
+          <img src="Gunston-Middle-School.jpg" alt="Gunston Middle School" style="height:28px; border-radius:4px; border:1px solid rgba(255,255,255,0.12); object-fit:cover;">
+          <span style="display:inline-flex; align-items:center; background:#fff; border-radius:4px; padding:2px 6px;"><img src="YouTube_Logo_2017.svg.png" alt="YouTube" style="height:14px; object-fit:contain;"></span>
+        </div>
+        <a href="https://youtu.be/OSrCi-fifgo?si=YnODNu5vJuUsfQ88" target="_blank" class="wn-app-frame" style="display:block; text-decoration:none;">
+          <div class="wn-app-titlebar">
+            <div class="wn-app-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <div class="wn-app-url">youtube.com/watch?v=OSrCi-fifgo</div>
+          </div>
+          <div class="wn-app-screen" style="position:relative;">
+            <img src="gunston-youtube-video.png" alt="Gunston Middle School — Save Arlington Gymnastics video">
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition:background 0.2s;">
+              <div style="width:68px; height:48px; background:#FF0000; border-radius:14px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+                <div style="width:0; height:0; border-left:20px solid #fff; border-top:12px solid transparent; border-bottom:12px solid transparent; margin-left:5px;"></div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center; padding:0.4rem 0; font-family:'Poppins',sans-serif; font-size:0.7rem; color:rgba(255,255,255,0.5);">Watch on YouTube &rarr;</div>
+        </a>
+        <div class="wn-body">
+          <h3>Gunston Middle School Students Speak Out</h3>
+          <p>These students grew up at Barcroft. Now they&rsquo;re using their voices to fight for it. Watch what they have to say.</p>
+          <div class="wn-meta">Student Voices &middot; Gunston Middle School</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1359,7 +1505,7 @@
       </div>
 
     </div>
-    <p class="challenge-desc">Aerials. Tigers. <strong>Adaptive staff every Sunday morning.</strong> They&rsquo;re challenging Arlington to reach 10,000 signatures before the March 24 budget hearing.</p>
+    <p class="challenge-desc">Aerials. Tigers. <strong>Adaptive staff every Sunday morning.</strong> They&rsquo;re challenging Arlington to reach 10,000 signatures before the Board votes on the final budget.</p>
     <div style="text-align:center; margin-top:1.5rem;">
       <a href="https://www.change.org/p/save-arlington-gymnastics-stop-cutting-aerials-tigers-rec-barcroft" target="_blank" class="btn-share">
         <img src="change-org-avatar-logo.png" alt=""> Share the 10K Challenge
@@ -1652,7 +1798,7 @@
 <section id="media-coverage" style="background:linear-gradient(135deg, #0F1B33, #1B2A4A); padding:3rem 2rem;">
   <div class="container" style="max-width:960px;">
     <div style="text-align:center; margin-bottom:0.5rem;">
-      <span style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(249,168,37,0.15); color:var(--gold); font-family:'Poppins',sans-serif; font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:0.35rem 1rem; border-radius:4px; border:1px solid rgba(249,168,37,0.3);">&#128250; In the News</span>
+      <span style="display:inline-flex; align-items:center; gap:0.4rem; background:rgba(249,168,37,0.15); color:var(--gold); font-family:'Poppins',sans-serif; font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; padding:0.35rem 1rem; border-radius:4px; border:1px solid rgba(249,168,37,0.3);">&#128250; In the News &amp; Resources</span>
     </div>
     <h2 class="section-title" style="color:#fff; margin-bottom:0.3rem;">Our Fight Is Making News</h2>
     <p class="section-subtitle" style="color:rgba(255,255,255,0.7); margin-bottom:2.5rem;">Local and regional outlets are covering the campaign to save Arlington gymnastics. Every share reaches families we can&rsquo;t reach alone.</p>
@@ -1991,7 +2137,7 @@
     <!-- BOTTOM CTA -->
     <div style="text-align:center; margin-top:1.5rem;">
       <div style="font-size:1.15rem; font-weight:800; color:#fff; margin-bottom:0.5rem;">The door is open. Now we keep pushing.</div>
-      <div style="font-size:0.9rem; color:rgba(255,255,255,0.6); margin-bottom:1rem;">The DPR work session is coming. Show up, email your Board member, and help build the partnership proposal they&rsquo;re asking for.</div>
+      <div style="font-size:0.9rem; color:rgba(255,255,255,0.6); margin-bottom:1rem;">The work sessions are wrapping up. Email your Board member and keep building the partnership proposal they&rsquo;re asking for.</div>
       <div class="feb24-cta-row">
         <a href="#act" style="display:inline-block; background:var(--gold); color:var(--dark-navy); padding:0.7rem 2rem; border-radius:6px; font-weight:800; font-size:1rem; text-decoration:none;">Take Action &rarr;</a>
         <a href="#board" style="display:inline-block; background:rgba(255,255,255,0.1); color:#fff; padding:0.7rem 2rem; border-radius:6px; font-weight:700; font-size:1rem; text-decoration:none; border:1px solid rgba(255,255,255,0.2);">Email the Board</a>
@@ -2085,11 +2231,11 @@
 
     <!-- NEXT STEPS -->
     <div style="background:rgba(198,40,40,0.1); border:1px solid rgba(198,40,40,0.25); border-radius:10px; padding:1.25rem; margin-top:1.5rem; text-align:center;">
-      <div style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); margin-bottom:0.5rem;">Keep the Momentum Going</div>
+      <div style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:#4CAF50; margin-bottom:0.5rem;">All ODMs &amp; Hearings Complete</div>
       <div style="font-size:0.95rem; color:rgba(255,255,255,0.9); line-height:1.5;">
-        <strong style="color:#fff;">March 16 (Virtual):</strong> <span style="color:#4CAF50;">&#10003; Done &mdash;</span> <a href="#odm-mar16" style="color:var(--gold); text-decoration:none; font-weight:700;">See recap &rarr;</a> &middot; <strong style="color:#fff;">Final In-Person ODM:</strong> <span style="color:var(--gold);">Monday, March 23</span> (Walter Reed Community Center)
+        <strong style="color:#fff;">March 16 (Virtual):</strong> <span style="color:#4CAF50;">&#10003; Attended</span> &middot; <strong style="color:#fff;">March 23 (Walter Reed):</strong> <span style="color:#4CAF50;">&#10003; Attended</span> &middot; <strong style="color:#fff;">Hearings:</strong> <span style="color:#4CAF50;">&#10003; 56 speakers</span>
       </div>
-      <div style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0.4rem;">The budget hearing is March 24. Every voice between now and then matters.</div>
+      <div style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0.4rem;">The community showed up at every opportunity. Budget work sessions wrap up April 7 &amp; 9. The vote follows.</div>
     </div>
   </div>
 </div>
@@ -2176,18 +2322,18 @@
 
     <!-- NEXT STEPS -->
     <div style="background:rgba(198,40,40,0.1); border:1px solid rgba(198,40,40,0.25); border-radius:10px; padding:1.25rem; margin-top:1.5rem; text-align:center;">
-      <div style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); margin-bottom:0.5rem;">One Week Left</div>
+      <div style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:#4CAF50; margin-bottom:0.5rem;">Hearings Complete</div>
       <div style="font-size:0.95rem; color:rgba(255,255,255,0.9); line-height:1.5;">
-        <strong style="color:#fff;">Final In-Person ODM:</strong> <span style="color:var(--gold);">Monday, March 23</span> (Walter Reed Community Center) &middot; <strong style="color:#fff;">Budget Hearing:</strong> <span style="color:var(--gold);">March 24 at 6:30 PM</span>
+        <strong style="color:#fff;">March 23 ODM:</strong> <span style="color:#4CAF50;">&#10003; Attended</span> &middot; <strong style="color:#fff;">March 24 Hearing:</strong> <span style="color:#4CAF50;">&#10003; 27 speakers</span> &middot; <strong style="color:#fff;">March 26 Hearing:</strong> <span style="color:#4CAF50;">&#10003; 28 speakers</span>
       </div>
-      <div style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0.4rem;">The budget hearing is 8 days away. Every voice between now and then matters.</div>
+      <div style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-top:0.4rem;">56 community voices across two historic hearings. Now we push through to the budget vote.</div>
     </div>
   </div>
 </div>
 
 <!-- COUNTDOWN -->
 <div class="countdown-bar">
-  <span class="date">Public Budget Hearing: March 24, 2026 at 6:30 PM &mdash; Bozman Government Center, 3rd Floor</span>
+  <span class="date">Both public hearings complete &mdash; 56 speakers for gymnastics &amp; Barcroft. Budget adoption vote: April 22.</span>
 </div>
 
 <!-- WHAT HAPPENED -->
@@ -2328,7 +2474,7 @@
       <div class="join-card" id="email-signup">
         <div class="card-icon">&#128233;</div>
         <h3>Get Campaign Updates</h3>
-        <p>Join our email list for action alerts, hearing reminders, and updates as we fight to save Arlington gymnastics. We&rsquo;ll only email when it matters.</p>
+        <p>Join our email list for action alerts and updates as we fight to save Arlington gymnastics through the budget vote. We&rsquo;ll only email when it matters.</p>
         <!-- MAILCHIMP EMBEDDED SIGNUP FORM -->
         <form class="email-form" action="https://savearlingtongymnastics.us2.list-manage.com/subscribe/post?u=45155d55e4c074ebb67467b10&amp;id=afacf43c19&amp;f_id=00d977e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
           <input type="email" name="EMAIL" placeholder="Enter your email" required>
@@ -2358,7 +2504,7 @@
       <div class="join-card full-width">
         <div class="card-icon">&#9999;&#65039;</div>
         <h3>Sign the Petition</h3>
-        <p style="max-width:600px; margin-left:auto; margin-right:auto;">Teagan, Rocco, and Will challenged Arlington to reach 10,000 signatures. Add yours and help us get there before the March 24 hearing.</p>
+        <p style="max-width:600px; margin-left:auto; margin-right:auto;">Teagan, Rocco, and Will challenged Arlington to reach 10,000 signatures. Add yours and help us get there before the Board votes.</p>
         <a href="https://c.org/Fq86V645dB" target="_blank" class="btn btn-red" style="font-size:1.1rem; padding:0.85rem 2.5rem;">Sign the Petition on Change.org</a>
       </div>
     </div>
@@ -2601,14 +2747,14 @@
 <section style="background:#ffffff" id="dates">
   <div class="container">
     <h2 class="section-title">Key Dates</h2>
-    <p class="section-subtitle">Mark your calendar. Every one of these matters.</p>
+    <p class="section-subtitle">The timeline of this fight. Every one of these mattered.</p>
 
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date highlight">FEB 21</div>
+      <div class="timeline-item" style="background:rgba(76,175,80,0.08); border-radius:8px; padding:1.25rem; margin-bottom:0.5rem;">
+        <div class="timeline-date" style="background:#4CAF50;">&#10003; FEB 21</div>
         <div class="timeline-content">
           <h4>FY 2027 Proposed Budget Released</h4>
-          <p>Read the full proposal. Understand exact savings numbers. Share this page.</p>
+          <p>The county manager's proposed budget included elimination of all gymnastics programs and closure of Barcroft.</p>
         </div>
       </div>
       <div class="timeline-item" style="background:rgba(249,168,37,0.08); border-radius:8px; padding:1.25rem; margin-bottom:0.5rem;">
@@ -2636,10 +2782,9 @@
               <span>Monday, March 16 (Virtual) &mdash; Board Members Spain &amp; County Staff</span>
               <span style="margin-left:auto; color:var(--gold); font-weight:700; font-size:0.8rem;">See photos &amp; recap &rarr;</span>
             </a>
-            <div style="padding:0.7rem 1rem; background:var(--dark-navy); color:#fff; border-radius:6px; font-size:0.95rem; border:2px solid var(--gold); display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-              <span style="background:var(--red); color:#fff; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.2rem 0.6rem; border-radius:3px; white-space:nowrap;">In-Person</span>
-              <span><strong style="color:var(--gold);">Monday, March 23</strong> &mdash; Walter Reed Community Center</span>
-              <span style="font-size:0.8rem; color:var(--gold); font-weight:700;">&larr; Last in-person before the budget hearing</span>
+            <div style="padding:0.7rem 1rem; background:rgba(76,175,80,0.15); color:rgba(255,255,255,0.95); border-radius:6px; font-size:0.95rem; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; border:1px solid rgba(76,175,80,0.3);">
+              <span style="background:rgba(76,175,80,0.9); color:#fff; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.2rem 0.6rem; border-radius:3px; white-space:nowrap;">&#10003; Attended</span>
+              <span>Monday, March 23 &mdash; Walter Reed Community Center &mdash; Last in-person before the budget hearing</span>
             </div>
           </div>
 
@@ -2653,36 +2798,71 @@
           <p>Arlington gymnastics families showed up in force. Community members spoke passionately about saving Aerials, Tigers, adaptive programs, and Barcroft. <strong style="color:var(--teal);">See the full recap, photos &amp; testimony &rarr;</strong></p>
         </div>
       </a>
-      <div class="timeline-item">
-        <div class="timeline-date">MAR 5</div>
+      <div class="timeline-item" style="background:rgba(76,175,80,0.08); border-radius:8px; padding:1.25rem; margin-bottom:0.5rem;">
+        <div class="timeline-date" style="background:#4CAF50;">&#10003; MAR 5</div>
         <div class="timeline-content">
-          <h4>County Board Work Session with DPR (1:00 PM)</h4>
+          <h4 style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">County Board Work Session with DPR (1:00 PM) <span style="background:rgba(76,175,80,0.9); color:#fff; font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.15rem 0.5rem; border-radius:3px;">&#10003; Attended</span></h4>
           <p>DPR presented their case for gymnastics elimination. <a href="https://www.dprdata.com" target="_blank" style="color:var(--teal); font-weight:700;">See the DPR data analysis at DPRdata.com &rarr;</a></p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-date urgent">MAR 24</div>
+      <a href="save-arlington-gymnastics-speakers.html" class="timeline-item" style="background:rgba(76,175,80,0.08); border-radius:8px; padding:1.25rem; margin-bottom:0.5rem; text-decoration:none; color:inherit; display:grid; border:1px solid rgba(76,175,80,0.2); transition: background 0.2s;">
+        <div class="timeline-date" style="background:#4CAF50;">&#10003; MAR 24</div>
         <div class="timeline-content">
-          <h4>Public Budget Hearing (6:30 PM)</h4>
-          <p><strong>SIGN UP TO SPEAK.</strong> This is your primary chance. Bozman Govt Center, 3rd Floor.</p>
+          <h4 style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">Public Budget Hearing (6:30 PM) <span style="background:rgba(76,175,80,0.9); color:#fff; font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.15rem 0.5rem; border-radius:3px;">&#10003; Attended</span></h4>
+          <p>162 speakers signed up. 27 spoke for Barcroft &amp; gymnastics. An unprecedented community turnout made history at Bozman Govt Center. <strong style="color:var(--teal);">See all 56 speakers &amp; testimony &rarr;</strong></p>
+        </div>
+      </a>
+      <a href="save-arlington-gymnastics-speakers.html#march26" class="timeline-item" style="background:rgba(76,175,80,0.08); border-radius:8px; padding:1.25rem; margin-bottom:0.5rem; text-decoration:none; color:inherit; display:grid; border:1px solid rgba(76,175,80,0.2); transition: background 0.2s;">
+        <div class="timeline-date" style="background:#4CAF50;">&#10003; MAR 26</div>
+        <div class="timeline-content">
+          <h4 style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">Carryover Hearing &amp; Tax Rate Hearing (6:45 PM) <span style="background:rgba(76,175,80,0.9); color:#fff; font-weight:800; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.5px; padding:0.15rem 0.5rem; border-radius:3px;">&#10003; Attended</span></h4>
+          <p>28 more Barcroft &amp; gymnastics speakers returned. The community came back with even more intensity. <strong style="color:var(--teal);">See speakers &amp; testimony &rarr;</strong></p>
+        </div>
+      </a>
+      <div class="timeline-item" style="border-left:3px solid var(--gold); padding-left:1.25rem;">
+        <div class="timeline-date urgent">APR 7</div>
+        <div class="timeline-content">
+          <h4>Budget Work Session (3:00&ndash;6:00 PM)</h4>
+          <p>Commonwealth&rsquo;s Attorney, Electoral Board, Public Defender, Circuit Court. Email your Board member now &mdash; we&rsquo;re in the final stretch.</p>
+        </div>
+      </div>
+      <div class="timeline-item" style="border-left:3px solid var(--gold); padding-left:1.25rem;">
+        <div class="timeline-date urgent">APR 8</div>
+        <div class="timeline-content">
+          <h4>Commissions Hearing (2:00&ndash;4:30 PM &amp; 6:00&ndash;8:00 PM)</h4>
+          <p>Advisory commissions weigh in on the budget. Two sessions &mdash; afternoon and evening.</p>
+        </div>
+      </div>
+      <div class="timeline-item" style="border-left:3px solid var(--gold); padding-left:1.25rem;">
+        <div class="timeline-date urgent">APR 9</div>
+        <div class="timeline-content">
+          <h4>Budget Work Session (1:00&ndash;4:00 PM)</h4>
+          <p>Capital, debt service, Metro, County Manager &amp; Board offices. Last work session before wrap-up.</p>
+        </div>
+      </div>
+      <div class="timeline-item" style="border-left:3px solid var(--gold); padding-left:1.25rem;">
+        <div class="timeline-date urgent">APR 13</div>
+        <div class="timeline-content">
+          <h4>Budget Wrap-Up Session (2:30&ndash;4:30 PM)</h4>
+          <p>Board consolidates positions. Final window to influence members before mark-up. Send emails now.</p>
+        </div>
+      </div>
+      <div class="timeline-item" style="border-left:3px solid var(--gold); padding-left:1.25rem;">
+        <div class="timeline-date highlight">APR 16</div>
+        <div class="timeline-content">
+          <h4>Final Budget Decisions / Mark-Up (2:30&ndash;4:30 PM)</h4>
+          <p>Board members propose and vote on amendments. This is where gymnastics lives or dies in the budget. Be heard before this date.</p>
+        </div>
+      </div>
+      <div class="timeline-item" style="border-left:3px solid var(--red); padding-left:1.25rem;">
+        <div class="timeline-date" style="background:var(--red);">APR 22</div>
+        <div class="timeline-content">
+          <h4 style="color:var(--red);"><i class="fas fa-gavel"></i> &nbsp;FY 2027 Budget Adoption</h4>
+          <p><strong>The Board votes to adopt the final budget.</strong> This is the decision point. Everything we&rsquo;ve done &mdash; 56 speakers, hundreds of emails, every ODM &mdash; comes down to this vote. Keep the pressure on.</p>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date urgent">MAR 26</div>
-        <div class="timeline-content">
-          <h4>Tax Rate &amp; Fees Hearing (6:30 PM)</h4>
-          <p>Attend and speak about fee alternatives to program cuts.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">APRIL</div>
-        <div class="timeline-content">
-          <h4>Board Adopts Final Budget</h4>
-          <p>Final push: emails, calls, public comments before the vote.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date highlight">MAY 4</div>
+        <div class="timeline-date">MAY 4</div>
         <div class="timeline-content">
           <h4>Town Hall Meeting (6:30 PM)</h4>
           <p>New town hall format. Additional opportunity for community voice.</p>
@@ -3164,7 +3344,7 @@
 
 <script>
 // Petition signature counter — shared config
-var CURRENT_SIGNATURES = 5891; // Update this number regularly
+var CURRENT_SIGNATURES = 6649; // Update this number regularly
 var GOAL = 10000;
 var needed = GOAL - CURRENT_SIGNATURES;
 var pct = Math.min((CURRENT_SIGNATURES / GOAL) * 100, 100);
@@ -3229,15 +3409,7 @@ window.addEventListener('DOMContentLoaded', function() {
 // Footer petition bar (on scroll)
 animatePetitionBar('sig-count', 'sig-bar', 'sig-needed', 'petition', 0.3);
 
-// Live countdown to March 24, 2026
-(function() {
-  var hearing = new Date(2026, 2, 24); // March 24, 2026
-  var today = new Date();
-  today.setHours(0,0,0,0);
-  var diff = Math.ceil((hearing - today) / (1000 * 60 * 60 * 24));
-  var el = document.getElementById('days-left');
-  if (el) el.textContent = diff > 0 ? diff : 0;
-})();
+// Countdown removed — hearings are complete, hero text updated
 
 // Close mobile nav when a link is tapped
 document.querySelectorAll('.nav-links a').forEach(function(link) {
