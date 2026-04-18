@@ -119,10 +119,10 @@
     .deadline-banner { animation: none; }
   }
 
-  /* SURPRISE CALLOUT — red capsule block */
+  /* SURPRISE CALLOUT — gold enclosing box with red badge inside */
   .surprise-callout {
-    background: linear-gradient(180deg, rgba(229,57,53,0.16) 0%, rgba(229,57,53,0.05) 100%);
-    border: 1px solid rgba(229,57,53,0.40);
+    background: linear-gradient(180deg, rgba(244,180,26,0.14) 0%, rgba(244,180,26,0.05) 100%);
+    border: 1px solid rgba(244,180,26,0.40);
     padding: 18px 22px;
     border-radius: 18px;
     margin-bottom: 22px;
@@ -558,7 +558,7 @@
 <div class="surprise-callout">
 <div class="surprise-badge">⚠ What Just Happened</div>
 <div class="surprise-body" id="surpriseBody">
-<strong id="daysSince">Two days ago</strong>, at Thursday's budget markup session, the Arlington County Board surprised the gymnastics community by advancing a <span class="accent">44% fee increase</span> for competitive teams. Parents had been communicating a reasonable <span class="accent">25% stepped alternative</span> for weeks. The final vote is Wednesday, April 22.
+<strong id="daysSince">Two days ago</strong>, at Thursday's budget markup, the Arlington County Board amended the Chair's original <span class="accent">25%</span> fee proposal up to <span class="accent">44%</span> for competitive teams — nearly twice what the Chair originally put forward. Aerials and Tigers families support the Chair's original 25%. The final vote is Wednesday, April 22.
 </div>
 </div>
 
@@ -576,7 +576,7 @@
 
 <div class="cta-autofill-info">
 <div><span class="check">✓</span> <strong>Recipients pre-filled:</strong> all 6 Board members + County Manager (8 addresses)</div>
-<div style="margin-top:4px;"><span class="check">✓</span> <strong>Subject pre-filled:</strong> Please reconsider the proposed 44% fee increase</div>
+<div style="margin-top:4px;"><span class="check">✓</span> <strong>Subject pre-filled:</strong> Please reconsider the 44% fee increase</div>
 <div style="margin-top:4px;"><span class="check">✓</span> <strong>Body pre-filled:</strong> A short, respectful message you can personalize</div>
 </div>
 </div>
@@ -593,12 +593,12 @@
 <div class="stat green">
 <span class="stat-emoji">🤝</span>
 <div class="stat-number">25%</div>
-<div class="stat-label">what parents<br>proposed</div>
+<div class="stat-label">what the Chair<br>proposed</div>
 </div>
 <div class="stat red">
 <span class="stat-emoji">⚠️</span>
 <div class="stat-number">44%</div>
-<div class="stat-label">what the Board<br>advanced</div>
+<div class="stat-label">what the Board<br>picked</div>
 </div>
 <div class="stat purple">
 <span class="stat-emoji">💰</span>
@@ -624,7 +624,7 @@
 
 <div class="preview-field">
 <div class="preview-label">Subject</div>
-<div class="preview-value">Please reconsider the proposed 44% competitive gymnastics fee increase</div>
+<div class="preview-value">Please reconsider the 44% competitive gymnastics fee increase</div>
 </div>
 
 <div class="preview-field">
@@ -633,7 +633,7 @@
 
 I am an Arlington resident writing to ask the Board to reconsider the proposed 44% fee increase for competitive gymnastics advanced at Thursday's budget markup.
 
-The AAPA and ATPA parent associations have proposed a 25% stepped fee increase that reaches the 86% cost recovery target over a reasonable timeline. The proposed 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.
+Aerials and Tigers families — through AAPA and ATPA — support the Chair's original 25% stepped fee proposal, which reaches the 86% cost recovery target over a reasonable timeline. The proposed 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.
 
 Before Wednesday's vote, I respectfully ask the Board to adopt the 25% stepped approach and pair any fee action with a directive that holds DPR accountable for the structural issues (enrollment growth, staffing, overhead methodology) rather than transferring the full consequence to current and future Aerials and Tigers families.
 
@@ -671,9 +671,9 @@ Respectfully,
     "countymanager@arlingtonva.us"
   ].join(",");
 
-  var subject = "Please reconsider the proposed 44% competitive gymnastics fee increase";
+  var subject = "Please reconsider the 44% competitive gymnastics fee increase";
 
-  var body = "Dear Chair De Ferranti, Vice Chair Coffey, Ms. Cunningham, Mr. Karantonis, Mr. Spain, and County Manager Schwartz,\n\nI am an Arlington resident writing to ask the Board to reconsider the proposed 44% fee increase for competitive gymnastics advanced at Thursday's budget markup.\n\nThe AAPA and ATPA parent associations have proposed a 25% stepped fee increase that reaches the 86% cost recovery target over a reasonable timeline. The proposed 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.\n\nBefore Wednesday's vote, I respectfully ask the Board to adopt the 25% stepped approach and pair any fee action with a directive that holds DPR accountable for the structural issues (enrollment growth, staffing, overhead methodology) rather than transferring the full consequence to current and future Aerials and Tigers families.\n\nThank you for your service.\n\nRespectfully,\n[Your name]\n[Your neighborhood or address]";
+  var body = "Dear Chair De Ferranti, Vice Chair Coffey, Ms. Cunningham, Mr. Karantonis, Mr. Spain, and County Manager Schwartz,\n\nI am an Arlington resident writing to ask the Board to reconsider the proposed 44% fee increase for competitive gymnastics advanced at Thursday's budget markup.\n\nAerials and Tigers families — through AAPA and ATPA — support the Chair's original 25% stepped fee proposal, which reaches the 86% cost recovery target over a reasonable timeline. The proposed 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.\n\nBefore Wednesday's vote, I respectfully ask the Board to adopt the 25% stepped approach and pair any fee action with a directive that holds DPR accountable for the structural issues (enrollment growth, staffing, overhead methodology) rather than transferring the full consequence to current and future Aerials and Tigers families.\n\nThank you for your service.\n\nRespectfully,\n[Your name]\n[Your neighborhood or address]";
 
   var mailtoLink = "mailto:" + recipients +
                    "?subject=" + encodeURIComponent(subject) +
@@ -738,16 +738,18 @@ Respectfully,
     var etNow = new Date((new Date()).toLocaleString("en-US", { timeZone: "America/New_York" }));
     var date = etNow.getDate();
     var month = etNow.getMonth();
-    if (month === 3 && date === 21) {
+    if (month === 3 && date === 22) {
       banner.classList.add("today");
       vbMain.innerText = "⚡ VOTE IS TODAY";
-    } else if (month === 3 && date === 20) {
+    } else if (month === 3 && date === 21) {
       banner.classList.add("tomorrow");
       vbMain.innerText = "⏰ Vote is tomorrow";
+    } else if (month === 3 && date === 20) {
+      vbMain.innerHTML = 'Vote in 2 days<br><span style="color: #f4b41a;">Wednesday, April 22</span>';
     } else if (month === 3 && date === 19) {
-      vbMain.innerText = "Vote in 2 days — Wednesday, April 22";
+      vbMain.innerHTML = 'Vote in 3 days<br><span style="color: #f4b41a;">Wednesday, April 22</span>';
     } else if (month === 3 && date === 18) {
-      vbMain.innerText = "Vote in 3 days — Wednesday, April 22";
+      vbMain.innerHTML = 'Vote in 4 days<br><span style="color: #f4b41a;">Wednesday, April 22</span>';
     }
   }
 })();
