@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Write the Board — Save Arlington Gymnastics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy-deep:  #0a1628;
+    --navy:       #0f1e3a;
+    --navy-soft:  #16294f;
+    --ink-white:  #ffffff;
+    --ink-soft:   #d8e1f0;
+    --muted:      #8fa0bf;
+    --rule:       rgba(255,255,255,0.12);
+    --gold:       #f4b41a;
+    --gold-deep:  #c8940d;
+    --red:        #e53935;
+    --red-deep:   #b71c1c;
+    --green:      #2a8c4a;
+    --green-br:   #3fb168;
+    --purple:     #8b5cf6;
+    --purple-dp:  #6d41d0;
+  }
+
+  html, body {
+    background: var(--navy-deep);
+    color: var(--ink-white);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 22px 80px;
+  }
+
+  /* WORDMARK */
+  .wordmark {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .wordmark a { color: var(--muted); }
+  .wordmark a:hover { color: var(--gold); text-decoration: none; }
+
+  /* DEADLINE BANNER — gold capsule at the top */
+  .deadline-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, var(--gold-deep) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+    color: #1a0e00;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    box-shadow:
+      0 4px 16px rgba(244, 180, 26, 0.28),
+      0 0 0 1px rgba(244, 180, 26, 0.40);
+    text-align: center;
+    flex-wrap: wrap;
+    animation: deadline-pulse 2.8s ease-in-out infinite;
+  }
+  .deadline-icon { font-size: 16px; line-height: 1; }
+  .deadline-days {
+    background: rgba(26, 14, 0, 0.18);
+    padding: 3px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 800;
+  }
+  @keyframes deadline-pulse {
+    0%, 100% { box-shadow: 0 4px 16px rgba(244,180,26,0.28), 0 0 0 1px rgba(244,180,26,0.40); }
+    50%      { box-shadow: 0 4px 22px rgba(244,180,26,0.45), 0 0 0 3px rgba(244,180,26,0.20); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .deadline-banner { animation: none; }
+  }
+
+  /* SURPRISE CALLOUT — red capsule block */
+  .surprise-callout {
+    background: linear-gradient(180deg, rgba(229,57,53,0.16) 0%, rgba(229,57,53,0.05) 100%);
+    border: 1px solid rgba(229,57,53,0.40);
+    padding: 18px 22px;
+    border-radius: 18px;
+    margin-bottom: 22px;
+  }
+  .surprise-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .surprise-body {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .surprise-body strong { color: var(--ink-white); font-weight: 800; }
+  .surprise-body .accent { color: var(--gold); font-weight: 800; }
+
+  /* HEADLINE */
+  h1.display {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.03;
+    color: var(--ink-white);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  h1.display .accent { color: var(--gold); }
+  p.deck {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-bottom: 28px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CTA CARD — THE CENTERPIECE */
+  .cta-block {
+    position: relative;
+    background: linear-gradient(180deg, var(--navy-soft) 0%, var(--navy) 100%);
+    border: 2px solid var(--red);
+    padding: 34px 28px 28px;
+    margin-bottom: 36px;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(229,57,53,0.18), 0 0 0 1px rgba(229,57,53,0.15);
+  }
+  .cta-block::before {
+    content: "✦  TAKE 90 SECONDS  ✦";
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    padding: 4px 14px;
+    border-radius: 2px;
+  }
+  .cta-explainer {
+    display: inline-block;
+    background: rgba(244,180,26,0.14);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(244,180,26,0.35);
+  }
+  .cta-headline {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ink-white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .cta-sub {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-button {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    padding: 22px 20px;
+    background: var(--red);
+    color: #fff;
+    font-family: inherit;
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.08s ease, background 0.12s ease;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    animation: pulse-glow 2.4s ease-in-out infinite;
+    box-shadow:
+      0 4px 14px rgba(229, 57, 53, 0.40),
+      0 0 0 0 rgba(229, 57, 53, 0.55),
+      0 0 22px rgba(229, 57, 53, 0.22);
+  }
+  /* Shimmer "spark" sweep */
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,0.05) 35%,
+      rgba(255,255,255,0.55) 50%,
+      rgba(255,255,255,0.05) 65%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  /* Ambient outer glow that breathes with the button */
+  .cta-button::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 6px;
+    background: radial-gradient(circle at 50% 50%, rgba(229, 57, 53, 0.35), transparent 65%);
+    z-index: -1;
+    animation: halo 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .cta-button:hover,
+  .cta-button:focus {
+    background: var(--red-deep);
+    transform: translateY(-1px);
+    text-decoration: none;
+    animation-play-state: paused;
+    box-shadow:
+      0 6px 22px rgba(229, 57, 53, 0.60),
+      0 0 0 4px rgba(229, 57, 53, 0.15),
+      0 0 30px rgba(229, 57, 53, 0.35);
+  }
+  .cta-button:active { transform: translateY(0); }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow:
+        0 4px 14px rgba(229, 57, 53, 0.40),
+        0 0 0 0 rgba(229, 57, 53, 0.55),
+        0 0 22px rgba(229, 57, 53, 0.22);
+    }
+    50% {
+      box-shadow:
+        0 6px 22px rgba(229, 57, 53, 0.60),
+        0 0 0 12px rgba(229, 57, 53, 0),
+        0 0 36px rgba(229, 57, 53, 0.38);
+    }
+  }
+  @keyframes shimmer {
+    0%   { left: -75%; }
+    38%  { left: 130%; }
+    100% { left: 130%; }
+  }
+  @keyframes halo {
+    0%, 100% { opacity: 0.55; transform: scale(1.00); }
+    50%      { opacity: 0.85; transform: scale(1.03); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button,
+    .cta-button::before,
+    .cta-button::after { animation: none; }
+  }
+  .cta-footnote {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .cta-autofill-info {
+    background: var(--navy-deep);
+    border: 1px solid var(--rule);
+    padding: 12px 16px;
+    border-radius: 3px;
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    text-align: left;
+  }
+  .cta-autofill-info strong { color: var(--green-br); font-weight: 800; }
+  .cta-autofill-info .check { color: var(--green-br); font-weight: 900; margin-right: 6px; }
+
+  /* STATS BADGE — dprdata.com editorial pattern */
+  .stats-badge {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  /* STATS STRIP — color-coded, editorial */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 18px;
+    background: var(--rule);
+    padding: 2px;
+    border-radius: 4px;
+  }
+  .stat {
+    padding: 22px 12px;
+    text-align: center;
+    color: #fff;
+    background: var(--navy);
+    position: relative;
+  }
+  .stat-emoji {
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .stat-number {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+    color: #fff;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  .stat.gold    { background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%); color: #1a0e00; }
+  .stat.gold .stat-number { color: #1a0e00; }
+  .stat.gold .stat-label  { color: rgba(26,14,0,0.75); }
+  .stat.green   { background: linear-gradient(180deg, var(--green-br) 0%, var(--green) 100%); }
+  .stat.red     { background: linear-gradient(180deg, var(--red) 0%, var(--red-deep) 100%); }
+  .stat.purple  { background: linear-gradient(180deg, var(--purple) 0%, var(--purple-dp) 100%); }
+  .stat .stat-number.small { font-size: 22px; }
+
+  /* VOTE DAY BANNER */
+  .vote-banner {
+    margin-bottom: 32px;
+    padding: 18px 20px;
+    background: var(--navy-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .vote-banner .vb-left {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .vote-banner .vb-main {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--ink-white);
+  }
+  .vote-banner.today .vb-main { color: var(--red); animation: pulse 1.8s ease-in-out infinite; }
+  .vote-banner.tomorrow .vb-main { color: var(--gold); }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+
+  @media (max-width: 540px) {
+    .wrapper { padding: 22px 16px 60px; }
+    h1.display { font-size: 30px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat-number { font-size: 24px; }
+    .cta-headline { font-size: 19px; }
+    .cta-button { font-size: 17px; padding: 20px 16px; }
+    .vote-banner { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .surprise-body { font-size: 14px; }
+  }
+
+  /* PREVIEW CARD */
+  .preview-card {
+    background: var(--navy);
+    border: 1px solid var(--rule);
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    border-radius: 4px;
+  }
+  .preview-card h3 {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .preview-field { margin-bottom: 14px; }
+  .preview-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .preview-value {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--navy-deep);
+    padding: 10px 12px;
+    border-left: 2px solid var(--purple);
+    word-break: break-word;
+    font-family: "SF Mono", ui-monospace, Menlo, Monaco, "Courier New", monospace;
+    line-height: 1.5;
+  }
+  .preview-body {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    background: var(--navy-deep);
+    padding: 14px 16px;
+    border-left: 2px solid var(--gold);
+    white-space: pre-wrap;
+    font-family: inherit;
+    line-height: 1.6;
+  }
+  .copy-btn {
+    display: inline-block;
+    padding: 9px 14px;
+    background: var(--gold);
+    color: #1a0e00;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .copy-btn:hover { background: var(--gold-deep); }
+  .copy-status {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 12px;
+    color: var(--green-br);
+    font-weight: 700;
+  }
+
+  /* FALLBACK */
+  .fallback {
+    background: rgba(139, 92, 246, 0.10);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-left: 4px solid var(--purple);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .fallback strong { color: var(--purple); font-weight: 800; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+  }
+  .footer a { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+<div class="wordmark">
+<a href="https://savearlingtongymnastics.com">★ Save Arlington Gymnastics ★</a>
+</div>
+
+<!-- DEADLINE BANNER — gold capsule, dynamic days-until counter -->
+<div class="deadline-banner">
+<span class="deadline-icon">⏰</span>
+<span>Send before April 21</span>
+<span class="deadline-days" id="deadlineDays">in 3 days</span>
+</div>
+
+<!-- SURPRISE CALLOUT — top of page, dynamic day counter -->
+<div class="surprise-callout">
+<div class="surprise-badge">⚠ What Just Happened</div>
+<div class="surprise-body" id="surpriseBody">
+<strong id="daysSince">Two days ago</strong>, at Thursday's budget markup session, the Arlington County Board surprised the gymnastics community by advancing a <span class="accent">44% fee increase</span> for competitive teams. Parents had been communicating a reasonable <span class="accent">25% stepped alternative</span> for weeks. The final vote is Tuesday, April 21.
+</div>
+</div>
+
+<h1 class="display">Write the Board.<br><span class="accent">Save Aerials and Tigers.</span></h1>
+<p class="deck">One click opens your email with a message pre-drafted. 90 seconds to send. Your voice on the record before the vote.</p>
+
+<!-- CENTERPIECE CTA -->
+<div class="cta-block">
+<div class="cta-explainer">⚡ ONE CLICK  •  AUTO-FILLS YOUR EMAIL</div>
+<div class="cta-headline">Click below to open your email app with the message ready to send.</div>
+<p class="cta-sub">Recipients, subject, and body are all pre-filled. Add your name at the bottom, optionally customize a sentence or two, and hit send.</p>
+
+<a id="ctaLink" href="" class="cta-button">✉️  Email the Board Now  →</a>
+<p class="cta-footnote">Opens in your default mail app. Desktop and mobile.</p>
+
+<div class="cta-autofill-info">
+<div><span class="check">✓</span> <strong>Recipients pre-filled:</strong> all 6 Board members + County Manager (8 addresses)</div>
+<div style="margin-top:4px;"><span class="check">✓</span> <strong>Subject pre-filled:</strong> Please reconsider the 44% fee increase</div>
+<div style="margin-top:4px;"><span class="check">✓</span> <strong>Body pre-filled:</strong> A short, respectful message you can personalize</div>
+</div>
+</div>
+
+<!-- STATS STRIP — dprdata.com-style editorial badges -->
+<div class="stats-badge">📊 THE FULL PICTURE — IN FOUR NUMBERS</div>
+
+<div class="stats">
+<div class="stat gold">
+<span class="stat-emoji">⏱️</span>
+<div class="stat-number">8 WEEKS</div>
+<div class="stat-label">of community<br>testimony</div>
+</div>
+<div class="stat green">
+<span class="stat-emoji">🤝</span>
+<div class="stat-number">25%</div>
+<div class="stat-label">what parents<br>proposed</div>
+</div>
+<div class="stat red">
+<span class="stat-emoji">⚠️</span>
+<div class="stat-number">44%</div>
+<div class="stat-label">what the Board<br>advanced</div>
+</div>
+<div class="stat purple">
+<span class="stat-emoji">💰</span>
+<div class="stat-number small">$775–$7,634</div>
+<div class="stat-label">above local<br>private gyms</div>
+</div>
+</div>
+
+<!-- VOTE DAY BANNER -->
+<div class="vote-banner" id="voteBanner">
+<div class="vb-left">Arlington County Board Budget Vote</div>
+<div class="vb-main" id="voteMain">Tuesday, April 21</div>
+</div>
+
+<!-- PREVIEW -->
+<div class="preview-card">
+<h3>✉ Preview — what will be pre-filled</h3>
+
+<div class="preview-field">
+<div class="preview-label">To (8 recipients)</div>
+<div class="preview-value">mschwartz@arlingtonva.us, mdeferranti@arlingtonva.us, mcoffey@arlingtonva.us, scunningham@arlingtonva.us, jdspainsr@arlingtonva.us, tkarantonis@arlingtonva.us, countyboard@arlingtonva.us, countymanager@arlingtonva.us</div>
+</div>
+
+<div class="preview-field">
+<div class="preview-label">Subject</div>
+<div class="preview-value">Please reconsider the 44% competitive gymnastics fee increase</div>
+</div>
+
+<div class="preview-field">
+<div class="preview-label">Body</div>
+<div class="preview-body" id="bodyPreview">Dear Chair De Ferranti, Vice Chair Coffey, Ms. Cunningham, Mr. Karantonis, Mr. Spain, and County Manager Schwartz,
+
+I am an Arlington resident writing to ask the Board to reconsider the 44% fee increase for competitive gymnastics advanced at Thursday's budget markup.
+
+The AAPA and ATPA parent associations have proposed a 25% stepped fee increase that reaches the 86% cost recovery target over a reasonable timeline. The 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.
+
+Before Tuesday's vote, I respectfully ask the Board to adopt the 25% stepped approach and pair any fee action with a directive that holds DPR accountable for the structural issues (enrollment growth, staffing, overhead methodology) rather than transferring the full consequence to current and future Aerials and Tigers families.
+
+Thank you for your service.
+
+Respectfully,
+[Your name]
+[Your neighborhood or address]</div>
+</div>
+
+<button class="copy-btn" onclick="copyBodyText()">COPY THE BODY TEXT</button>
+<span id="copyStatus" class="copy-status"></span>
+</div>
+
+<div class="fallback">
+<strong>If the button doesn't open your email app:</strong> copy the recipients, subject, and body above and paste them into a new email manually. Some workplace email systems block mailto: links — try again from your personal phone or laptop.
+</div>
+
+<div class="footer">
+← Back to <a href="https://savearlingtongymnastics.com">savearlingtongymnastics.com</a>
+</div>
+
+</div>
+
+<script>
+(function() {
+  var recipients = [
+    "mschwartz@arlingtonva.us",
+    "mdeferranti@arlingtonva.us",
+    "mcoffey@arlingtonva.us",
+    "scunningham@arlingtonva.us",
+    "jdspainsr@arlingtonva.us",
+    "tkarantonis@arlingtonva.us",
+    "countyboard@arlingtonva.us",
+    "countymanager@arlingtonva.us"
+  ].join(",");
+
+  var subject = "Please reconsider the 44% competitive gymnastics fee increase";
+
+  var body = "Dear Chair De Ferranti, Vice Chair Coffey, Ms. Cunningham, Mr. Karantonis, Mr. Spain, and County Manager Schwartz,\n\nI am an Arlington resident writing to ask the Board to reconsider the 44% fee increase for competitive gymnastics advanced at Thursday's budget markup.\n\nThe AAPA and ATPA parent associations have proposed a 25% stepped fee increase that reaches the 86% cost recovery target over a reasonable timeline. The 44% increase would place Arlington's fees between $775 and $7,634 above local private gyms depending on level, making our public program the more expensive option for families.\n\nBefore Tuesday's vote, I respectfully ask the Board to adopt the 25% stepped approach and pair any fee action with a directive that holds DPR accountable for the structural issues (enrollment growth, staffing, overhead methodology) rather than transferring the full consequence to current and future Aerials and Tigers families.\n\nThank you for your service.\n\nRespectfully,\n[Your name]\n[Your neighborhood or address]";
+
+  var mailtoLink = "mailto:" + recipients +
+                   "?subject=" + encodeURIComponent(subject) +
+                   "&body=" + encodeURIComponent(body);
+
+  document.getElementById("ctaLink").setAttribute("href", mailtoLink);
+
+  // ── Dynamic "days since markup" counter ──
+  // The budget markup was April 16, 2026 (Thursday)
+  var daysSinceEl = document.getElementById("daysSince");
+  if (daysSinceEl) {
+    var now = new Date();
+    var etString = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+    var et = new Date(etString);
+    var markupDate = new Date(2026, 3, 16); // April 16, 2026 (month is 0-indexed)
+    var etDateOnly = new Date(et.getFullYear(), et.getMonth(), et.getDate());
+    var diffMs = etDateOnly - markupDate;
+    var days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    var label;
+    if (days <= 0) {
+      label = "Today";
+    } else if (days === 1) {
+      label = "Yesterday";
+    } else if (days < 7) {
+      label = days + " days ago";
+    } else if (days < 14) {
+      label = "One week ago";
+    } else {
+      label = days + " days ago";
+    }
+    daysSinceEl.innerText = label;
+  }
+
+  // ── Dynamic "days until vote" counter for the deadline banner ──
+  var deadlineDaysEl = document.getElementById("deadlineDays");
+  if (deadlineDaysEl) {
+    var nowForDeadline = new Date();
+    var etStringDeadline = nowForDeadline.toLocaleString("en-US", { timeZone: "America/New_York" });
+    var etDeadline = new Date(etStringDeadline);
+    var etDateOnlyDeadline = new Date(etDeadline.getFullYear(), etDeadline.getMonth(), etDeadline.getDate());
+    var voteDate = new Date(2026, 3, 21); // April 21, 2026
+    var daysUntil = Math.ceil((voteDate - etDateOnlyDeadline) / (1000 * 60 * 60 * 24));
+
+    var deadlineLabel;
+    if (daysUntil < 0) {
+      deadlineLabel = "Vote has passed";
+    } else if (daysUntil === 0) {
+      deadlineLabel = "Today";
+    } else if (daysUntil === 1) {
+      deadlineLabel = "Tomorrow";
+    } else {
+      deadlineLabel = "In " + daysUntil + " days";
+    }
+    deadlineDaysEl.innerText = deadlineLabel;
+  }
+
+  // ── Dynamic vote-day indicator ──
+  var banner  = document.getElementById("voteBanner");
+  var vbMain  = document.getElementById("voteMain");
+  if (banner && vbMain) {
+    var etNow = new Date((new Date()).toLocaleString("en-US", { timeZone: "America/New_York" }));
+    var date = etNow.getDate();
+    var month = etNow.getMonth();
+    if (month === 3 && date === 21) {
+      banner.classList.add("today");
+      vbMain.innerText = "⚡ VOTE IS TODAY";
+    } else if (month === 3 && date === 20) {
+      banner.classList.add("tomorrow");
+      vbMain.innerText = "⏰ Vote is tomorrow";
+    } else if (month === 3 && date === 19) {
+      vbMain.innerText = "Vote in 2 days — Tuesday, April 21";
+    } else if (month === 3 && date === 18) {
+      vbMain.innerText = "Vote in 3 days — Tuesday, April 21";
+    }
+  }
+})();
+
+function copyBodyText() {
+  var bodyText = document.getElementById("bodyPreview").innerText;
+  navigator.clipboard.writeText(bodyText).then(function() {
+    document.getElementById("copyStatus").innerText = "✓ Copied";
+    setTimeout(function() { document.getElementById("copyStatus").innerText = ""; }, 2200);
+  }, function() {
+    document.getElementById("copyStatus").innerText = "Copy failed — select manually";
+  });
+}
+</script>
+
+</body>
+</html>
