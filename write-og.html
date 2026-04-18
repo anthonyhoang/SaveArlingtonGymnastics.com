@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG Image — Save Arlington Gymnastics / Write the Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #1a1a1a;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Exact 1200x630 canvas — Facebook / Twitter / LinkedIn / iMessage standard */
+  .og {
+    width: 1200px;
+    height: 630px;
+    background:
+      radial-gradient(ellipse at top right, rgba(244,180,26,0.10) 0%, transparent 55%),
+      linear-gradient(135deg, #0a1628 0%, #0f1e3a 60%, #16294f 100%);
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* Top gold stripe */
+  .stripe {
+    position: absolute; top: 0; left: 0; right: 0; height: 8px;
+    background: linear-gradient(90deg, #f4b41a 0%, #ffd54f 50%, #f4b41a 100%);
+  }
+
+  /* Faint star/burst in background — visual energy without distraction */
+  .corner-glow {
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(244,180,26,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .brand {
+    position: absolute;
+    top: 38px; left: 60px;
+    font-size: 18px; font-weight: 800;
+    color: #f4b41a;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .deadline-pill {
+    position: absolute;
+    top: 32px; right: 60px;
+    background: rgba(244,180,26,0.15);
+    border: 1.5px solid rgba(244,180,26,0.55);
+    color: #f4b41a;
+    font-size: 16px; font-weight: 800;
+    padding: 10px 18px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* HOOK — the punch */
+  .hook {
+    position: absolute;
+    top: 130px; left: 60px; right: 60px;
+    font-size: 76px;
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+  }
+  .hook .accent {
+    color: #f4b41a;
+    display: inline-block;
+  }
+  .hook .strike-line {
+    display: inline-block;
+    border-bottom: 6px solid #f4b41a;
+    padding-bottom: 6px;
+    line-height: 0.95;
+  }
+
+  /* Bottom band: CTA + URL */
+  .cta-band {
+    position: absolute;
+    bottom: 50px; left: 60px; right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .cta-btn {
+    background: linear-gradient(180deg, #e53935 0%, #b71c1c 100%);
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    padding: 22px 32px;
+    border-radius: 12px;
+    letter-spacing: 0.01em;
+    box-shadow:
+      0 0 0 3px rgba(229,57,53,0.25),
+      0 12px 32px rgba(229,57,53,0.45);
+    line-height: 1.1;
+  }
+  .cta-btn .micro {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cta-btn .main {
+    display: block;
+    font-size: 30px;
+  }
+
+  .url-block {
+    text-align: right;
+  }
+  .url-arrow {
+    font-size: 16px;
+    font-weight: 700;
+    color: #d8e1f0;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .url {
+    font-size: 22px;
+    font-weight: 800;
+    color: #f4b41a;
+  }
+</style>
+</head>
+<body>
+
+<div class="og" id="og">
+  <div class="stripe"></div>
+  <div class="corner-glow"></div>
+
+  <div class="brand">★ Save Arlington Gymnastics</div>
+  <div class="deadline-pill">Vote: Apr 21</div>
+
+  <!-- HOOK -->
+  <div class="hook">
+    The County Board's fee hike priced<br>
+    public youth gymnastics<br>
+    <span class="strike-line"><span class="accent">above private gyms.</span></span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="cta-btn">
+      <span class="micro">Help Aerials &amp; Tigers families</span>
+      <span class="main">Send 1 email &middot; 90 seconds</span>
+    </div>
+    <div class="url-block">
+      <div class="url-arrow">→ Open</div>
+      <div class="url">savearlingtongymnastics.com/write</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
