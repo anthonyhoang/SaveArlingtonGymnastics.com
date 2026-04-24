@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Save Arlington Gymnastics</title>
+<meta name="description" content="A thank-you, in your own words. The County Board, County Manager, and DPR Director went out of their way to protect Barcroft gymnastics — send a personal note.">
+
+<!-- Open Graph / iMessage / Slack / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://savearlingtongymnastics.com/thanks/">
+<meta property="og:title" content="A thank you, in your own words.">
+<meta property="og:description" content="The Arlington County Board approved the FY27 budget on April 22 — protecting recreational, competitive, and adapted gymnastics at Barcroft. Three groups deserve our thanks.">
+<meta property="og:site_name" content="Save Arlington Gymnastics">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A thank you, in your own words.">
+<meta name="twitter:description" content="Three groups went out of their way to protect Barcroft gymnastics. Send a personal note.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,500;1,600&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy-deep:  #0a1628;
+    --navy:       #0f1e3a;
+    --navy-soft:  #16294f;
+    --ink-white:  #ffffff;
+    --ink-soft:   #d8e1f0;
+    --muted:      #8fa0bf;
+    --rule:       rgba(255,255,255,0.12);
+    --gold:       #f4b41a;
+    --gold-deep:  #c8940d;
+    --gold-soft:  rgba(244,180,26,0.12);
+    --gold-border: rgba(244,180,26,0.35);
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  html, body {
+    background: var(--navy-deep);
+    background:
+      radial-gradient(ellipse at top right, rgba(244,180,26,0.06) 0%, transparent 55%),
+      linear-gradient(180deg, #0a1628 0%, #0f1e3a 80%, #0a1628 100%);
+    background-attachment: fixed;
+    color: var(--ink-soft);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+
+  /* Top gold stripe — matches brand */
+  .top-stripe {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, #FFD54F 50%, var(--gold) 100%);
+    z-index: 10;
+  }
+
+  a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(244,180,26,0.4); text-underline-offset: 3px; transition: color 0.2s, text-decoration-color 0.2s; }
+  a:hover { color: #FFD54F; text-decoration-color: var(--gold); }
+
+  .wordmark {
+    text-align: center;
+    padding: 40px 24px 8px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .wordmark a {
+    color: var(--gold);
+    text-decoration: none;
+    border: none;
+  }
+
+  .wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 32px 24px 96px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .eyebrow::before {
+    content: "★ ";
+    color: var(--gold);
+    margin-right: 2px;
+  }
+
+  h1 {
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--ink-white);
+    margin-bottom: 24px;
+  }
+  h1 .accent { color: var(--gold); }
+
+  h2 {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink-white);
+    margin: 0 0 6px;
+  }
+
+  h3 {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 26px 0 10px;
+  }
+
+  p { margin-bottom: 16px; color: var(--ink-soft); }
+  p strong { color: var(--ink-white); font-weight: 700; }
+
+  .lede p {
+    font-size: 18.5px;
+    color: var(--ink-white);
+    line-height: 1.6;
+  }
+
+  .intro-note {
+    border-left: 3px solid var(--gold);
+    background: var(--gold-soft);
+    padding: 18px 22px;
+    margin: 32px 0 40px;
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: #f5ecd8;
+    border-radius: 2px;
+  }
+
+  /* Thank-nav — 3 numbered bubbles linking to each section */
+  .thank-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0 36px;
+  }
+  .thank-nav-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--navy-soft);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none !important;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    min-width: 0;
+  }
+  .thank-nav-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.04);
+  }
+  .thank-nav-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--navy-deep);
+    line-height: 1;
+  }
+  .thank-nav-text { min-width: 0; }
+  .thank-nav-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink-white);
+    line-height: 1.25;
+  }
+  .thank-nav-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+  .thank-nav-board .thank-nav-num { background: var(--gold); box-shadow: 0 0 0 3px rgba(244,180,26,0.18); }
+  .thank-nav-schwartz .thank-nav-num { background: rgba(139,170,220,0.95); color: #0a1628; box-shadow: 0 0 0 3px rgba(139,170,220,0.18); }
+  .thank-nav-rudolph .thank-nav-num { background: rgba(99,200,170,0.95); color: #0a1628; box-shadow: 0 0 0 3px rgba(99,200,170,0.18); }
+  .thank-nav-board { border-color: rgba(244,180,26,0.32); }
+  .thank-nav-schwartz { border-color: rgba(139,170,220,0.32); }
+  .thank-nav-rudolph { border-color: rgba(99,200,170,0.32); }
+  .thank-nav-board:hover { border-color: var(--gold); }
+  .thank-nav-schwartz:hover { border-color: rgba(139,170,220,1); }
+  .thank-nav-rudolph:hover { border-color: rgba(99,200,170,1); }
+
+  @media (max-width: 520px) {
+    .thank-nav { grid-template-columns: 1fr; gap: 10px; }
+    .thank-nav-title { font-size: 14.5px; }
+  }
+
+  .section {
+    margin-top: 36px;
+    padding: 42px 32px 48px;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  }
+
+  /* Distinct section cards — each with its own base color, glow, and border */
+
+  /* BOARD — warm gold-tinted navy. Primary recipients. */
+  .section-board {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(244,180,26,0.18) 0%, transparent 70%),
+      linear-gradient(180deg, #1f2748 0%, #182040 100%);
+    border: 1px solid rgba(244,180,26,0.28);
+  }
+
+  /* SCHWARTZ — cooler slate-blue navy. Administrative feel. */
+  .section-schwartz {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,170,220,0.16) 0%, transparent 70%),
+      linear-gradient(180deg, #1a2742 0%, #151e36 100%);
+    border: 1px solid rgba(139,170,220,0.28);
+  }
+
+  /* RUDOLPH — muted teal-sage navy. Softer, operational. */
+  .section-rudolph {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99,200,170,0.16) 0%, transparent 70%),
+      linear-gradient(180deg, #16293a 0%, #132230 100%);
+    border: 1px solid rgba(99,200,170,0.30);
+  }
+
+  /* Greeting — artistic "Thank you" intro above each section's h2.
+     Serif italic (Fraunces) + decorative opening quotation mark. */
+  .greeting {
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: 0.005em;
+    position: relative;
+    display: inline-block;
+    padding-left: 52px;
+    padding-top: 8px;
+  }
+  .greeting::before {
+    content: "\201C";
+    position: absolute;
+    left: -6px;
+    top: -22px;
+    font-family: "Fraunces", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 88px;
+    line-height: 1;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .section-board .greeting { color: var(--gold); }
+  .section-schwartz .greeting { color: rgba(139,170,220,0.95); }
+  .section-rudolph .greeting { color: rgba(99,200,170,0.95); }
+
+  @media (max-width: 520px) {
+    .greeting { font-size: 22px; padding-left: 42px; padding-top: 6px; }
+    .greeting::before { font-size: 72px; top: -18px; }
+  }
+
+  .role {
+    font-weight: 500;
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+  }
+
+  /* People grid — Board (5 members) */
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin: 8px 0 32px;
+  }
+  .person {
+    text-align: center;
+  }
+  .person-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--navy-soft);
+    border: 2px solid var(--gold-border);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .person a:hover .person-img-wrap {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .person img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .person-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-white);
+    margin-top: 10px;
+    line-height: 1.25;
+  }
+  .person-role {
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .person a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .person-ig {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .person a:hover .person-ig {
+    text-decoration: underline;
+  }
+
+  /* People single — Schwartz, Rudolph */
+  .person-single {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 10px 0 28px;
+    padding: 18px 20px;
+    background: var(--navy-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+  }
+  .person-single-img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--gold-border);
+    background: var(--navy-deep);
+  }
+  .person-single-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .person-single-info { flex: 1; min-width: 0; }
+  .person-single-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink-white);
+    line-height: 1.2;
+  }
+  .person-single-role {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 520px) {
+    .people-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .person-name { font-size: 12px; }
+    .person-role { font-size: 9.5px; }
+    .person-ig { font-size: 10.5px; }
+    .person-single { gap: 14px; padding: 14px 16px; }
+    .person-single-img { width: 64px; height: 64px; }
+    .person-single-name { font-size: 15px; }
+  }
+
+  ul.prompts {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 20px;
+  }
+
+  ul.prompts li {
+    padding: 7px 0 7px 24px;
+    position: relative;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  ul.prompts li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .contact {
+    margin: 22px 0;
+    padding: 14px 18px;
+    background: var(--navy-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    font-size: 14.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .contact-main { flex: 1; min-width: 0; }
+  .contact .label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .contact .contact-main a { overflow-wrap: anywhere; text-decoration: none; font-weight: 600; font-size: 13.5px; line-height: 1.5; }
+  .contact .contact-main a:hover { text-decoration: underline; }
+  .contact-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold);
+    color: var(--navy-deep) !important;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none !important;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+    border: 1px solid var(--gold-deep);
+  }
+  .contact-btn:hover {
+    background: #FFD54F;
+    color: var(--navy-deep) !important;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 520px) {
+    .contact { flex-direction: column; align-items: stretch; gap: 12px; }
+    .contact-btn { justify-content: center; }
+  }
+
+  .opener {
+    margin: 18px 0 8px;
+    padding: 16px 20px;
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold-border);
+    border-radius: 4px;
+    font-family: "Inter", sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #f5ecd8;
+  }
+
+  .opener .opener-label {
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 800;
+  }
+
+  .closing {
+    margin-top: 72px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+    font-size: 16.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .signoff {
+    margin-top: 22px;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--gold);
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    h1 { font-size: 34px; }
+    h2 { font-size: 24px; }
+    .lede p { font-size: 17px; }
+    .wrapper { padding: 24px 18px 72px; }
+    .wordmark { font-size: 11px; padding: 32px 18px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<div class="wordmark">
+  <a href="https://savearlingtongymnastics.com">★ Save Arlington Gymnastics ★</a>
+</div>
+
+<div class="wrapper">
+
+  <div class="eyebrow">Thank You</div>
+  <h1>A thank you, <span class="accent">in your own words.</span></h1>
+
+  <div class="lede">
+    <p>The Arlington County Board approved the FY27 budget on April 22 — and with it, protected recreational, competitive, and adapted gymnastics at Barcroft. That outcome was the product of eight weeks of hard, honest, often messy collaboration between families, coaches, the County Board, and County staff.</p>
+    <p>A lot of people went out of their way to get us here. Three in particular deserve our thanks:</p>
+  </div>
+
+  <nav class="thank-nav" aria-label="Thank you sections">
+    <a href="#section-board" class="thank-nav-card thank-nav-board">
+      <div class="thank-nav-num">1</div>
+      <div class="thank-nav-text">
+        <div class="thank-nav-title">The County Board</div>
+        <div class="thank-nav-sub">5 elected members</div>
+      </div>
+    </a>
+    <a href="#section-schwartz" class="thank-nav-card thank-nav-schwartz">
+      <div class="thank-nav-num">2</div>
+      <div class="thank-nav-text">
+        <div class="thank-nav-title">County Manager</div>
+        <div class="thank-nav-sub">Mark Schwartz</div>
+      </div>
+    </a>
+    <a href="#section-rudolph" class="thank-nav-card thank-nav-rudolph">
+      <div class="thank-nav-num">3</div>
+      <div class="thank-nav-text">
+        <div class="thank-nav-title">DPR Director</div>
+        <div class="thank-nav-sub">Jane Rudolph</div>
+      </div>
+    </a>
+  </nav>
+
+  <div class="intro-note">
+    A short, personal note from you will mean more than anything polished. Three sentences is plenty. A specific detail — a coach's name, a Sunday morning at Barcroft, a moment from the last eight weeks — goes further than eloquent generalities. Please use your own words.
+  </div>
+
+  <!-- ===== BOARD ===== -->
+  <section id="section-board" class="section section-board">
+    <div class="greeting">Thank you to</div>
+    <h2>The County Board</h2>
+    <div class="role">Arlington's five-member elected governing body</div>
+
+    <div class="people-grid">
+      <div class="person">
+        <a href="https://instagram.com/mattforarlington" target="_blank" rel="noopener">
+          <div class="person-img-wrap"><img src="full-matt-de-ferranti.jpg" alt="Matt de Ferranti"></div>
+          <div class="person-name">Matt de Ferranti</div>
+          <div class="person-role">Chair</div>
+          <div class="person-ig">@mattforarlington</div>
+        </a>
+      </div>
+      <div class="person">
+        <a href="https://instagram.com/maureencoffeyva" target="_blank" rel="noopener">
+          <div class="person-img-wrap"><img src="full-maureen-coffey.jpg" alt="Maureen Coffey"></div>
+          <div class="person-name">Maureen Coffey</div>
+          <div class="person-role">Vice Chair</div>
+          <div class="person-ig">@maureencoffeyva</div>
+        </a>
+      </div>
+      <div class="person">
+        <a href="https://instagram.com/susanforalington" target="_blank" rel="noopener">
+          <div class="person-img-wrap"><img src="full-susan-cunningham.jpg" alt="Susan Cunningham"></div>
+          <div class="person-name">Susan Cunningham</div>
+          <div class="person-role">Member</div>
+          <div class="person-ig">@susanforalington</div>
+        </a>
+      </div>
+      <div class="person">
+        <a href="https://instagram.com/takiskarantonis" target="_blank" rel="noopener">
+          <div class="person-img-wrap"><img src="full-takis-karantonis.jpg" alt="Takis Karantonis"></div>
+          <div class="person-name">Takis Karantonis</div>
+          <div class="person-role">Member</div>
+          <div class="person-ig">@takiskarantonis</div>
+        </a>
+      </div>
+      <div class="person">
+        <a href="https://instagram.com/jdforarlington" target="_blank" rel="noopener">
+          <div class="person-img-wrap"><img src="full-julius-d.-jd-spain-sr.jpeg" alt="JD Spain"></div>
+          <div class="person-name">JD Spain</div>
+          <div class="person-role">Member</div>
+          <div class="person-ig">@jdforarlington</div>
+        </a>
+      </div>
+    </div>
+
+    <p>Chair De Ferranti, Vice Chair Coffey, Ms. Cunningham, Mr. Karantonis, and Mr. Spain set County policy and approve the budget. They are the only elected layer in every County decision that affects our program.</p>
+
+    <h3>What they did</h3>
+    <p>They approved a 25% competitive fee increase instead of the 44% that had been on the table after Thursday's markup, paired with a multi-year path toward the cost recovery target and a committed May kickoff meeting with AAPA/ATPA leadership and DPR/County leadership "to kick off a new spirit of collaboration."</p>
+    <p>What you may not have seen from the outside: each of them visited Barcroft during the campaign, asked substantive questions at the markup, and sat through hours of testimony. They chose to pull both the fees lever and the structural lever — not just one.</p>
+
+    <h3>A few things you might reference</h3>
+    <ul class="prompts">
+      <li>A specific moment from a Board meeting, markup session, or Barcroft visit</li>
+      <li>What Barcroft means to your family — a coach, a teammate, a Sunday morning</li>
+      <li>The piece of the outcome that mattered most to you (the 25%, the multi-year path, the May meeting)</li>
+      <li>A thank-you to a particular member whose questions or comments stood out</li>
+    </ul>
+
+    <div class="contact">
+      <div class="contact-main">
+        <div class="label">Email &middot; 6 recipients (all 5 Board members + countyboard)</div>
+        <a href="mailto:mdeferranti@arlingtonva.us,mcoffey@arlingtonva.us,scunningham@arlingtonva.us,tkarantonis@arlingtonva.us,jdspainsr@arlingtonva.us,countyboard@arlingtonva.us">mdeferranti@arlingtonva.us, mcoffey@arlingtonva.us, scunningham@arlingtonva.us, tkarantonis@arlingtonva.us, jdspainsr@arlingtonva.us, countyboard@arlingtonva.us</a>
+      </div>
+      <a href="mailto:mdeferranti@arlingtonva.us,mcoffey@arlingtonva.us,scunningham@arlingtonva.us,tkarantonis@arlingtonva.us,jdspainsr@arlingtonva.us,countyboard@arlingtonva.us?subject=Thank%20you%20for%20Barcroft%20gymnastics%20%E2%80%94%20the%2025%25%20vote" class="contact-btn">&#9993;&nbsp; Open email &rarr;</a>
+    </div>
+
+    <div class="opener">
+      <span class="opener-label">If you're stuck on a first sentence</span>
+      Dear Chair De Ferranti and Members of the Board — I'm writing as an Arlington [parent / resident / gymnastics family] to thank you for...
+    </div>
+  </section>
+
+  <!-- ===== SCHWARTZ ===== -->
+  <section id="section-schwartz" class="section section-schwartz">
+    <div class="greeting">Thank you,</div>
+    <h2>County Manager Mark Schwartz</h2>
+    <div class="role">Arlington's top administrative leader, appointed by the Board</div>
+
+    <div class="person-single">
+      <div class="person-single-img"><img src="mark-schwartz.png" alt="Mark Schwartz"></div>
+      <div class="person-single-info">
+        <div class="person-single-name">Mark Schwartz</div>
+        <div class="person-single-role">County Manager · Arlington County</div>
+      </div>
+    </div>
+
+    <p>Most gymnastics families never interact directly with the County Manager — he works a layer above DPR and sets the staff-side posture for the whole County. Department directors like DPR's Jane Rudolph report to him.</p>
+
+    <h3>What he did</h3>
+    <p>The Chair's original 25% proposal was part of the County Manager's budget framework — which is to say, the number we ended up at was on the table from the very beginning because of him. And the Board thanked him directly at last night's vote for the staff-side leadership that made the final outcome possible.</p>
+    <p>Staff leadership is the kind of thing that isn't always visible from outside — but it's what lets a director like Jane Rudolph make the move she made after Thursday's markup. None of what happened on Wednesday night happens without the posture he set.</p>
+
+    <h3>A few things you might reference</h3>
+    <ul class="prompts">
+      <li>Gratitude for keeping 25% on the table as the baseline all along</li>
+      <li>Appreciation for the "new spirit of collaboration" the Board referenced</li>
+      <li>How you'd hope County–community partnership works from here</li>
+    </ul>
+
+    <div class="contact">
+      <div class="contact-main">
+        <div class="label">Email &middot; 2 recipients (Mark + countymanager)</div>
+        <a href="mailto:mschwartz@arlingtonva.us,countymanager@arlingtonva.us">mschwartz@arlingtonva.us, countymanager@arlingtonva.us</a>
+      </div>
+      <a href="mailto:mschwartz@arlingtonva.us,countymanager@arlingtonva.us?subject=Thank%20you%20for%20Barcroft%20gymnastics%20%E2%80%94%20staff%20leadership" class="contact-btn">&#9993;&nbsp; Open email &rarr;</a>
+    </div>
+
+    <div class="opener">
+      <span class="opener-label">If you're stuck on a first sentence</span>
+      Dear Mr. Schwartz — I wanted to write directly and thank you for the role you played in the FY27 gymnastics outcome...
+    </div>
+  </section>
+
+  <!-- ===== RUDOLPH ===== -->
+  <section id="section-rudolph" class="section section-rudolph">
+    <div class="greeting">Thank you,</div>
+    <h2>DPR Director Jane Rudolph</h2>
+    <div class="role">Director of the Department of Parks and Recreation — the department that runs Barcroft</div>
+
+    <div class="person-single">
+      <div class="person-single-img"><img src="jane-rudolph.png" alt="Jane Rudolph"></div>
+      <div class="person-single-info">
+        <div class="person-single-name">Jane Rudolph</div>
+        <div class="person-single-role">Director · Arlington Dept. of Parks &amp; Recreation</div>
+      </div>
+    </div>
+
+    <p>Jane leads the department that runs every gymnastics program at Barcroft — rec, competitive, and adapted. Most families interact with coaches, program supervisors, or Enjoy Arlington registration, so her role can be invisible from the outside. It shouldn't be, at least not this week.</p>
+
+    <h3>What she did</h3>
+    <p>After Thursday's markup, when the Board had raised the competitive fee increase to 44%, Jane personally urged the Board to bring it back down to 25%. The Board acknowledged this directly at Tuesday's vote. She also committed DPR to being "all-in" on making this program successful and open to new ideas, and she'll be one of the key participants in the May kickoff meeting.</p>
+
+    <h3>A few things you might reference</h3>
+    <ul class="prompts">
+      <li>The decision to urge the Board back to 25% after Thursday's markup</li>
+      <li>The "all-in" commitment DPR has made to the program's future</li>
+      <li>What you're looking forward to in the May meeting and the chapter ahead</li>
+      <li>A specific program, coach, or Barcroft experience your family values</li>
+    </ul>
+
+    <div class="contact">
+      <div class="contact-main">
+        <div class="label">Email</div>
+        <a href="mailto:jrudolph@arlingtonva.us">jrudolph@arlingtonva.us</a>
+      </div>
+      <a href="mailto:jrudolph@arlingtonva.us?subject=Thank%20you%20for%20Barcroft%20gymnastics%20%E2%80%94%20urging%2025%25" class="contact-btn">&#9993;&nbsp; Open email &rarr;</a>
+    </div>
+
+    <div class="opener">
+      <span class="opener-label">If you're stuck on a first sentence</span>
+      Dear Ms. Rudolph — I wanted to write directly and thank you for urging the Board back to 25% after Thursday's markup...
+    </div>
+  </section>
+
+  <div class="closing">
+    <p>Eight weeks ago, a lot of us didn't know each other. We do now. If there's a new spirit of collaboration on the horizon — and the Board, Mark, and Jane have all said there is — this is how we start it: plainly, personally, and in our own voices.</p>
+    <div class="signoff">— Save Arlington Gymnastics</div>
+  </div>
+
+</div>
+
+</body>
+</html>
