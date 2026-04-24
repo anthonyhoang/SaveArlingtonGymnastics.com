@@ -1237,16 +1237,16 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
   }
-  /* URGENT final-push announcement bar — red gradient, single CTA to /write */
-  .announce-bar { position:fixed; top:56px; left:0; right:0; z-index:999; background:linear-gradient(90deg, #B71C1C, #E53935, #B71C1C); border-bottom:2px solid rgba(0,0,0,0.25); padding:0.55rem 1rem; overflow-x:auto; white-space:nowrap; text-align:center; box-shadow:0 3px 14px rgba(229,57,53,0.4); }
+  /* Celebratory announcement bar — gold gradient, CTA to /thanks/ */
+  .announce-bar { position:fixed; top:56px; left:0; right:0; z-index:999; background:linear-gradient(90deg, #F9A825, #FFD54F, #F9A825); border-bottom:2px solid rgba(0,0,0,0.15); padding:0.55rem 1rem; overflow-x:auto; white-space:nowrap; text-align:center; box-shadow:0 3px 14px rgba(249,168,37,0.35); }
   .announce-bar .announce-inner { display:inline-flex; align-items:center; gap:0.75rem; font-family:'Poppins',sans-serif; font-size:0.85rem; }
-  .announce-bar a { display:inline-flex; align-items:center; gap:0.55rem; color:#fff; text-decoration:none; font-weight:700; transition:opacity 0.2s; letter-spacing:0.02em; }
-  .announce-bar a:hover { opacity:0.85; }
-  .announce-bar .announce-icon { animation: announcePulse 1.2s ease-in-out infinite; font-size:1rem; }
-  .announce-bar .announce-urgent { background:#FFD54F; color:#B71C1C; font-size:0.62rem; font-weight:900; padding:0.2rem 0.5rem; border-radius:4px; letter-spacing:1px; text-transform:uppercase; animation: announcePulse 1s ease-in-out infinite; }
+  .announce-bar a { display:inline-flex; align-items:center; gap:0.55rem; color:#1a1a2e; text-decoration:none; font-weight:700; transition:opacity 0.2s; letter-spacing:0.02em; }
+  .announce-bar a:hover { opacity:0.8; }
+  .announce-bar .announce-icon { font-size:1rem; }
+  .announce-bar .announce-urgent { background:#2a8c4a; color:#fff; font-size:0.62rem; font-weight:900; padding:0.2rem 0.55rem; border-radius:4px; letter-spacing:1px; text-transform:uppercase; }
   .announce-bar .announce-days { font-weight:900; font-size:0.95rem; letter-spacing:0.03em; text-transform:uppercase; }
-  .announce-bar .announce-cta { font-weight:700; opacity:0.95; border-left:1px solid rgba(255,255,255,0.4); padding-left:0.75rem; }
-  .announce-bar .announce-arrow { font-weight:900; font-size:1.1rem; margin-left:0.2rem; animation: announcePulse 1.4s ease-in-out infinite; }
+  .announce-bar .announce-cta { font-weight:700; opacity:0.9; border-left:1px solid rgba(0,0,0,0.25); padding-left:0.75rem; }
+  .announce-bar .announce-arrow { font-weight:900; font-size:1.1rem; margin-left:0.2rem; animation: announcePulse 1.6s ease-in-out infinite; }
   @media (max-width: 640px) {
     .announce-bar .announce-inner { font-size:0.72rem; gap:0.55rem; }
     .announce-bar .announce-days { font-size:0.78rem; }
@@ -1255,11 +1255,11 @@
 </style>
 <div class="announce-bar">
   <div class="announce-inner">
-    <a href="/write">
-      <span class="announce-urgent">Urgent</span>
-      <span class="announce-icon">&#9200;</span>
-      <span class="announce-days" data-days-until-vote-label>Vote in 3 days &middot; Wed, Apr 22</span>
-      <span class="announce-cta">Write the Board in 90 sec</span>
+    <a href="/thanks/">
+      <span class="announce-urgent">Win</span>
+      <span class="announce-icon">&#9733;</span>
+      <span class="announce-days">Barcroft gymnastics saved</span>
+      <span class="announce-cta">Send a personal thank-you</span>
       <span class="announce-arrow">&rarr;</span>
     </a>
   </div>
@@ -1268,7 +1268,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="urgency">56 SPEAKERS &middot; TWO HEARINGS &middot; <span data-days-until-vote-label style="color:#FFD54F;">VOTE IN 3 DAYS — WED, APR 22</span></div>
+    <div class="urgency">56 SPEAKERS &middot; TWO HEARINGS &middot; <span style="color:#FFD54F;">WE WON &mdash; BARCROFT GYMNASTICS SAVED</span></div>
     <h1>Save Arlington <span class="highlight">Gymnastics</span></h1>
     <div class="coalition-strip">
       <span class="coalition-label">A Coalition For</span>
@@ -1319,7 +1319,7 @@
     </div>
 
     <div class="hero-actions">
-      <a href="/write" class="btn btn-red" style="font-weight:800; box-shadow:0 6px 20px rgba(229,57,53,0.4);">&#9993;&nbsp; Email the Board &middot; 90 sec &rarr;</a>
+      <a href="/thanks/" class="btn btn-gold" style="font-weight:800; box-shadow:0 6px 20px rgba(249,168,37,0.35);">&#9733;&nbsp; Send a personal thank-you &rarr;</a>
       <a href="#testimonials" class="btn btn-outline">Share Your Story</a>
     </div>
   </div>
@@ -2136,7 +2136,7 @@
       <div style="font-size:0.9rem; color:rgba(255,255,255,0.6); margin-bottom:1rem;">The work sessions are wrapping up. Email your Board member and keep building the partnership proposal they&rsquo;re asking for.</div>
       <div class="feb24-cta-row">
         <a href="#act" style="display:inline-block; background:var(--gold); color:var(--dark-navy); padding:0.7rem 2rem; border-radius:6px; font-weight:800; font-size:1rem; text-decoration:none;">Take Action &rarr;</a>
-        <a href="/write" style="display:inline-block; background:rgba(229,57,53,0.9); color:#fff; padding:0.7rem 2rem; border-radius:6px; font-weight:700; font-size:1rem; text-decoration:none; border:1px solid rgba(229,57,53,0.9);">&#9993; Email the Board &rarr;</a>
+        <a href="/thanks/" style="display:inline-block; background:rgba(244,180,26,0.95); color:#0a1628; padding:0.7rem 2rem; border-radius:6px; font-weight:800; font-size:1rem; text-decoration:none; border:1px solid rgba(244,180,26,0.95);">&#9733; Send a thank-you &rarr;</a>
       </div>
     </div>
 
